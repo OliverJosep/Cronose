@@ -1,0 +1,83 @@
+.card-chat {
+	// height: 600px;
+
+	.chats {
+		.bg {
+			background-color: #fff;
+			border: 1px solid var(--primary-color);
+			border-radius: 10px 10px;
+			height: 591px;
+		}
+
+		.user-chat {
+			border-bottom: 1px solid var(--primary-color);
+			color: var(--secondary-color);
+			&:hover {
+				cursor: pointer;
+			}
+			.active {
+				color: orange;
+				font-weight: bold;
+			}
+		}
+
+		small {
+			color: #808080;
+		}
+	}
+
+	.chat {
+		.messages {
+			border: 1px solid var(--primary-color);
+			background-color: #fff;
+			border-radius: 10px 10px;
+			height: 545px;
+
+			.user {
+				border-bottom: 1px solid var(--primary-color);
+			}
+			.scroll {
+				height: 480px;
+				overflow-y: scroll;
+			}
+		}
+
+		.btn {
+			background-color: var(--primary-color);
+		}
+	}
+
+	.cards {
+		border-radius: 10px 10px;
+		.bg {
+			background-color: #fff;
+			border: 1px solid var(--primary-color);
+			border-radius: 10px 10px;
+			height: 591px;
+			.offer-card {
+				border-bottom: 1px solid var(--primary-color);
+				cursor: pointer;
+				.title {
+					font-weight: bold;
+					color: var(--secondary-color);
+				}
+			}
+			.add {
+				cursor: pointer;
+				color: var(--secondary-color);
+				font-size: 30px;
+				font-weight: bold;
+			}
+		}
+
+		@media (max-width: 767px) {
+			.bg {
+				height: auto;
+			}
+		}
+
+		h3 {
+			border-bottom: 1px solid var(--primary-color);
+		}
+	}
+}

@@ -1,0 +1,23 @@
+.card-login {
+	max-width: 400px;
+	margin: auto;
+	margin-top: 200px;
+	margin-bottom: 200px;
+	padding: 40px;
+
+	.btn-login {
+		background-color: var(--primary-color);
+		border-color: var(--primary-color);
+
+		&:hover {
+			background-color: var(--secondary-color);
+		}
+	}
+	.card-footer {
+		background-color: var(--white);
+
+		a {
+			color: var(--secondary-color);
+		}
+	}
+}

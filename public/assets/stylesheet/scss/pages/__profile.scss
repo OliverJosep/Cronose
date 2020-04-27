@@ -1,0 +1,101 @@
+//HEAD PROFILE
+
+.img-back-profile {
+	z-index: -100;
+	img {
+		height: 300px;
+		min-width: 100%;
+	}
+}
+
+#head-profile {
+	padding-left: 5%;
+	padding-right: 5%;
+
+	.btn {
+		background-color: var(--secondary-color);
+	}
+}
+
+.card-profile {
+	a:hover {
+		background-color: var(--secondary-color);
+	}
+}
+
+#profile-average {
+	p {
+		margin-top: 4px;
+		margin-right: 5px;
+	}
+}
+
+.img-profile {
+	margin-top: -80px;
+	padding-left: 50px;
+	img {
+		width: 120px;
+		background-color: var(--white);
+	}
+}
+
+@media (max-width: 575px) {
+	.img-profile {
+		padding-left: 0px !important;
+	}
+}
+
+.row-profile-name {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+// BODY PROFILE
+
+#body-profile {
+	padding-left: 8%;
+	padding-right: 8%;
+	padding-top: 30px;
+}
+
+.profile-offers {
+	padding-top: 25px;
+
+	h3 {
+		padding-left: 20px;
+	}
+
+	.card-deck {
+		padding-top: 20px;
+	}
+
+	.card {
+		max-width: 300px;
+		min-width: 300px;
+		margin: auto;
+		text-align: start;
+	}
+
+	.btn {
+		background-color: var(--primary-color);
+	}
+
+	.icon-more a {
+		font-size: 60px;
+		color: var(--secondary-color);
+		border: 0;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
+.progress {
+	height: 20px;
+	.progress-bar {
+		width: 25%;
+		height: 20px;
+		background-color: var(--secondary-color);
+	}
+}

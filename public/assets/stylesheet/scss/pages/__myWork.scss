@@ -1,0 +1,52 @@
+.my-work-card {
+	margin-top: 40px;
+	margin-bottom: 40px;
+	margin-left: 15%;
+	margin-right: 15%;
+
+	.card-header {
+		padding-bottom: 0px;
+	}
+
+	.card-body {
+		padding: 20px;
+		padding-bottom: 0px;
+	}
+
+	.card-img {
+		margin: 0px;
+		padding: 0px;
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+
+	@media (max-width: 992px) {
+		.card-img {
+			height: 250px;
+		}
+	}
+
+	.btn {
+		background-color: #1b64aa;
+		margin: 15px;
+		padding-left: 20px;
+		padding-right: 20px;
+
+		&:hover {
+			background-color: var(--secondary-color);
+		}
+	}
+
+	#editButton {
+		margin-right: 0px;
+	}
+
+	.price {
+		color: #498f30;
+	}
+}
+
+.btn {
+	background-color: var(--secondary-color);
+}

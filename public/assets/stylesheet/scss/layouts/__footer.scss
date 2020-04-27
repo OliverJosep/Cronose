@@ -1,0 +1,46 @@
+footer {
+	margin-left: var(--sidebar-width);
+	background-color: rgba(255, 255, 255, 0.5);
+	transition: all 250ms ease-in-out;
+
+	a {
+		color: var(--primary-color);
+	}
+
+	.col-md-6 {
+		padding-left: 10%;
+	}
+
+	.btn-submit {
+		background-color: var(--primary-color);
+	}
+
+	.social a {
+		margin-right: 20px;
+		font-size: 50px;
+		color: var(--primary-color);
+		border: 0;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	.newsletter {
+		padding-top: 20px;
+	}
+
+	.links {
+		padding-top: 10px;
+	}
+}
+
+@media (max-width: 575px) {
+	footer {
+		margin-left: 0px;
+	}
+
+	.footer-copyright {
+		color: black;
+	}
+}

@@ -1,0 +1,10 @@
+.btn-orange {
+	background-color: var(--secondary-color);
+	color: var(--white);
+	border-radius: 30px;
+
+	&:hover {
+		transform: scale(1.1);
+		color: var(--white);
+	}
+}

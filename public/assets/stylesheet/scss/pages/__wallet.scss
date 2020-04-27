@@ -1,0 +1,17 @@
+.recharts-wrapper {
+	margin: auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+#records {
+	.card-header .fa {
+		transition: 0.3s transform ease-in-out;
+	}
+	.card-header a {
+		color: var(--primary-color);
+	}
+	.card-header .collapsed .fa {
+		transform: rotate(90deg);
+	}
+}

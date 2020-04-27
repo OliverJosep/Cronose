@@ -1,0 +1,159 @@
+:root {
+	--sidebar-width: 0px;
+	--primary-color: #1b64aa;
+	--secondary-color: #f09a24;
+	--ternary-color: #242633;
+	--text-color: #242633;
+	--white: #ffffff;
+	--black: #000000;
+	--back-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 575px) {
+	main {
+		margin-left: 0px !important;
+	}
+}
+
+* {
+	font-family: 'Montserrat', 'Lato', 'Work Sans', sans-serif;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+//RATER REACT
+.react-rater-star {
+	font-size: 25px !important ;
+}
+
+.react-rater-star.is-active {
+	color: var(--secondary-color) !important ;
+}
+
+.react-rater-star.is-active-half::before {
+	color: var(--secondary-color) !important ;
+}
+
+.navbar {
+	background-color: var(--white);
+}
+
+footer {
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+#app {
+	background-color: var(--back-color);
+}
+
+#homepage {
+	footer {
+		width: 100%;
+		background-color: var(--primary-color);
+
+		a,
+		p {
+			color: var(--white);
+		}
+
+		.btn {
+			background-color: var(--white);
+		}
+	}
+}
+body {
+	min-height: 100vh;
+	margin: 0;
+}
+
+figure {
+	margin: 0;
+	padding: 0;
+}
+
+[class*='col-'] {
+	padding: 0px;
+}
+
+.row {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+main {
+	&#homepage {
+		width: 100%;
+	}
+	margin-left: var(--sidebar-width);
+	transition: all 250ms ease-in-out;
+}
+
+#HowItWorks {
+	.col-lg-7 {
+		margin-top: auto;
+		margin-bottom: auto;
+	}
+}
+
+.user-val {
+	margin: auto;
+	margin-top: 40vh;
+	margin-bottom: 200px;
+}
+
+.reset-pass {
+	margin: auto;
+	margin-top: 200px;
+	margin-bottom: 200px;
+	max-width: 400px;
+	padding: 40px;
+	.btn {
+		background-color: var(--primary-color);
+		border-color: var(--primary-color);
+
+		&:hover {
+			background-color: var(--ternary-color);
+		}
+	}
+}
+
+.navbar-toggler-icon {
+	font-size: 40px;
+}
+
+.languagesButtons {
+	margin-top: 20px;
+	margin-right: 20px;
+	.btn {
+		border-radius: 10px;
+		color: var(--white);
+		border: solid 1px;
+		border-color: var(--white);
+		background-color: var(--primary-color);
+	}
+	.active {
+		background-color: var(--secondary-color);
+	}
+}
+
+#btnLanguages {
+	text-align: right;
+}
+
+@import 'components/__buttons';
+@import 'layouts/__sidebar';
+@import 'layouts/__navbar';
+@import 'layouts/__footer';
+@import 'pages/__login';
+@import 'pages/__profile';
+@import 'pages/__market';
+@import 'pages/__about';
+@import 'pages/__register';
+@import 'pages/__register';
+@import 'pages/__myWork';
+@import 'pages/__wallet';
+@import 'pages/__chat';
+@import 'pages/__newOffer';
+@import 'pages/__workDetail';
