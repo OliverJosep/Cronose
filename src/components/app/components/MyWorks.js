@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import WorkCard from '../../components/WorkCard';
+import WorkCard from '../../global/WorkCard';
 import Axios from 'axios';
-import { LoginContext } from '../../contexts/LoginContext';
+import { LoginContext } from '../../../contexts/LoginContext';
 
 export default class MyWorks extends Component {
 	static contextType = LoginContext;

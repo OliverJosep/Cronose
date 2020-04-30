@@ -3,7 +3,7 @@ import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
 import Axios from 'axios';
 import qs from 'qs';
-import { LoginContext } from '../../contexts/LoginContext';
+import { LoginContext } from '../../../contexts/LoginContext';
 
 export default class NewOffer extends React.Component {
 	static contextType = LoginContext;

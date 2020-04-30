@@ -10,7 +10,7 @@ import {
 } from 'recharts';
 import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
-import { LoginContext } from '../../contexts/LoginContext';
+import { LoginContext } from '../../../contexts/LoginContext';
 import Axios from 'axios';
 
 const data = [

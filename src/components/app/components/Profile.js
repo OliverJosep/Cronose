@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MdAddBox } from 'react-icons/md';
 import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
-import { LoginContext } from '../../contexts/LoginContext';
+import { LoginContext } from '../../../contexts/LoginContext';
 import ProfileCard from './ProfileCard';
 import Axios from 'axios';
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import md5 from 'md5';
 
-export default class SignIn extends Component {
+export default class Register extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { province: [], cities: [] };

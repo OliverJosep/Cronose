@@ -1,6 +1,6 @@
 import React from 'react';
 import md5 from 'md5';
-import { LoginContext } from '../../contexts/LoginContext';
+import { LoginContext } from '../../../contexts/LoginContext';
 import Reset from './Reset';
 
 export default class Login extends React.Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Translate from '../../translations/Translate';
+import Translate from '../../../translations/Translate';
 
 export default function Contact() {
 	return (

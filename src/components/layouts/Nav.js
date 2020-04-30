@@ -1,12 +1,18 @@
 import React from 'react';
-import { BrowserRouter, NavLink, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink
+} from "react-router-dom";
 import { FaPowerOff } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { LoginContext } from '../../contexts/LoginContext';
+import { LocaleContext } from '../../contexts/LocaleContext'
 
 function NavBar(props) {
 	return (
-		<BrowserRouter basename={props.basename} forceRefresh={props.refresh}>
+		<Router>
 			<nav className='navbar navbar-expand-lg w-100 container'>
 				<div>
 					<img className='img-logo' src='/assets/img/svg/logo.svg' />
@@ -14,7 +20,6 @@ function NavBar(props) {
 						Cronose
 					</a>
 				</div>
-
 				<button
 					className='navbar-toggler'
 					type='button'
@@ -32,30 +37,29 @@ function NavBar(props) {
 					id='navbarToggler'>
 					<ul id='ul-nav-hor' className='navbar-nav'>
 						{props.routes.map(function(route, index) {
-							if (route.show == false) return;
-							return (
-								<li key={index} className='item'>
-									<NavLink
-										to={route.path}
-										exact={route.exact}
-										className='nav-item mr-2 px-3 py-2'
-										activeClassName='active'>
-										{route.title}
-									</NavLink>
-								</li>
-							);
-						})}
+							if (route.show === false) return false;
+								return (
+									<li key={index} className='item'>
+										<NavLink
+											to={route.path}
+											exact={route.exact}
+											className='nav-item mr-2 px-3 py-2'
+											activeClassName='active'>
+											{route.title}
+										</NavLink>
+									</li>
+								)})}
 					</ul>
 				</div>
 			</nav>
-			<main className='w-100'>{SwitchRoutes(props.routes)}</main>
-		</BrowserRouter>
+			<main className='w-100'>{SwitchRoutes(props.routes, props)}</main>
+		</Router>
 	);
 }
 
 function SideBar(props) {
 	return (
-		<BrowserRouter basename={props.basename} forceRefresh={props.refresh}>
+		<Router>
 			<input type='checkbox' name='toggle' id='sidebar-toggle'></input>
 			<nav className='sidebar-nav'>
 				<section className='navbar'>
@@ -95,22 +99,24 @@ function SideBar(props) {
 					</ul>
 				</section>
 			</nav>
-			<main>{SwitchRoutes(props.routes)}</main>
-		</BrowserRouter>
+			<main className='w-100'>{SwitchRoutes(props.routes, props)}</main>
+		</Router>
 	);
 }
 
-function SwitchRoutes(routes) {
+function SwitchRoutes(routes, props) {
 	return (
 		<Switch>
-			{routes.map((route, index) => (
-				<Route
-					key={index}
-					path={route.path}
-					exact={route.exact}
-					component={route.component}
-				/>
-			))}
+			<LocaleContext.Provider value={props.lang}>
+				{routes.map((route, index) => (
+					<Route
+						key={index}
+						path={route.path}
+						exact={route.exact}
+						component={route.component}
+					/>
+				))}
+			</LocaleContext.Provider>
 		</Switch>
 	);
 }

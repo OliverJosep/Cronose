@@ -1,9 +1,11 @@
 import React from 'react';
 import { IoLogoTwitter, IoLogoFacebook, IoLogoInstagram } from 'react-icons/io';
+import LanguagePicker from './LanguagePicker';
 
-export default function Footer() {
+export default function Footer(props) {
 	return (
 		<footer className='page-footer p-4'>
+			<LanguagePicker changeLanguage={props.changeLanguage} />
 			<div className='links row text-center'>
 				<div className='col-md-6 text-md-left'>
 					<p>

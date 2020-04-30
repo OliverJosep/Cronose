@@ -1,6 +1,6 @@
 import React from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-import Translate from '../../translations/Translate';
+import Translate from '../../../translations/Translate';
 
 const position = [39.5616104, 3.20025];
 

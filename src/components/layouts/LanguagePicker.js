@@ -15,21 +15,21 @@ class LanguagePicker extends Component {
 				<button
 					id='en'
 					type='button'
-					className='btn btnlan'
+					// className='btn btnlan'
 					onClick={changeLanguage}>
 					EN
 				</button>
 				<button
 					id='es'
 					type='button'
-					className='btn btnlan'
+					//className='btn btnlan'
 					onClick={changeLanguage}>
 					ES
 				</button>
 				<button
 					id='ca'
 					type='button'
-					className='btn btnlan active'
+					//className='btn btnlan active'
 					onClick={changeLanguage}>
 					CA
 				</button>

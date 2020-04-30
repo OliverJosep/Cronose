@@ -1,6 +1,5 @@
 import React from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from 'leaflet';
 import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
 import Axios from 'axios';

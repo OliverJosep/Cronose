@@ -1,17 +1,16 @@
-import Wallet from '../app/components/Wallet';
-import Market from '../components/Market';
-import Chat from '../app/components/Chat';
-import MyWorks from '../app/components/MyWorks';
-import Profile from '../app/components/Profile';
-import Home from '../homepage/components/Home';
-import HomePage from '../homepage/components/HomePage';
-import Login from '../homepage/components/Login';
-import SignIn from '../homepage/components/SignIn';
-import WorkDetail from '../components/WorkDetail';
-import NewOffer from '../app/components/NewOffer';
-import ResetPassword from '../components/ResetPassword';
-import UserValidator from '../components/UserValidator';
-import Reset from '../homepage/components/Reset';
+import Wallet from '../components/app/components/Wallet';
+import Market from '../components/global/Market';
+import Chat from '../components/app/components/Chat';
+import MyWorks from '../components/app/components/MyWorks';
+import Profile from '../components/app/components/Profile';
+import Home from '../components/homepage/components/Home';
+import Login from '../components/homepage/components/Login';
+import Register from '../components/homepage/components/Register';
+import WorkDetail from '../components/global/WorkDetail';
+import NewOffer from '../components/app/components/NewOffer';
+import ResetPassword from '../components/global/ResetPassword';
+import UserValidator from '../components/global/UserValidator';
+import Reset from '../components/homepage/components/Reset';
 
 import { IoIosChatbubbles } from 'react-icons/io';
 import { FaStore } from 'react-icons/fa';
@@ -70,26 +69,26 @@ export default [
 			{
 				title: 'Home',
 				path: '/home',
-				component: HomePage,
+				component: Home,
 				exact: true,
 				show: false,
 			},
 			{
 				title: 'About Us',
 				path: '/#about',
-				component: HomePage,
+				component: Home,
 				show: false,
 			},
 			{
 				title: 'How It Works',
 				path: '/#HowItWorks',
-				component: HomePage,
+				component: Home,
 				show: false,
 			},
 			{
 				title: 'Contact',
 				path: '/#contact',
-				component: HomePage,
+				component: Home,
 				show: false,
 			},
 			{
@@ -113,23 +112,23 @@ export default [
 			{
 				title: 'Home',
 				path: '/',
-				component: HomePage,
+				component: Home,
 				exact: true,
 			},
 			{
 				title: 'How It Works',
 				path: '/#HowItWorks',
-				component: HomePage,
+				component: Home,
 			},
 			{
 				title: 'About Us',
 				path: '/#about',
-				component: HomePage,
+				component: Home,
 			},
 			{
 				title: 'Contact',
 				path: '/#contact',
-				component: HomePage,
+				component: Home,
 			},
 			{
 				title: 'Market',
@@ -150,7 +149,7 @@ export default [
 			{
 				title: 'Register',
 				path: '/register',
-				component: SignIn,
+				component: Register,
 			},
 			{
 				title: 'Reset Password',
