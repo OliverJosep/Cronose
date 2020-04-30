@@ -24,7 +24,7 @@ export default [
 		basename: 'app',
 		routes: [
 			{
-				title: 'Market',
+				title: 'market',
 				path: '/market',
 				component: Market,
 				exact: true,
@@ -110,44 +110,44 @@ export default [
 		basename: '',
 		routes: [
 			{
-				title: 'Home',
+				title: 'home',
 				path: '/',
 				component: Home,
 				exact: true,
 			},
 			{
-				title: 'How It Works',
+				title: 'how-it-works',
 				path: '/#HowItWorks',
 				component: Home,
 			},
 			{
-				title: 'About Us',
+				title: 'about-us',
 				path: '/#about',
 				component: Home,
 			},
 			{
-				title: 'Contact',
+				title: 'contact',
 				path: '/#contact',
 				component: Home,
 			},
 			{
-				title: 'Market',
+				title: 'market',
 				path: '/market',
 				component: Market,
 			},
 			{
-				title: 'Work Details',
+				title: 'work-details',
 				path: '/work/:initials/:tag/:specialization',
 				component: WorkDetail,
 				show: false,
 			},
 			{
-				title: 'Login',
+				title: 'login',
 				path: '/login',
 				component: Login,
 			},
 			{
-				title: 'Register',
+				title: 'register',
 				path: '/register',
 				component: Register,
 			},
@@ -158,7 +158,7 @@ export default [
 				show: false,
 			},
 			{
-				title: 'reset',
+				title: 'Reset',
 				path: '/reset',
 				component: Reset,
 				show: false,

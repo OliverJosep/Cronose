@@ -8,12 +8,12 @@ import {
 import { FaPowerOff } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { LoginContext } from '../../contexts/LoginContext';
-import { LocaleContext } from '../../contexts/LocaleContext'
+import Translate from '../../translations/Translate';
 
 function NavBar(props) {
 	return (
 		<Router>
-			<nav className='navbar navbar-expand-lg w-100 container'>
+			<nav className='navbar navbar-expand-xl w-100 container'>
 				<div>
 					<img className='img-logo' src='/assets/img/svg/logo.svg' />
 					<a className='pl-3 navbar-brand' href='/'>
@@ -43,9 +43,9 @@ function NavBar(props) {
 										<NavLink
 											to={route.path}
 											exact={route.exact}
-											className='nav-item mr-2 px-3 py-2'
+											className='nav-item mr-1 px-3 py-2'
 											activeClassName='active'>
-											{route.title}
+											<Translate string={route.title} />
 										</NavLink>
 									</li>
 								)})}
@@ -107,16 +107,14 @@ function SideBar(props) {
 function SwitchRoutes(routes, props) {
 	return (
 		<Switch>
-			<LocaleContext.Provider value={props.lang}>
-				{routes.map((route, index) => (
-					<Route
-						key={index}
-						path={route.path}
-						exact={route.exact}
-						component={route.component}
-					/>
-				))}
-			</LocaleContext.Provider>
+			{routes.map((route, index) => (
+				<Route
+					key={index}
+					path={route.path}
+					exact={route.exact}
+					component={route.component}
+				/>
+			))}
 		</Switch>
 	);
 }
