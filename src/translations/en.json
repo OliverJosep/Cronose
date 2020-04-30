@@ -1,11 +1,17 @@
 {
+	"home": "Home",
+	"how-it-works":"How it works",
+	"about-us": "About Us",
+	"contact": "Contact",
+	"login": "Login",
+	"register": "Register",
+	"market": "Market",
+
 	"share-time": "Share your time",
 	"create-an-offer": "Create an Offer",
 	"contact-people": "Contact People",
 	"stablish-a-work": "Stablish a Work",
 	"get-coins": "Get Coins",
-	"contact": "Contact",
-	"about-us": "About Us",
 	"about-us-text-1": "Cronose is a project designed by four students of the IES Manacor Institute, Mallorca.",
 	"about-us-text-2": "This project is part of the final validation of the higher Web Application Development (DAW) module as a fundamental piece in obtaining the necessary skills.",
 	"about-us-text-3": "Cronose starts from the idea of creating an online time bank, a tool capable of connecting registered users on the platform to exchange favors or jobs with each other without paying for these services. Each user contributes their skills or knowledge to the rest of the community and to the same extent can use those offered by the rest of the users."
