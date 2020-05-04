@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavBar } from '../../components/layouts/Nav';
+import Translate from '../../translations/Translate';
 
 export default function HomePage(props) {
 	return (
@@ -7,8 +8,6 @@ export default function HomePage(props) {
 			<NavBar
 				basename={props.navigator.basename}
 				routes={props.navigator.routes}
-				refresh={true}
-				lang={props.lang}
 				changeLanguage={props.changeLanguage}
 			/>
 		</div>

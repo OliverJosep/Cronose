@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { MdAddBox } from 'react-icons/md';
 import Rater from 'react-rater';
-import { LoginContext } from '../../../contexts/LoginContext';
 import { LocaleContext } from '../../../contexts/LocaleContext';
 import ProfileCard from './ProfileCard';
 import Axios from 'axios';
 
 export default class Profile extends Component {
-	static contextType = LoginContext;
+	static contextType = LocaleContext;
 	// static contextType = LocaleContext;
 	constructor(props) {
 		super(props);
@@ -45,7 +44,7 @@ export default class Profile extends Component {
 	}
 	render() {
 		return (
-			<LoginContext.Consumer>
+			<LocaleContext.Consumer>
 				{(context) => {
 					var srcImg =
 						`${process.env.REACT_APP_API_URL}/images/` +
@@ -150,7 +149,7 @@ export default class Profile extends Component {
 						</div>
 					);
 				}}
-			</LoginContext.Consumer>
+			</LocaleContext.Consumer>
 		);
 	}
 }

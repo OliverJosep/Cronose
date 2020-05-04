@@ -8,7 +8,7 @@ import {
 import Footer from './Footer';
 import { FaPowerOff } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { LoginContext } from '../../contexts/LoginContext';
+import { LocaleContext } from '../../contexts/LocaleContext';
 import Translate from '../../translations/Translate';
 
 function NavBar(props) {
@@ -95,7 +95,7 @@ function SideBar(props) {
 								</li>
 							);
 						})}
-						<LoginContext.Consumer>
+						<LocaleContext.Consumer>
 							{(context) => (
 								<i
 									id='iconDown'
@@ -104,7 +104,7 @@ function SideBar(props) {
 									<FaPowerOff />
 								</i>
 							)}
-						</LoginContext.Consumer>
+						</LocaleContext.Consumer>
 					</ul>
 				</section>
 			</nav>
