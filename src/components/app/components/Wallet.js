@@ -48,7 +48,7 @@ export default class Wallet extends Component {
 	};
 
 	componentDidMount() {
-		const coins = Axios.get(
+		Axios.get(
 			`${process.env.REACT_APP_API_URL}/wallet/${this.context.user.id}`
 		).then((res) => {
 			const coins = res.data;
@@ -99,10 +99,7 @@ export default class Wallet extends Component {
 									id='heading-content'
 									className='d-block'>
 									<i className='fa fa-chevron-down pull-right'></i>
-									<a>11/02/2020 </a>
-									<a>
-										| COINS : <b>7</b>
-									</a>
+									11/02/2020 | COINS : <b>7</b>
 								</a>
 							</h5>
 							<div
@@ -144,10 +141,7 @@ export default class Wallet extends Component {
 									id='heading-content'
 									className='d-block'>
 									<i className='fa fa-chevron-down pull-right'></i>
-									<a>11/02/2020 </a>
-									<a>
-										| COINS : <b>7</b>
-									</a>
+									11/02/2020 | COINS : <b>7</b>
 								</a>
 							</h5>
 							<div
@@ -189,10 +183,7 @@ export default class Wallet extends Component {
 									id='heading-content'
 									className='d-block'>
 									<i className='fa fa-chevron-down pull-right'></i>
-									<a>11/02/2020 </a>
-									<a>
-										| COINS : <b>7</b>
-									</a>
+									11/02/2020 | COINS : <b>7</b>
 								</a>
 							</h5>
 							<div
@@ -234,10 +225,7 @@ export default class Wallet extends Component {
 									id='heading-content'
 									className='d-block'>
 									<i className='fa fa-chevron-down pull-right'></i>
-									<a>11/02/2020 </a>
-									<a>
-										| COINS : <b>7</b>
-									</a>
+									11/02/2020 | COINS : <b>7</b>
 								</a>
 							</h5>
 							<div

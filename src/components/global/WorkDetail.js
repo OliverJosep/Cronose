@@ -3,6 +3,8 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
 import Axios from 'axios';
+import { NavLink } from 'react-router-dom';
+import  { LocaleContext } from '../../contexts/LocaleContext';
 
 const position = [39.5643576, 3.20227];
 
@@ -40,6 +42,7 @@ Moves.defaultProps = {
 };
 
 export default class WorkDetail extends React.Component {
+	static contextType = LocaleContext;
 	constructor(props) {
 		super(props);
 
@@ -53,12 +56,20 @@ export default class WorkDetail extends React.Component {
 	componentDidMount() {
 		this.getWork();
 	}
+	componentDidUpdate() {
+    if(this.state.lang !== this.context.lang){
+			this.getWork();
+			this.setState((state) => {
+				return {lang: this.context.lang};
+			})
+    }
+	}
 
 	getWork() {
 		const self = this;
 		const { initials, tag, specialization } = this.props.match.params;
 		Axios.get(
-			`${process.env.REACT_APP_API_URL}/work/${initials}/${tag}/${specialization}`
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/work/${initials}/${tag}/${specialization}`
 		)
 			.then((response) => {
 				self.setState({ work: response.data });
@@ -73,6 +84,7 @@ export default class WorkDetail extends React.Component {
 		if (!work) return <>Loading</>;
 		return (
 			<section className='work'>
+				{console.log()}
 				<div className='container mt-2'>
 					<div className='row'>
 						<h1>{work.title}</h1>
@@ -160,17 +172,18 @@ export default class WorkDetail extends React.Component {
 								<img
 									src={`${process.env.REACT_APP_API_URL}/images/${work.user.avatar.url}`}
 									height='50px'
+									alt='user-avatar'
 								/>
-								<h6 className='ml-2 my-auto'>
+								<div className='ml-2 my-auto'>
 									{work.user.full_name || work.user.initials}
 									<h6 className='d-inline text-muted'>#{work.user.tag}</h6>
-								</h6>
+								</div>
 							</div>
 							<div className='row mt-4'>
 								<div className='container-fluid'>
-									<h6>Work info</h6>
+									<h4>Work info</h4>
 									<hr />
-									<p>{work.description}</p>
+									<p>{work.translations[0].description}</p>
 								</div>
 							</div>
 							<div className='row mt-4'>
@@ -181,8 +194,9 @@ export default class WorkDetail extends React.Component {
 										<img
 											src='/assets/img/avatar-placeholder.png'
 											height='40px'
+											alt='avatar-placeholder'
 										/>
-										<h4 className='ml-2 my-auto'>Nombre Genérico</h4>
+										<h4 className='ml-2 my-auto'>{work.user.full_name}</h4>
 									</div>
 									<div className='row'>
 										<div className='container-fluid mt-4'>
@@ -191,12 +205,7 @@ export default class WorkDetail extends React.Component {
 												<hr />
 											</div>
 											<p>
-												Lorem Ipsum is simply dummy text of the printing and
-												typesetting industry. Lorem Ipsum has been the
-												industry's standard dummy text ever since the 1500s,
-												when an unknown printer took a galley of type and
-												scrambled it to make a type specimen book. It has
-												survived not only five centuries.
+												{work.user.description[0].description}
 											</p>
 										</div>
 									</div>
@@ -252,6 +261,7 @@ export default class WorkDetail extends React.Component {
 														<img
 															src='/assets/img/avatar-placeholder.png'
 															height='30px'
+															alt='avatar-placeholder'
 														/>
 														<h4 className='ml-2 my-auto'>Pepito grillo</h4>
 													</div>
@@ -276,6 +286,7 @@ export default class WorkDetail extends React.Component {
 														<img
 															src='/assets/img/avatar-placeholder.png'
 															height='30px'
+															alt='avatar-placeholder'
 														/>
 														<h4 className='ml-2 my-auto'>Amancio Ortega</h4>
 													</div>
@@ -303,6 +314,7 @@ export default class WorkDetail extends React.Component {
 														<img
 															src='/assets/img/avatar-placeholder.png'
 															height='30px'
+															alt='avatar-placeholder'
 														/>
 														<h4 className='ml-2 my-auto'>Willy Toledo</h4>
 													</div>
@@ -353,9 +365,11 @@ export default class WorkDetail extends React.Component {
 								<Moves />
 							</div>
 							<div className='text-center mt-4'>
-								<a href='#' className='btn btn-large btn-primary'>
+								<NavLink
+									to={`#`}
+									className='btn btn-large btn-primary'>
 									Contactar
-								</a>
+								</NavLink>
 							</div>
 						</div>
 					</div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { IoLogoTwitter, IoLogoFacebook, IoLogoInstagram } from 'react-icons/io';
 import LanguagePicker from './LanguagePicker';
 
@@ -9,30 +10,30 @@ export default function Footer(props) {
 			<div className='links row text-center'>
 				<div className='col-md-6 text-md-left'>
 					<p>
-						<a href='/home'>Home</a>
+						<NavLink to='/'>Home</NavLink> 
 					</p>
 					<p>
-						<a href='/home#about'>About Us</a>
+						<NavLink to='/#about'>About Us</NavLink> 
 					</p>
 					<p>
-						<a href='/home#HowItWorks'>How it work</a>
+						<NavLink to='/#HowItWorks'>How it work</NavLink> 
 					</p>
 					<p>
-						<a href='/home#contact'>Contact</a>
+						<NavLink to='/#contact'>Contact</NavLink>
 					</p>
 				</div>
 				<div className='col-md-6 text-md-left'>
 					<p>
-						<a href='#'>FAQ</a>
+						<NavLink to='/#'>FAQ</NavLink>
 					</p>
 					<p>
-						<a href='#'>Terms & Conditions</a>
+						<NavLink to='/#'>Terms & Conditions</NavLink>
 					</p>
 					<p>
-						<a href='#'>Help & Support</a>
+						<NavLink to='/#'>Help & Support</NavLink>
 					</p>
 					<p>
-						<a href='#'>Team</a>
+						<NavLink to='/#'>Team</NavLink>
 					</p>
 				</div>
 				<div className='newsletter col-md-6'>
@@ -64,8 +65,8 @@ export default function Footer(props) {
 				</div>
 				<div className='col-12'>
 					<div className='footer-copyright text-center py-3'>
-						© 2020 Copyright:
-						<a href=''> cronose.com</a>
+						© 2020 Copyright: 
+						<a href='https://cronose.com'> cronose.com</a>
 					</div>
 				</div>
 			</div>

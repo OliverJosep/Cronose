@@ -25,7 +25,7 @@ export default class Platform extends Component {
 	
 	render() {
 		return (
-			<LocaleContext.Provider value={this.state.lang}>
+			<LocaleContext.Provider value={this.state}>
 				<LoginContextProvider>
 					<LoginContext.Consumer>
 						{(context) => {
@@ -40,7 +40,7 @@ export default class Platform extends Component {
 							}
 							return (
 								<HomePage 
-									navigator={navigators.filter((nav) => nav.name == 'root')[0]} 
+									navigator={navigators.filter((nav) => nav.name === 'root')[0]} 
 									lang={this.state.lang}
 									changeLanguage={this.changeLanguage}
 								/>

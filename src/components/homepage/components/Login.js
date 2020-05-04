@@ -1,6 +1,7 @@
 import React from 'react';
 import md5 from 'md5';
 import { LoginContext } from '../../../contexts/LoginContext';
+import { NavLink } from 'react-router-dom';
 import Reset from './Reset';
 
 export default class Login extends React.Component {
@@ -61,12 +62,19 @@ export default class Login extends React.Component {
 				</form>
 				<div className='card-footer'>
 					<div className='justify-content-center links'>
-						Don't have an account? <a href='/register'> Sign Up</a>
+						Don't have an account?
+						<NavLink
+							to='/register'
+							activeClassName='active'>
+							&nbsp;Sign Up!
+						</NavLink> 
 					</div>
 					<div className=' justify-content-center'>
-						<a href='#' data-toggle='modal' data-target='#reset_password'>
+						<NavLink
+							to={`/#`}
+							data-toggle="modal" data-target='#reset_password'>
 							Forgot your password?
-						</a>
+						</NavLink> 
 					</div>
 				</div>
 				<Reset />

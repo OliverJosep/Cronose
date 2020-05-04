@@ -8,8 +8,12 @@ export default class LoginContextProvider extends Component {
 	constructor(props) {
 		super(props);
 
+		let avaliableLangs = ['ca','es','en'];
+		let defaulLang = avaliableLangs.includes(window.navigator.language.slice(0, 2)) ? window.navigator.language.slice(0, 2) : 'es';
+
 		this.state = JSON.parse(localStorage.getItem('login')) || {
 			user: {},
+			lang: avaliableLangs.includes(localStorage.getItem('lang')) ? localStorage.getItem('lang') : defaulLang,
 			jwt: '',
 			isLogged: false,
 		};
@@ -39,7 +43,7 @@ export default class LoginContextProvider extends Component {
 	}
 
 	logout(error) {
-		this.setState({ user: {}, jwt: {}, isLogged: false }, () => {
+		this.setState({ user: {},lang: this.state.lang , jwt: {}, isLogged: false }, () => {
 			this.saveLocalStorage();
 		});
 	}

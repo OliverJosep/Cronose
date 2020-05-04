@@ -1,7 +1,7 @@
 import React from 'react';
 import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
-import { Router, Route, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function WorkCard(props) {
 	const work = props.work;
@@ -13,7 +13,7 @@ export default function WorkCard(props) {
 					<img
 						className='card-img'
 						src='/assets/img/img-work.jpg'
-						alt='Card image cap'></img>
+						alt='img-work'/>
 				</figure>
 				<div className='col-lg-9'>
 					<section className='header card-header row'>

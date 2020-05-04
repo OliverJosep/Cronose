@@ -1,11 +1,15 @@
 {
 	"home": "Inicio",
-	"how-it-works":"Com funciona",
-	"about-us": "Sobre nosotros",
+	"how-it-works":"Como Funciona",
+	"about-us": "Sobre Nosotros",
 	"contact": "Contacto",
-	"login": "Iniciar session",
+	"login": "Iniciar Sesión",
 	"register": "Registro",
 	"market": "Mercado",
+	"chat": "Chat",
+	"my-job-offers": "Mis ofertas",
+	"profile": "Perfil",
+	"wallet": "Cartera",
 
 	"share-time": "Comparte tu tiempo",
 	"create-an-offer": "Crea una oferta",

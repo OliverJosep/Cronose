@@ -7,15 +7,20 @@ import {
 } from 'react-icons/io';
 import WorkCard from './WorkCard';
 import qs from 'qs';
+import  { LocaleContext } from '../../contexts/LocaleContext';
+
 
 export default class Market extends Component {
+	static contextType = LocaleContext;
 	constructor(props) {
 		super(props);
 		this.state = {
+			lang: [],
 			works: [],
 			categories: [],
 			specialization: [],
 		};
+
 		this.getWorks = this.getWorks.bind(this);
 		this.getCategories = this.getCategories.bind(this);
 		this.getSpecialization = this.getSpecialization.bind(this);
@@ -24,6 +29,10 @@ export default class Market extends Component {
 	}
 
 	componentDidMount() {
+		this.setState((state) => {
+			return {lang: this.context.lang};
+		})
+
 		this.getWorks();
 		this.getCategories();
 		$('#btn-show').click(function() {
@@ -36,6 +45,16 @@ export default class Market extends Component {
 			$('#btn-show').show();
 		});
 	}
+	componentDidUpdate() {
+    if(this.state.lang !== this.context.lang){
+			this.getCategories();
+			this.getSpecialization();
+			this.getWorks();
+			this.setState((state) => {
+				return {lang: this.context.lang};
+			})
+    }
+	}
 
 	resetFilter() {
 		this.setState({ categories: [], specialization: [] });
@@ -45,7 +64,7 @@ export default class Market extends Component {
 
 	getWorks() {
 		Axios.get(
-			`${process.env.REACT_APP_API_URL}/works/0/10/default/ca`
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/works/all/0/10`
 		).then((response) =>
 			this.setState({ works: response.data || this.state.works })
 		);
@@ -54,7 +73,7 @@ export default class Market extends Component {
 	getFilteredWorks() {
 		const category_id = document.getElementById('category_id').value;
 		const specialization_id =
-			category_id != '0'
+			category_id !== '0'
 				? document.getElementById('specialization_id').value
 				: '';
 
@@ -67,7 +86,7 @@ export default class Market extends Component {
 					category: category_id,
 					specialization: specialization_id,
 					string: string,
-					defaultLang: 'ca',
+					defaultLang: this.context.lang,
 				},
 			})
 		).then((response) => this.setState({ works: response.data }));
@@ -75,14 +94,14 @@ export default class Market extends Component {
 
 	getCategories() {
 		Axios.get(
-			`${process.env.REACT_APP_API_URL}/categories/ca`
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/categories`
 		).then((response) => this.setState({ categories: response.data }));
 	}
 
 	getSpecialization() {
 		const category_id = document.getElementById('category_id').value;
 		Axios.get(
-			`${process.env.REACT_APP_API_URL}/specialization/ca/${category_id}`
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/specialization/${category_id}`
 		).then((response) => this.setState({ specialization: response.data }));
 		this.getFilteredWorks();
 	}
@@ -108,14 +127,14 @@ export default class Market extends Component {
 						/>
 					))}
 				</section>
-				<a id='btn-show'>
+				<span id='btn-show' >
 					<IoIosArrowDropleftCircle />
-				</a>
+				</span>
 
 				<div className='' id='jobFilter'>
-					<a id='btn-hide'>
+					<span id='btn-hide'>
 						<IoIosArrowDroprightCircle />
-					</a>
+					</span>
 					<h2 className='p-3 pt-4 text-center'>Job Filter</h2>
 					<div className='input-group p-2'>
 						<div className='p-2 pt-4'>

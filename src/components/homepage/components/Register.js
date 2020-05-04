@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import md5 from 'md5';
+import { NavLink } from 'react-router-dom';
 
 export default class Register extends Component {
 	constructor(props) {
@@ -44,7 +45,7 @@ export default class Register extends Component {
 		Axios.get(`${process.env.REACT_APP_API_URL}/cities/${province_id}`)
 			.then((response) => {
 				this.setState({ cities: response.data || this.state.cities });
-				const cities = document.getElementById('cities');
+				// const cities = document.getElementById('cities');
 			})
 			.catch((err) => console.error(err));
 	}
@@ -218,7 +219,12 @@ export default class Register extends Component {
 										type='checkbox'
 									/>
 									<label className='ml-2' htmlFor='terms_and_conditions'>
-										Accept the <a href="#" data-toggle="modal" data-target="#termsAndConds">terms and conditions</a>
+										Accept the 
+									<NavLink
+										to={`/#`}
+										data-toggle="modal" data-target="#termsAndConds">
+										&nbsp;terms and conditions
+									</NavLink> 
 									</label>
 								</div>
 							</div>
@@ -230,7 +236,12 @@ export default class Register extends Component {
 								/>
 								<div className='form-label-group col-12 mt-2'>
 									<label className='ml-2' htmlFor='terms_and_conditions'>
-										You already have an account? Please <a href='/login'>log in!</a>
+										You already have an account? Please
+										<NavLink
+											to='/login'
+											activeClassName='active'>
+											&nbsp;log in!
+										</NavLink> 
 									</label>
 								</div>
 							</div>

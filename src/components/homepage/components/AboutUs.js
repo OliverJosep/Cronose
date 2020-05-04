@@ -38,7 +38,6 @@ Moves.defaultProps = {
 };
 
 export default function AboutUs(props) {
-	const data = props.data;
 
 	return (
 		<div className='container' id='about'>

@@ -5,6 +5,7 @@ import {
   Route,
   NavLink
 } from "react-router-dom";
+import Footer from './Footer';
 import { FaPowerOff } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { LoginContext } from '../../contexts/LoginContext';
@@ -15,7 +16,10 @@ function NavBar(props) {
 		<Router>
 			<nav className='navbar navbar-expand-xl w-100 container'>
 				<div>
-					<img className='img-logo' src='/assets/img/svg/logo.svg' />
+					<img 
+						className='img-logo' 
+						src='/assets/img/svg/logo.svg' 
+						alt='logo'/>
 					<a className='pl-3 navbar-brand' href='/'>
 						Cronose
 					</a>
@@ -53,6 +57,10 @@ function NavBar(props) {
 				</div>
 			</nav>
 			<main className='w-100'>{SwitchRoutes(props.routes, props)}</main>
+			<Footer 
+				lang={props.lang}
+				changeLanguage={props.changeLanguage}
+			/>
 		</Router>
 	);
 }
@@ -69,10 +77,11 @@ function SideBar(props) {
 					<img
 						className='img-logo m-auto mt-4'
 						src='/assets/img/svg/logo.svg'
+						alt='logo'
 					/>
 					<ul className='nav flex-column mb-0 mt-4'>
 						{props.routes.map(function(route, index) {
-							if (route.show == false) return;
+							if (route.show === false) return false;
 							return (
 								<li key={index} className='nav-item'>
 									<NavLink
@@ -81,7 +90,7 @@ function SideBar(props) {
 										className=''
 										activeClassName='active'>
 										<i className='icon'>{route.icon ? <route.icon /> : null}</i>
-										<p>{route.title}</p>
+										<p><Translate string={route.title}/></p>
 									</NavLink>
 								</li>
 							);
@@ -100,6 +109,10 @@ function SideBar(props) {
 				</section>
 			</nav>
 			<main className='w-100'>{SwitchRoutes(props.routes, props)}</main>
+			<Footer 
+				lang={props.lang}
+				changeLanguage={props.changeLanguage}
+			/>
 		</Router>
 	);
 }

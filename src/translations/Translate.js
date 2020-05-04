@@ -23,7 +23,7 @@ class Translate extends Component {
 		const { string } = this.props;
 		return (
 			<LocaleContext.Consumer>
-				{(value) => langs[value][string]}
+				{(value) => langs[value.lang][string]}
 			</LocaleContext.Consumer>
 		);
 	}

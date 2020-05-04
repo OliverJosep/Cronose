@@ -1,6 +1,5 @@
 import React from 'react';
 import { SideBar } from '../../components/layouts/Nav';
-import Footer from '../../components/layouts/Footer';
 
 export default function App(props) {
 	return (
@@ -9,10 +8,6 @@ export default function App(props) {
 				basename={props.navigator.basename}
 				routes={props.navigator.routes}
 				refresh={false}
-				lang={props.lang}
-				changeLanguage={props.changeLanguage}
-			/>
-			<Footer 
 				lang={props.lang}
 				changeLanguage={props.changeLanguage}
 			/>

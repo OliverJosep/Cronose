@@ -662,7 +662,7 @@ footer .links {
   background-color: var(--primary-color);
 }
 
-#jobFilter a {
+#jobFilter span {
   font-size: 50px;
   color: var(--primary-color);
   position: absolute;

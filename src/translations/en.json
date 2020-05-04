@@ -6,6 +6,10 @@
 	"login": "Login",
 	"register": "Register",
 	"market": "Market",
+	"chat": "Chat",
+	"my-job-offers": "My Offers",
+	"profile": "Profile",
+	"wallet": "Wallet",
 
 	"share-time": "Share your time",
 	"create-an-offer": "Create an Offer",

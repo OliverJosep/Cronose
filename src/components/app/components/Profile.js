@@ -45,7 +45,7 @@ export default class Profile extends Component {
 											<img
 												src={srcImg}
 												alt='...'
-												class=' rounded-circle shadow-sm'></img>
+												className=' rounded-circle shadow-sm'></img>
 											<h5>
 												{context.user.name}
 												<p className='d-inline text-muted'>
@@ -80,15 +80,15 @@ export default class Profile extends Component {
 										25%
 									</div>
 								</div>
-								<div class='card card-about'>
-									<div class='card-header'>
+								<div className='card card-about'>
+									<div className='card-header'>
 										<h3>
 											<b>ABOUT ME</b>
 										</h3>
 									</div>
 
-									<div class='card-body'>
-										<p class='card-text'>
+									<div className='card-body'>
+										<p className='card-text'>
 											Lorem ipsum dolor sit amet, ea vel prima adhuc, scripta
 											liberavisse ea quo, te vel vidit mollis complectitur. Quis
 											verear mel ne. Munere vituperata vis cu, te pri duis
@@ -96,7 +96,7 @@ export default class Profile extends Component {
 											aliquip mediocritatem, mei habemus persecuti mediocritatem
 											ei.
 										</p>
-										<p class='card-text'>
+										<p className='card-text'>
 											Lorem ipsum dolor sit amet, ea vel prima adhuc, scripta
 											liberavisse ea quo, te vel vidit mollis complectitur. Quis
 											verear mel ne. Munere vituperata vis cu, te pri duis
@@ -110,7 +110,7 @@ export default class Profile extends Component {
 									<h3>
 										<b>My Offers</b>
 									</h3>
-									<div class='card-deck text-center'>
+									<div className='card-deck text-center'>
 										{this.state.works.map((work, index) => (
 											<ProfileCard
 												key={index}

@@ -15,6 +15,7 @@ export default function Chat() {
 										className='pr-2 m-md-0 m-auto'
 										src='/assets/img/avatar-placeholder.png'
 										height='55px'
+										alt="avatar-placeholder"
 									/>
 									<div className='row '>
 										<div className='col-12 d-none d-md-block'>Anastasio</div>
@@ -28,6 +29,7 @@ export default function Chat() {
 										className='pr-2 m-md-0 m-auto'
 										src='/assets/img/avatar-placeholder.png'
 										height='55px'
+										alt="avatar-placeholder"
 									/>
 									<div className='row'>
 										<div className='col-12 d-none d-md-block'>Username</div>
@@ -43,6 +45,7 @@ export default function Chat() {
 										className='pr-2 m-md-0 m-auto'
 										src='/assets/img/avatar-placeholder.png'
 										height='55px'
+										alt="avatar-placeholder"
 									/>
 									<div className='row '>
 										<div className='col-12 d-none d-md-block'>Username</div>
@@ -61,6 +64,7 @@ export default function Chat() {
 									className='pr-2'
 									src='/assets/img/avatar-placeholder.png'
 									height='40px'
+									alt="avatar-placeholder"
 								/>
 								Anastasio
 							</div>
@@ -105,7 +109,8 @@ export default function Chat() {
 										className='m-auto'
 										src='/assets/img/img-work.jpg'
 										width='auto'
-										height='71px'></img>
+										height='71px'
+										alt="img-work"></img>
 								</div>
 								<div className='col-6 col-md-12 col-xl-6 text-md-center text-xl-left'>
 									<div className='row'>
@@ -123,7 +128,8 @@ export default function Chat() {
 										className='m-auto'
 										src='/assets/img/img-work.jpg'
 										width='auto'
-										height='71px'></img>
+										height='71px'
+										alt="img-work"></img>
 								</div>
 								<div className='col-6 col-md-12 col-xl-6 text-md-center text-xl-left'>
 									<div className='row'>

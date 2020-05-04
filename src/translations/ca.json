@@ -1,11 +1,15 @@
 {
 	"home": "Inici",
-	"how-it-works":"Com funcionam",
-	"about-us": "Sobre nosaltres",
+	"how-it-works":"Com Funcionam",
+	"about-us": "Sobre Nosaltres",
 	"contact": "Contacte",
-	"login": "Iniciar sessió",
+	"login": "Iniciar Sessió",
 	"register": "Registre",
 	"market": "Mercat",
+	"chat": "Xat",
+	"my-job-offers": "Les meves ofertes",
+	"profile": "Perfil",
+	"wallet": "Cartera",
 
 	"share-time": "Comparteix el teu temps",
 	"create-an-offer": "Crea una oferta",

@@ -16,7 +16,7 @@ export default class ResetPassword extends React.Component {
 	changePassword(e) {
 		e.preventDefault();
 		const password = md5(document.getElementById('newpassword1').value);
-		if (password != md5(document.getElementById('newpassword2').value))
+		if (password !== md5(document.getElementById('newpassword2').value))
 			return false;
 		Axios.post(
 			`${process.env.REACT_APP_API_URL}/reset_password`,
