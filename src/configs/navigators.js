@@ -61,10 +61,16 @@ export default [
 				icon: MdWork,
 			},
 			{
-				title: 'profile',
+				title: 'my_profile',
 				path: '/me',
 				component: Profile,
 				icon: GoPerson,
+			},
+			{
+				title: 'profile',
+				path: '/profile/:initials/:tag',
+				component: Profile,
+				show: false
 			},
 			{
 				title: 'Home',
@@ -74,7 +80,7 @@ export default [
 				show: false,
 			},
 			{
-				title: 'About Us',
+				title: 'about_us',
 				path: '/#about',
 				component: Home,
 				show: false,
@@ -168,6 +174,12 @@ export default [
 				path: '/userValidator',
 				component: UserValidator,
 				show: false,
+			},
+			{
+				title: 'profile',
+				path: '/profile/:initials/:tag',
+				component: Profile,
+				show: false
 			},
 		],
 	},
