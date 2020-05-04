@@ -3,52 +3,48 @@ import HomePage from './components/homepage/Homepage';
 import App from './components/app/App';
 
 import navigators from './configs/navigators.js';
-import LoginContextProvider, { LoginContext } from './contexts/LoginContext';
-import { LocaleContext } from './contexts/LocaleContext';
+import LocaleContextProvider, { LocaleContext } from './contexts/LocaleContext';
 
 export default class Platform extends Component {
-  constructor(props){
-		super(props);
-		let avaliableLangs = ['ca','es','en'];
-		let defaulLang = avaliableLangs.includes(window.navigator.language.slice(0, 2)) ? window.navigator.language.slice(0, 2) : 'es';
-		this.state = {
-			lang: avaliableLangs.includes(localStorage.getItem('lang')) ? localStorage.getItem('lang') : defaulLang,
-		};
-  }
+	// static contextType = LoginContext;
+  // constructor(props){
+	// 	super(props);
+	// 	let avaliableLangs = ['ca','es','en'];
+	// 	let defaulLang = avaliableLangs.includes(window.navigator.language.slice(0, 2)) ? window.navigator.language.slice(0, 2) : 'es';
+	// 	this.state = {
+	// 		lang: avaliableLangs.includes(localStorage.getItem('lang')) ? localStorage.getItem('lang') : defaulLang,
+	// 	};
+  // }
 
-	changeLanguage = ({ currentTarget: { id } }) => {
-		localStorage.setItem('lang', id);
-		this.setState({
-			lang: id,
-		});
-	};
+	// changeLanguage = ({ currentTarget: { id } }) => {
+	// 	localStorage.setItem('lang', id);
+	// 	this.setState({
+	// 		lang: id,
+	// 	});
+	// };
 	
 	render() {
 		return (
-			<LocaleContext.Provider value={this.state}>
-				<LoginContextProvider>
-					<LoginContext.Consumer>
-						{(context) => {
-							if (context.isLogged) {
-								return (
-									<App
-										navigator={navigators.filter((nav) => nav.name === 'app')[0]}
-										lang={this.state.lang}
-										changeLanguage={this.changeLanguage}
-									/>
-								);
-							}
+			<LocaleContextProvider>
+				<LocaleContext.Consumer>
+					{(context) => {
+						if (context.isLogged) {
 							return (
-								<HomePage 
-									navigator={navigators.filter((nav) => nav.name === 'root')[0]} 
-									lang={this.state.lang}
-									changeLanguage={this.changeLanguage}
+								<App
+									navigator={navigators.filter((nav) => nav.name === 'app')[0]}
+									changeLanguage={context.changeLanguage}
 								/>
 							);
-						}}
-					</LoginContext.Consumer>
-				</LoginContextProvider>
-			</LocaleContext.Provider>
+						}
+						return (<>
+							<HomePage 
+								navigator={navigators.filter((nav) => nav.name === 'root')[0]} 
+								changeLanguage={context.changeLanguage}
+							/></>
+						);
+					}}
+				</LocaleContext.Consumer>
+			</LocaleContextProvider>
 		);
 	}
 }

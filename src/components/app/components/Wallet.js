@@ -10,7 +10,7 @@ import {
 } from 'recharts';
 import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
-import { LoginContext } from '../../../contexts/LoginContext';
+import { LocaleContext } from '../../../contexts/LocaleContext';
 import Axios from 'axios';
 
 const data = [
@@ -41,7 +41,7 @@ const data = [
 ];
 
 export default class Wallet extends Component {
-	static contextType = LoginContext;
+	static contextType = LocaleContext;
 
 	state = {
 		coins: [],

@@ -3,10 +3,10 @@ import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
 import Axios from 'axios';
 import qs from 'qs';
-import { LoginContext } from '../../../contexts/LoginContext';
+import { LocaleContext } from '../../../contexts/LocaleContext';
 
 export default class NewOffer extends React.Component {
-	static contextType = LoginContext;
+	static contextType = LocaleContext;
 	constructor(props) {
 		super(props);
 		this.state = {

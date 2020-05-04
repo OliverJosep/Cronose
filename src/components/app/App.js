@@ -7,8 +7,6 @@ export default function App(props) {
 			<SideBar
 				basename={props.navigator.basename}
 				routes={props.navigator.routes}
-				refresh={false}
-				lang={props.lang}
 				changeLanguage={props.changeLanguage}
 			/>
 		</div>

@@ -1,15 +1,14 @@
 import React from 'react';
 import md5 from 'md5';
-import { LoginContext } from '../../../contexts/LoginContext';
+import { LocaleContext } from '../../../contexts/LocaleContext';
 import { NavLink } from 'react-router-dom';
 import Reset from './Reset';
 
 export default class Login extends React.Component {
-	static contextType = LoginContext;
+	static contextType = LocaleContext;
 
 	constructor(props) {
 		super(props);
-
 		this.login = this.login.bind(this);
 	}
 

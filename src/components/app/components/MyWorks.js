@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import WorkCard from '../../global/WorkCard';
 import Axios from 'axios';
-import { LoginContext } from '../../../contexts/LoginContext';
+import { LocaleContext } from '../../../contexts/LocaleContext';
 
 export default class MyWorks extends Component {
-	static contextType = LoginContext;
+	static contextType = LocaleContext;
 	constructor(props) {
 		super(props);
 		this.state = { works: [] };
