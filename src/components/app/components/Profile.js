@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
 import { MdAddBox } from 'react-icons/md';
-import Rater from 'react-rater';
 import { LocaleContext } from '../../../contexts/LocaleContext';
-import ProfileCard from './ProfileCard';
 import Axios from 'axios';
+import Rater from 'react-rater';
+import Translate from '../../../translations/Translate';
+import ProfileCard from './ProfileCard';
+import Loader from '../../layouts/Loader';
+import Footer from '../../layouts/Loader';
 
 export default class Profile extends Component {
 	static contextType = LocaleContext;
-	// static contextType = LocaleContext;
 	constructor(props) {
 		super(props);
-		this.state = {lang: [], user: [], works: [] };
+		this.state = {lang: [], user: [], works: [] , loading: true };
 		this.getWorks = this.getWorks.bind(this);
 		this.getUserProfile = this.getUserProfile.bind(this);
 	}
 
 	componentDidMount() {
+		//Set language
 		this.setState((state) => {
 			return {lang: this.context.lang};
 		})
-		console.log(this.context)
-		// this.getUserProfile();
-		// this.getWorks();
+
+		//Get data
+		this.getUserProfile();
+
+		//Profile loader
+		setTimeout(() => {
+			this.setState((state) => {
+				return {loading: false};
+			})
+		}, 300);
 	}
 
 	componentDidUpdate() {
@@ -29,47 +39,52 @@ export default class Profile extends Component {
 			this.setState((state) => {
 				return {lang: this.context.lang};
 			})
+			this.getUserProfile();
     }
 	}
 
 	getUserProfile() {
 		const { initials, tag } = (this.props.match.path === '/me') ? this.context.user : this.props.match.params;
-		console.log(this.props);
+		Axios.get(
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/user/${initials}/${tag}`
+		).then(response => {
+			this.setState({ user: response.data });
+			this.getWorks(response.data.id);
+		}); 
 	}
 
-	getWorks() {
+	getWorks(user_id) {
 		Axios.get(
-			`${process.env.REACT_APP_API_URL}/works/user/${this.context.user.id}`
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/works/user/${user_id}`
 		).then((response) => this.setState({ works: response.data }));
 	}
 	render() {
-		return (
+		const { user } = this.state;
+		if (this.state.loading) return <><Loader/></>;
+		if (!this.state.loading) return (
 			<LocaleContext.Consumer>
 				{(context) => {
-					var srcImg =
-						`${process.env.REACT_APP_API_URL}/images/` +
-						context.user.avatar.url;
 					return (
 						<div className='profile'>
+							{console.log(user)}
 							<div className='img-back-profile'>
 								<img
 									src='/assets/img/img-profile.jpg'
 									alt=''
 									className=''></img>
 							</div>
-				{console.log(this.state)}
 							<div id='head-profile'>
 								<div className='row row-profile-name'>
 									<div className='col-md-6 d-flex justify-content-md-start justify-content-center'>
 										<div className='img-profile'>
 											<img
-												src={srcImg}
+												src='/assets/img/avatar-placeholder.png'
 												alt='...'
 												className=' rounded-circle shadow-sm'></img>
 											<h5>
-												{/* {context.user.name} */}
+												{user.name}
 												<p className='d-inline text-muted'>
-													{/* #{context.user.tag} */}
+													#{user.tag}
 												</p>
 											</h5>
 										</div>
@@ -109,20 +124,7 @@ export default class Profile extends Component {
 
 									<div className='card-body'>
 										<p className='card-text'>
-											Lorem ipsum dolor sit amet, ea vel prima adhuc, scripta
-											liberavisse ea quo, te vel vidit mollis complectitur. Quis
-											verear mel ne. Munere vituperata vis cu, te pri duis
-											timeam scaevola, nam postea diceret ne. Cum ex quod
-											aliquip mediocritatem, mei habemus persecuti mediocritatem
-											ei.
-										</p>
-										<p className='card-text'>
-											Lorem ipsum dolor sit amet, ea vel prima adhuc, scripta
-											liberavisse ea quo, te vel vidit mollis complectitur. Quis
-											verear mel ne. Munere vituperata vis cu, te pri duis
-											timeam scaevola, nam postea diceret ne. Cum ex quod
-											aliquip mediocritatem, mei habemus persecuti mediocritatem
-											ei.
+											{user.description ? user.description[0].description : <Translate string={'no-description'}/>}
 										</p>
 									</div>
 								</div>

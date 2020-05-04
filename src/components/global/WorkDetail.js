@@ -84,8 +84,8 @@ export default class WorkDetail extends React.Component {
 		if (!work) return <>Loading</>;
 		return (
 			<section className='work'>
-				{console.log()}
 				<div className='container mt-2'>
+							{console.log(this.state)}
 					<div className='row'>
 						<h1>{work.title}</h1>
 						<h3 className='my-auto ml-4'> Precio: {work.coin_price}</h3>

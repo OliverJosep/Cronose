@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom';
 
 export default function ProfileCard(props) {
 	const work = props.work;
-	console.log(work);
 	// let translation;
 	// let title, description, rater;
 	// for (translation in work.translations) {
@@ -16,13 +15,13 @@ export default function ProfileCard(props) {
 	// }
 
 	return (
-		<div class='card card-profile mt-3'>
+		<div className='card card-profile mt-3'>
 			<img
 				className='card-img-top'
 				src='/assets/img/img-work.jpg'
 				alt='img-work'></img>
-			<div class='card-body'>
-				<div class='card-title'>
+			<div className='card-body'>
+				<div className='card-title'>
 					<div className='d-flex justify-content-end'>
 						<Rater
 							total={5}
@@ -34,10 +33,10 @@ export default function ProfileCard(props) {
 						<b>{work.title || work.translations[0].title}</b>
 					</h4>
 				</div>
-				<p class='card-text'>
+				<p className='card-text'>
 					{work.description || work.translations[0].description}
 				</p>
-				<NavLink to='#' class='btn btn-block text-white'>
+				<NavLink to='#' className='btn btn-block text-white'>
 					See Offer
 				</NavLink>
 			</div>
