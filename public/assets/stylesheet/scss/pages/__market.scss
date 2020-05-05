@@ -69,32 +69,61 @@
 	padding-bottom: 40px;
 }
 
-#jobFilter {
-	#btn-filter {
-		background-color: var(--primary-color);
-	}
-	display: none;
+// Filter
+
+.filter {
 	background-color: var(--white);
 	position: fixed;
-	width: 250px;
+	width: calc(250px);
 	height: 100%;
 	transition: all 250ms ease-in-out;
 	z-index: 1000;
-	right: 0;
+	right: -250px;
 	top: 0;
+}
 
-	span {
-		font-size: 50px;
-		color: var(--primary-color);
-		position: absolute;
-		right: 225px;
+#filter-toggle {
+	display: none;
+	z-index: 1000;
+	&:checked {
+		~ .filter {
+			right: 0;
+		}
+		~ #btn-filter {
+			transform: rotate(180deg);
+			right: 260px;
+		}
 	}
 }
 
-#btn-show {
+#btn-filter {
 	font-size: 50px !important;
 	color: var(--primary-color);
 	position: absolute;
 	top: 0;
 	right: 10px;
+	transition: all 250ms ease-in-out;
 }
+
+
+
+
+// .filter {
+// 	
+// 	display: block;
+// 	background-color: var(--white);
+// 	position: fixed;
+// 	width: 250px;
+// 	height: 100%;
+// 	transition: all 250ms ease-in-out;
+// 	z-index: 1000;
+// 	right: 0;
+// 	top: 0;
+
+// 	span {
+// 		font-size: 50px;
+// 		color: var(--primary-color);
+// 		position: absolute;
+// 		right: 225px;
+// 	}
+// }

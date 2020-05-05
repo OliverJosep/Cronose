@@ -108,7 +108,7 @@ function SideBar(props) {
 					</ul>
 				</section>
 			</nav>
-			<main className='w-100'>{SwitchRoutes(props.routes, props)}</main>
+			<main className=''>{SwitchRoutes(props.routes, props)}</main>
 			<Footer 
 				lang={props.lang}
 				changeLanguage={props.changeLanguage}

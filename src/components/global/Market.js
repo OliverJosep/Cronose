@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import $ from 'jquery';
 import {
 	IoIosArrowDroprightCircle,
 	IoIosArrowDropleftCircle,
@@ -37,33 +36,20 @@ export default class Market extends Component {
 
 		this.getWorks();
 		this.getCategories();
-		$('#btn-show').click(function() {
-			$('#jobFilter').show();
-			$('#btn-show').hide();
-		});
-
-		$('#btn-hide').click(function() {
-			$('#jobFilter').hide();
-			$('#btn-show').show();
-		});
 	}
 
 	componentDidUpdate() {
     if(this.state.lang !== this.context.lang){
 			this.getCategories();
 			this.getSpecialization();
-			this.getWorks();
+			this.state.specialization ? this.getFilteredWorks() : this.getWorks();
 			this.setState((state) => {
 				return {lang: this.context.lang};
 			})
-    }
+		}
 	}
 
-	resetFilter() {
-		this.setState({ categories: [], specialization: [] });
-		this.getWorks();
-		this.getCategories();
-	}
+	// Get Works
 
 	getWorks() {
 		Axios.get(
@@ -72,6 +58,8 @@ export default class Market extends Component {
 			this.setState({ works: response.data || this.state.works, loaded: true })
 		);
 	}
+
+	// Fliter
 
 	getFilteredWorks() {
 		const category_id = document.getElementById('category_id').value;
@@ -94,6 +82,14 @@ export default class Market extends Component {
 			})
 		).then((response) => this.setState({ works: response.data }));
 	}
+
+	resetFilter() {
+		this.setState({ categories: [], specialization: [] });
+		this.getWorks();
+		this.getCategories();
+	}
+
+	// Get category and specialization
 
 	getCategories() {
 		Axios.get(
@@ -131,13 +127,16 @@ export default class Market extends Component {
 						/>
 					))}
 				</section>
-				<span id='btn-show' >
+				<input type='checkbox' name='toggle' id='filter-toggle'></input>
+				<label htmlFor='filter-toggle' id='btn-filter'>
 					<IoIosArrowDropleftCircle />
-				</span>
+				</label>
+				{/* <span id='btn-show' >
+				</span> */}
 
-				<div className='' id='jobFilter'>
+				<div className='filter'>
 					<span id='btn-hide'>
-						<IoIosArrowDroprightCircle />
+						{/* <IoIosArrowDroprightCircle /> */}
 					</span>
 					<h2 className='p-3 pt-4 text-center'>Job Filter</h2>
 					<div className='input-group p-2'>
@@ -179,7 +178,7 @@ export default class Market extends Component {
 						</div>
 						<div className='p-2 pt-4'>
 							<button
-								id='btn-filter'
+								id='btn-reset'
 								onClick={this.resetFilter}
 								className='btn text-white'>
 								Reset Filter

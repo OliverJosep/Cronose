@@ -11,9 +11,10 @@
 	margin: 0px;
 }
 
-#sidebar-toggle:checked ~ .sidebar-nav ul li p {
+#sidebar-toggle:checked ~ .sidebar-nav ul li a p {
 	color: var(--primary-color);
 	margin: 10px 0 0;
+	text-align: left;
 	&:hover {
 		color: var(--secondary-color);
 		text-decoration: none;

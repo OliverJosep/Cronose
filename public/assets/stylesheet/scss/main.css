@@ -168,12 +168,13 @@ main#homepage {
   margin: 0px;
 }
 
-#sidebar-toggle:checked ~ .sidebar-nav ul li p {
+#sidebar-toggle:checked ~ .sidebar-nav ul li a p {
   color: var(--primary-color);
   margin: 10px 0 0;
+  text-align: left;
 }
 
-#sidebar-toggle:checked ~ .sidebar-nav ul li p:hover {
+#sidebar-toggle:checked ~ .sidebar-nav ul li a p:hover {
   color: var(--secondary-color);
   text-decoration: none;
 }
@@ -645,36 +646,41 @@ footer .links {
   padding-bottom: 40px;
 }
 
-#jobFilter {
-  display: none;
+.filter {
   background-color: var(--white);
   position: fixed;
-  width: 250px;
+  width: calc(250px);
   height: 100%;
   -webkit-transition: all 250ms ease-in-out;
   transition: all 250ms ease-in-out;
   z-index: 1000;
-  right: 0;
+  right: -250px;
   top: 0;
 }
 
-#jobFilter #btn-filter {
-  background-color: var(--primary-color);
+#filter-toggle {
+  display: none;
+  z-index: 1000;
 }
 
-#jobFilter span {
-  font-size: 50px;
-  color: var(--primary-color);
-  position: absolute;
-  right: 225px;
+#filter-toggle:checked ~ .filter {
+  right: 0;
 }
 
-#btn-show {
+#filter-toggle:checked ~ #btn-filter {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+  right: 260px;
+}
+
+#btn-filter {
   font-size: 50px !important;
   color: var(--primary-color);
   position: absolute;
   top: 0;
   right: 10px;
+  -webkit-transition: all 250ms ease-in-out;
+  transition: all 250ms ease-in-out;
 }
 
 .register .btn-register {
