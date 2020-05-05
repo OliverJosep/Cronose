@@ -11,7 +11,7 @@ export default class Profile extends Component {
 	static contextType = LocaleContext;
 	constructor(props) {
 		super(props);
-		this.state = {lang: [], user: [], works: [] , loading: true };
+		this.state = {lang: [], user: [], works: [] , loaded: false };
 		this.getWorks = this.getWorks.bind(this);
 		this.getUserProfile = this.getUserProfile.bind(this);
 	}
@@ -49,13 +49,13 @@ export default class Profile extends Component {
 		Axios.get(
 			`${process.env.REACT_APP_API_URL}/${this.context.lang}/works/user/${user_id}`
 		).then(response => {
-			this.setState({ works: response.data, loading: false });
+			this.setState({ works: response.data, loaded: true });
 		});
 	}
 	render() {
 		const { user } = this.state;
-		if (this.state.loading) return <><Loader/></>;
-		if (!this.state.loading) return (
+		if (!this.state.loaded) return <Loader/>;
+		return (
 			<LocaleContext.Consumer>
 				{(context) => {
 					return (

@@ -5,6 +5,8 @@ import 'react-rater/lib/react-rater.css';
 import Axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import  { LocaleContext } from '../../contexts/LocaleContext';
+import Translate from '../../translations/Translate';
+import Loader from '../layouts/Loader';
 
 const position = [39.5643576, 3.20227];
 
@@ -48,6 +50,7 @@ export default class WorkDetail extends React.Component {
 
 		this.state = {
 			work: null,
+			loaded: false
 		};
 
 		this.getWork = this.getWork.bind(this);
@@ -72,7 +75,7 @@ export default class WorkDetail extends React.Component {
 			`${process.env.REACT_APP_API_URL}/${this.context.lang}/work/${initials}/${tag}/${specialization}`
 		)
 			.then((response) => {
-				self.setState({ work: response.data });
+				self.setState({ work: response.data, loaded: true });
 			})
 			.catch((error) => {
 				console.log('ERROR');
@@ -81,7 +84,7 @@ export default class WorkDetail extends React.Component {
 
 	render() {
 		const { work } = this.state;
-		if (!work) return <>Loading</>;
+		if (!this.state.loaded) return <Loader></Loader>;
 		return (
 			<section className='work'>
 				<div className='container mt-2'>
@@ -183,7 +186,9 @@ export default class WorkDetail extends React.Component {
 								<div className='container-fluid'>
 									<h4>Work info</h4>
 									<hr />
-									<p>{work.translations[0].description}</p>
+									<p>
+										{work.description ? work.description[0].description : <Translate string={'no-description'}/>}
+									</p>
 								</div>
 							</div>
 							<div className='row mt-4'>
@@ -205,7 +210,7 @@ export default class WorkDetail extends React.Component {
 												<hr />
 											</div>
 											<p>
-												{work.user.description[0].description}
+												{work.user.description ? work.user.description[0].description : <Translate string={'no-description'}/>}
 											</p>
 										</div>
 									</div>
@@ -366,7 +371,7 @@ export default class WorkDetail extends React.Component {
 							</div>
 							<div className='text-center mt-4'>
 								<NavLink
-									to={`#`}
+									to={`/profile/${work.user.initials}/${work.user.tag}`}
 									className='btn btn-large btn-primary'>
 									Contactar
 								</NavLink>

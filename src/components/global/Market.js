@@ -20,7 +20,7 @@ export default class Market extends Component {
 			works: [],
 			categories: [],
 			specialization: [],
-			loading: true
+			loaded: false
 		};
 
 		this.getWorks = this.getWorks.bind(this);
@@ -69,7 +69,7 @@ export default class Market extends Component {
 		Axios.get(
 			`${process.env.REACT_APP_API_URL}/${this.context.lang}/works/all/0/10`
 		).then((response) =>
-			this.setState({ works: response.data || this.state.works, loading: false })
+			this.setState({ works: response.data || this.state.works, loaded: true })
 		);
 	}
 
@@ -110,8 +110,8 @@ export default class Market extends Component {
 	}
 
 	render() {
-		if (this.state.loading) return <><Loader/></>;
-		if (!this.state.loading) return (
+		if (!this.state.loaded) return <><Loader/></>;
+		return (
 			<>
 				<div className='btn-search md-form mt-0'>
 					<input
