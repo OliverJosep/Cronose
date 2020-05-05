@@ -69,14 +69,14 @@ export default function Chat() {
 								Anastasio
 							</div>
 							<div className='mt-1 scroll'>
-								<div class='ml-3 mt-2 card bg-light rounded w-75'>
-									<div class='card-body p-2'>
-										<p class='card-text black-text'> Hola bernardo </p>
+								<div className='ml-3 mt-2 card bg-light rounded w-75'>
+									<div className='card-body p-2'>
+										<p className='card-text black-text'> Hola bernardo </p>
 									</div>
 								</div>
-								<div class='mr-2 mt-2 card bg-primary rounded w-75 float-right'>
-									<div class='card-body p-2'>
-										<p class='card-text text-white'>Hola Anastasio</p>
+								<div className='mr-2 mt-2 card bg-primary rounded w-75 float-right'>
+									<div className='card-body p-2'>
+										<p className='card-text text-white'>Hola Anastasio</p>
 									</div>
 								</div>
 							</div>
@@ -88,7 +88,7 @@ export default function Chat() {
 									className='form-control'
 									type='text'
 									placeholder='Insert message here!'
-									readonly
+									readOnly
 								/>
 							</div>
 							<div className='pl-1 col-xl-2 col-4'>

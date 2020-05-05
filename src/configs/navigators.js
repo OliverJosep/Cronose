@@ -61,7 +61,7 @@ export default [
 				icon: MdWork,
 			},
 			{
-				title: 'my_profile',
+				title: 'profile',
 				path: '/me',
 				component: Profile,
 				icon: GoPerson,

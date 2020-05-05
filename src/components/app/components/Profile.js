@@ -6,7 +6,6 @@ import Rater from 'react-rater';
 import Translate from '../../../translations/Translate';
 import ProfileCard from './ProfileCard';
 import Loader from '../../layouts/Loader';
-import Footer from '../../layouts/Loader';
 
 export default class Profile extends Component {
 	static contextType = LocaleContext;
@@ -25,13 +24,6 @@ export default class Profile extends Component {
 
 		//Get data
 		this.getUserProfile();
-
-		//Profile loader
-		setTimeout(() => {
-			this.setState((state) => {
-				return {loading: false};
-			})
-		}, 300);
 	}
 
 	componentDidUpdate() {
@@ -51,12 +43,14 @@ export default class Profile extends Component {
 			this.setState({ user: response.data });
 			this.getWorks(response.data.id);
 		}); 
-	}
+	};
 
 	getWorks(user_id) {
 		Axios.get(
 			`${process.env.REACT_APP_API_URL}/${this.context.lang}/works/user/${user_id}`
-		).then((response) => this.setState({ works: response.data }));
+		).then(response => {
+			this.setState({ works: response.data, loading: false });
+		});
 	}
 	render() {
 		const { user } = this.state;

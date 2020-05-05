@@ -8,6 +8,7 @@ import {
 import WorkCard from './WorkCard';
 import qs from 'qs';
 import  { LocaleContext } from '../../contexts/LocaleContext';
+import Loader from '../layouts/Loader';
 
 
 export default class Market extends Component {
@@ -19,6 +20,7 @@ export default class Market extends Component {
 			works: [],
 			categories: [],
 			specialization: [],
+			loading: true
 		};
 
 		this.getWorks = this.getWorks.bind(this);
@@ -45,6 +47,7 @@ export default class Market extends Component {
 			$('#btn-show').show();
 		});
 	}
+
 	componentDidUpdate() {
     if(this.state.lang !== this.context.lang){
 			this.getCategories();
@@ -66,7 +69,7 @@ export default class Market extends Component {
 		Axios.get(
 			`${process.env.REACT_APP_API_URL}/${this.context.lang}/works/all/0/10`
 		).then((response) =>
-			this.setState({ works: response.data || this.state.works })
+			this.setState({ works: response.data || this.state.works, loading: false })
 		);
 	}
 
@@ -107,7 +110,8 @@ export default class Market extends Component {
 	}
 
 	render() {
-		return (
+		if (this.state.loading) return <><Loader/></>;
+		if (!this.state.loading) return (
 			<>
 				<div className='btn-search md-form mt-0'>
 					<input
@@ -144,8 +148,9 @@ export default class Market extends Component {
 								name='category_id'
 								className='rowser-default custom-select'
 								onChange={this.getSpecialization}
+								defaultValue='0'
 								required>
-								<option value='0' selected='selected'>
+								<option value='0'>
 									Select category
 								</option>
 								{this.state.categories.map((category, index) => (
@@ -160,8 +165,9 @@ export default class Market extends Component {
 								name='specialization_id'
 								className='rowser-default custom-select'
 								onChange={this.getFilteredWorks}
+								defaultValue='0'
 								required>
-								<option value='0' selected='selected'>
+								<option value='0'>
 									Select specialization
 								</option>
 								{this.state.specialization.map((specialization, index) => (

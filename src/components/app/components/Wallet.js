@@ -117,7 +117,7 @@ export default class Wallet extends Component {
 										<b>TITULO</b>
 									</h4>
 									<hr></hr>
-									<p class='card-text'>
+									<p className='card-text'>
 										Lorem ipsum dolor sit amet, ea vel prima adhuc, scripta
 										liberavisse ea quo, te vel vidit mollis complectitur.
 									</p>
@@ -159,7 +159,7 @@ export default class Wallet extends Component {
 										<b>TITULO</b>
 									</h4>
 									<hr></hr>
-									<p class='card-text'>
+									<p className='card-text'>
 										Lorem ipsum dolor sit amet, ea vel prima adhuc, scripta
 										liberavisse ea quo, te vel vidit mollis complectitur.
 									</p>
@@ -201,7 +201,7 @@ export default class Wallet extends Component {
 										<b>TITULO</b>
 									</h4>
 									<hr></hr>
-									<p class='card-text'>
+									<p className='card-text'>
 										Lorem ipsum dolor sit amet, ea vel prima adhuc, scripta
 										liberavisse ea quo, te vel vidit mollis complectitur.
 									</p>
@@ -243,7 +243,7 @@ export default class Wallet extends Component {
 										<b>TITULO</b>
 									</h4>
 									<hr></hr>
-									<p class='card-text'>
+									<p className='card-text'>
 										Lorem ipsum dolor sit amet, ea vel prima adhuc, scripta
 										liberavisse ea quo, te vel vidit mollis complectitur.
 									</p>

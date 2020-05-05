@@ -15,7 +15,7 @@ export default function Reset() {
 	return (
 		<div
 			className='modal'
-			tabindex='-1'
+			tabIndex='-1'
 			role='dialog'
 			aria-labelledby='bannerformmodal'
 			aria-hidden='true'

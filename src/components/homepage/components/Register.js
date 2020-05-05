@@ -132,8 +132,9 @@ export default class Register extends Component {
 									name='province_id'
 									className='form-control'
 									onChange={this.getCities}
+									defaultValue='0'
 									required>
-									<option value='0' selected='selected'>
+									<option value='0'>
 										Select province
 									</option>
 									{this.state.province.map((province, index) => (
@@ -147,8 +148,9 @@ export default class Register extends Component {
 									id='city_cp'
 									name='city_cp'
 									className='form-control'
+									defaultValue='0'
 									required>
-									<option selected='selected' disabled>
+									<option value='0' disabled>
 										Select City
 									</option>
 									{this.state.cities.map((cities, index) => (
@@ -246,7 +248,7 @@ export default class Register extends Component {
 								</div>
 							</div>
 						</div>
-            <div className="modal fade bannerformmodal bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="bannerformmodal" aria-hidden="true" id="termsAndConds">
+            <div className="modal fade bannerformmodal bd-example-modal-sm" tabIndex="-1" role="dialog" aria-labelledby="bannerformmodal" aria-hidden="true" id="termsAndConds">
               <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content p-4">
                   <h4 className="modal-title mb-4">Condiciones generales de Cronose</h4>

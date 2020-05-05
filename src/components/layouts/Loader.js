@@ -16,7 +16,7 @@ export default function loader() {
           color="#f09a24"
           height={100}
           width={100}
-          timeout={500} //3 secs
+          timeout={3000} //3 secs
         />
      </div>
     </>
