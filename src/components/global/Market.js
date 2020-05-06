@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import {
-	IoIosArrowDroprightCircle,
 	IoIosArrowDropleftCircle,
 } from 'react-icons/io';
 import WorkCard from './WorkCard';
