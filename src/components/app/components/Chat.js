@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { MdAddCircleOutline } from 'react-icons/md';
 import Axios from 'axios';
 import  { LocaleContext } from '../../../contexts/LocaleContext';
@@ -11,24 +10,28 @@ export default class Chat extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			message: '',
 			user_id: [],
 			chats: [],
 			chats_loaded: false,
 			chat_selected: '',
+			chat: [],
 			chat_loaded: false,
+			new_data: false
 		};
-		if (this.state.chat_selected) {
-		}
 		this.getChat = this.getChat.bind(this);
 		this.getChats = this.getChats.bind(this);
-		this.sendMessage = this.sendMessage.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 		this.getLastMessage = this.getLastMessage.bind(this);
 		this.selectChat = this.selectChat.bind(this);
+		this.scrollDown = this.scrollDown.bind(this);
 	}
 
 	componentDidMount() {
 		this.getChats();
-		
+	}
+
+	componentDidUpdate() {
 	}
 
 	getChats() {
@@ -43,45 +46,72 @@ export default class Chat extends Component {
 		Axios.get(
 			`${process.env.REACT_APP_API_URL}/chat/${this.context.user.id}/${id}`
 		).then((response) => {
-			this.setState({ chat: response.data || this.state.chat, chat_loaded: true || false}, this.getLastMessage);
+			this.setState({ chat: response.data || this.state.chat, chat_loaded: true || false});
+			!this.state.chat_selected && this.getLastMessage();
+			this.setState({ chat_selected: id});
 		});
+		this.scrollDown();
 	}
 
 	selectChat = ({ currentTarget: { id } }) => {
-		this.setState({ chat_selected: id});
 		this.getChat(id);
 	};
 
-	sendMessage(e) {
+  handleSubmit(e) {
 		e.preventDefault();
-		const data = Object.fromEntries(new FormData(e.currentTarget));
-		document.getElementById("message").value = '';
+		document.getElementById('send').value = '';
+		const list = this.state.chat.messages;
+    let date = new Date();
+    date = date.getFullYear() + '-' +
+      ('00' + (date.getMonth()+1)).slice(-2) + '-' +
+      ('00' + date.getDate()).slice(-2) + ' ' + 
+      ('00' + date.getHours()).slice(-2) + ':' + 
+      ('00' + date.getMinutes()).slice(-2) + ':' + 
+      ('00' + date.getSeconds()).slice(-2);
+    const newMessage = {
+      sended: '1',
+      sended_date: date,
+      message: this.state.message
+    }
 		Axios.post(`${process.env.REACT_APP_API_URL}/chat/${this.context.user.id}/${this.state.chat_selected}`, 
-		qs.stringify(data))
-			// .then(function (response) {
-			// 	console.log(response);
-			// })
-	}
+		qs.stringify(newMessage))
+    list.push(newMessage);
+		this.setState({messages: list});
+		this.scrollDown();
+  }
+
+  updateMessage(e) {
+    this.setState({message: e.target.value})
+  }
 
 	getLastMessage() {
+		let selected;
 		setInterval(
 			() => {
-				Axios.get(
-				`${process.env.REACT_APP_API_URL}/chat/last/${this.context.user.id}/${this.state.chat_selected}`
-			).then((response) => {
-				for (let i = 0 ; i < response.data.messages.length; i++) {
-					if (response.data.messages[i].sended_date > this.state.chat.messages[this.state.chat.messages.length - 1].sended_date) {
-						this.state.chat.messages.push(response.data.messages[i]);
-						console.log(this.state.chat.messages)
-						const myelement = (<h1>Puto</h1>);
-						ReactDOM.render(myelement, document.getElementById('chat_box'));
-					}
+				if (this.state.chat_selected) {
+					Axios.get(
+					`${process.env.REACT_APP_API_URL}/chat/last/${this.context.user.id}/${this.state.chat_selected}`
+					).then((response) => {
+						for (let i = 0 ; i < response.data.messages.length; i++) {
+							if (response.data.messages[i].sended_date > this.state.chat.messages[this.state.chat.messages.length - 1].sended_date) {
+								this.state.chat.messages.push(response.data.messages[i]);
+								this.setState({new_data: true})
+								this.scrollDown();
+								console.log(response.data.messages[i])
+							}
+						}
+					})
 				}
-			});
 			},
 			1000
 		);
+	}
 
+	scrollDown() {
+		setTimeout(function() {
+			var objDiv = document.getElementById("chat_box");
+			objDiv.scrollTop = objDiv.scrollHeight;
+		}, 10)
 	}
 
 	render() {
@@ -99,7 +129,6 @@ export default class Chat extends Component {
 						</div>
 						<div className='chat col-md-6 col-9 p-1'>
 
-						{console.log('puuto')}
 						{this.state.chat_loaded ? 
 							<RenderChat user={this.state.chat.receiver} messages={this.state.chat.messages} sendMessage={this.sendMessage} />
 							: 'Loading'}	
@@ -108,11 +137,11 @@ export default class Chat extends Component {
 								method='post'
 								target='_self' 
 								className='w-100 row'
-								onSubmit={this.sendMessage.bind(this)}>
+								onSubmit={this.handleSubmit.bind(this)}>
 								<div className='pr-1 col-xl-10 col-8'>
 									<input
-										id='message'
-										name='message'
+										onChange={this.updateMessage.bind(this)}
+										id='send'
 										className='form-control'
 										type='text'
 										placeholder='Insert message here!'
@@ -200,6 +229,7 @@ export function RenderChats(props) {
 }
 
 export function RenderChat(props) {
+	
 	return(
 			<div className='messages mb-2'>
 				<div className='user p-2'>
