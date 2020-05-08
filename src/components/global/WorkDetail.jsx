@@ -372,7 +372,7 @@ export default class WorkDetail extends React.Component {
 							</div>
 							<div className='text-center mt-4'>
 								<NavLink
-									to={`/profile/${work.user.initials}/${work.user.tag}`}
+									to={`/chat?id=${work.user.id}`}
 									className='btn btn-large btn-primary'>
 									Contactar
 								</NavLink>

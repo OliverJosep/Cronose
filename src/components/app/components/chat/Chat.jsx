@@ -28,9 +28,11 @@ export default class Chat extends Component {
 		this.scrollDown = this.scrollDown.bind(this);
 		this.getChatsInterval = this.getChatsInterval.bind(this);
 		this.chatsMessage = this.chatsMessage.bind(this);
+		this.newChat = this.newChat.bind(this);
 	}
 	
 	componentDidMount() {
+		this.newChat();
 		this.getChats();
 		this.chatsInterval = setInterval(this.getChatsInterval, 3000);
 		this.chatsMessage();
@@ -42,6 +44,19 @@ export default class Chat extends Component {
 	componentWillUnmount() {
 		clearInterval(this.chatInterval);
 		clearInterval(this.chatsInterval);
+	}
+
+	newChat() {
+		let url = new URL(window.location.href)
+		let id = url.searchParams.get('id');
+		if (id) { 
+			this.setState({
+				chat_selected: id
+			}, function() {
+				this.getChat(id);
+				// console.log(this.state)
+			})
+		};
 	}
 
 	getChats() {
@@ -67,8 +82,9 @@ export default class Chat extends Component {
 		).then((response) => {
 			!this.state.chat_selected && (this.chatInterval = setInterval(this.getLastMessage, 500));
 			this.setState({ chat_selected: id});
-			this.setState({chat: response.data || this.state.chat, chat_loaded: true || false, new_data: true}, function () {
+			this.setState({chat: response.data || 'this.state.chat', chat_loaded: true || false, new_data: true}, function () {
 				this.scrollDown();
+				console.log(this.state)
 			});
 		});
 		this.scrollDown();

@@ -843,6 +843,16 @@ footer .links {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
+.card-chat .chat .messages .user .name {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.card-chat .chat .messages .user .name:hover {
+  text-decoration: underline;
+}
+
 .card-chat .chat .messages .scroll {
   height: 480px;
   overflow-y: scroll;

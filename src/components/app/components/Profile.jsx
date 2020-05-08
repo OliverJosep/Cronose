@@ -6,6 +6,7 @@ import Rater from 'react-rater';
 import Translate from '../../../translations/Translate';
 import ProfileCard from './ProfileCard';
 import Loader from '../../layouts/Loader';
+import { NavLink } from 'react-router-dom';
 
 export default class Profile extends Component {
 	static contextType = LocaleContext;
@@ -60,7 +61,6 @@ export default class Profile extends Component {
 				{(context) => {
 					return (
 						<div className='profile'>
-							{console.log(user)}
 							<div className='img-back-profile'>
 								<img
 									src='/assets/img/img-profile.jpg'
@@ -91,8 +91,14 @@ export default class Profile extends Component {
 									</div>
 								</div>
 								<div className='d-flex justify-content-md-end justify-content-center'>
-									<button className='btn pl-4 pr-4 mr-3'>Edit</button>
-									<button className='btn pl-4 pr-4 '>Contact</button>
+									{this.context.user.id === user.id 
+										? <button className='btn pl-4 pr-4 mr-3'>Edit</button>
+										: <NavLink
+												to={`/chat?id=${user.id}`}
+												className='btn pl-4 pr-4'>
+												Contact
+											</NavLink>
+									}
 								</div>
 							</div>
 							<div id='body-profile'>

@@ -1,7 +1,7 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export function RenderChat(props) {
-	
 	return(
 		<div className='messages mb-2'>
 			<div className='user p-2'>
@@ -11,9 +11,13 @@ export function RenderChat(props) {
 					height='40px'
 					alt="avatar-placeholder"
 				/>
-				{props.user.name}
+				<NavLink
+					to={`/profile/${props.user.initials}/${props.user.tag}`}>
+					<span className='name'>{props.user.full_name}</span>
+				</NavLink>
 			</div>
 			<div className='mt-1 scroll' id='chat_box'>
+				
 				{props.messages ? props.messages.map((message, index) => (
 					<Message sended={message.sended} message={message.message} data={message.sended_date} key={index}/>
 				)) : 'Loading'}
