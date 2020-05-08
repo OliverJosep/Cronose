@@ -670,17 +670,18 @@ footer .links {
 #filter-toggle:checked ~ #btn-filter {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
-  right: 260px;
+  right: 225px;
 }
 
 #btn-filter {
+  position: fixed;
   font-size: 50px !important;
   color: var(--primary-color);
-  position: absolute;
   top: 0;
   right: 10px;
   -webkit-transition: all 250ms ease-in-out;
   transition: all 250ms ease-in-out;
+  z-index: 10001;
 }
 
 .register .btn-register {
@@ -789,13 +790,13 @@ footer .links {
 
 .card-chat .chats .bg {
   background-color: #fff;
-  border: 1px solid var(--primary-color);
+  border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 10px 10px;
   height: 591px;
 }
 
 .card-chat .chats .user-chat {
-  border-bottom: 1px solid var(--primary-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
   color: var(--secondary-color);
 }
 
@@ -803,9 +804,28 @@ footer .links {
   cursor: pointer;
 }
 
-.card-chat .chats .user-chat .active {
-  color: orange;
+.card-chat .chats .user-chat .user-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.card-chat .chats .active {
+  background-color: var(--primary-color);
+}
+
+.card-chat .chats .active .user-chat {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  color: var(--secondary-color);
+}
+
+.card-chat .chats .active .user {
   font-weight: bold;
+  font-size: 20px;
+}
+
+.card-chat .chats .active .message {
+  color: #fff;
 }
 
 .card-chat .chats small {
@@ -813,19 +833,43 @@ footer .links {
 }
 
 .card-chat .chat .messages {
-  border: 1px solid var(--primary-color);
+  border: 1px solid rgba(0, 0, 0, 0.125);
   background-color: #fff;
   border-radius: 10px 10px;
   height: 545px;
 }
 
 .card-chat .chat .messages .user {
-  border-bottom: 1px solid var(--primary-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .card-chat .chat .messages .scroll {
   height: 480px;
   overflow-y: scroll;
+}
+
+.card-chat .chat .sender {
+  background-color: var(--primary-color);
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  color: #fff;
+}
+
+.card-chat .chat .reciever {
+  background-color: #f8f9fa;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  color: #000;
+}
+
+.card-chat .chat .message {
+  margin: 0;
+  margin-right: 40px;
+}
+
+.card-chat .chat .data {
+  position: absolute;
+  right: 4px;
+  bottom: 0;
+  font-size: 11px;
 }
 
 .card-chat .chat .btn {
@@ -838,13 +882,13 @@ footer .links {
 
 .card-chat .cards .bg {
   background-color: #fff;
-  border: 1px solid var(--primary-color);
+  border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 10px 10px;
   height: 591px;
 }
 
 .card-chat .cards .bg .offer-card {
-  border-bottom: 1px solid var(--primary-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
   cursor: pointer;
 }
 
@@ -867,7 +911,7 @@ footer .links {
 }
 
 .card-chat .cards h3 {
-  border-bottom: 1px solid var(--primary-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 #workForm {

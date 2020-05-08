@@ -17,7 +17,8 @@ export default class Chat extends Component {
 			chat_selected: '',
 			chat: [],
 			chat_loaded: false,
-			new_data: false
+			new_data: false,
+			chatsLength: '10'
 		};
 		this.getChat = this.getChat.bind(this);
 		this.getChats = this.getChats.bind(this);
@@ -25,13 +26,22 @@ export default class Chat extends Component {
 		this.getLastMessage = this.getLastMessage.bind(this);
 		this.selectChat = this.selectChat.bind(this);
 		this.scrollDown = this.scrollDown.bind(this);
+		this.getChatsInterval = this.getChatsInterval.bind(this);
+		this.chastMessage = this.chastMessage.bind(this);
 	}
-
+	
 	componentDidMount() {
 		this.getChats();
+		this.chatsInterval = setInterval(this.getChatsInterval, 3000);
+		this.chastMessage();
 	}
 
 	componentDidUpdate() {
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.chatInterval);
+		clearInterval(this.chatsInterval);
 	}
 
 	getChats() {
@@ -42,24 +52,37 @@ export default class Chat extends Component {
 		});
 	}
 
+	getChatsInterval() {
+		Axios.get(
+			`${process.env.REACT_APP_API_URL}/chats/${this.context.user.id}`
+		).then((response) => {
+			this.setState({ chats: response.data.chats || this.state.chats, chats_loaded: true || false});
+		});
+		
+	}
+	
 	getChat(id) {
 		Axios.get(
 			`${process.env.REACT_APP_API_URL}/chat/${this.context.user.id}/${id}`
 		).then((response) => {
-			this.setState({ chat: response.data || this.state.chat, chat_loaded: true || false});
-			!this.state.chat_selected && this.getLastMessage();
+			!this.state.chat_selected && (this.chatInterval = setInterval(this.getLastMessage, 500));
 			this.setState({ chat_selected: id});
+			this.setState({chat: response.data || this.state.chat, chat_loaded: true || false, new_data: true}, function () {
+				this.scrollDown();
+			});
 		});
 		this.scrollDown();
 	}
 
 	selectChat = ({ currentTarget: { id } }) => {
 		this.getChat(id);
+		this.chastMessage();
 	};
 
   handleSubmit(e) {
 		e.preventDefault();
 		document.getElementById('send').value = '';
+		if (this.state.message === '') return false; 
 		const list = this.state.chat.messages;
     let date = new Date();
     date = date.getFullYear() + '-' +
@@ -76,8 +99,10 @@ export default class Chat extends Component {
 		Axios.post(`${process.env.REACT_APP_API_URL}/chat/${this.context.user.id}/${this.state.chat_selected}`, 
 		qs.stringify(newMessage))
     list.push(newMessage);
-		this.setState({messages: list});
-		this.scrollDown();
+		this.setState({messages: list, new_data: true, message: ''}, function () {
+			this.scrollDown();
+		});
+		this.getChats();
   }
 
   updateMessage(e) {
@@ -85,33 +110,35 @@ export default class Chat extends Component {
   }
 
 	getLastMessage() {
-		let selected;
-		setInterval(
-			() => {
-				if (this.state.chat_selected) {
-					Axios.get(
-					`${process.env.REACT_APP_API_URL}/chat/last/${this.context.user.id}/${this.state.chat_selected}`
-					).then((response) => {
-						for (let i = 0 ; i < response.data.messages.length; i++) {
-							if (response.data.messages[i].sended_date > this.state.chat.messages[this.state.chat.messages.length - 1].sended_date) {
-								this.state.chat.messages.push(response.data.messages[i]);
-								this.setState({new_data: true})
-								this.scrollDown();
-								console.log(response.data.messages[i])
-							}
-						}
-					})
+		let chat = this.state.chat;
+		if (this.state.chat_selected) {
+			Axios.get(
+			`${process.env.REACT_APP_API_URL}/chat/last/${this.context.user.id}/${this.state.chat_selected}`
+			).then((response) => {
+				for (let i = 0 ; i < response.data.messages.length; i++) {
+					if (response.data.messages[i].sended_date > chat.messages[chat.messages.length - 1].sended_date) {
+						chat.messages.push(response.data.messages[i]);
+						this.setState({chat: chat, new_data: true} , function () {
+							this.scrollDown();
+						})
+					}
 				}
-			},
-			1000
-		);
+			})
+		}
 	}
 
-	scrollDown() {
-		setTimeout(function() {
+	scrollDown(now) {
+		if (this.state.new_data || now) {
 			var objDiv = document.getElementById("chat_box");
 			objDiv.scrollTop = objDiv.scrollHeight;
-		}, 10)
+		}
+		this.setState({new_data: false});
+	}
+	
+	chastMessage() {
+		var objDiv = document.getElementById("user-chat");
+		console.log(objDiv.scrollWidth/10)
+		this.setState({chatsLength: objDiv.scrollWidth/15})
 	}
 
 	render() {
@@ -120,14 +147,14 @@ export default class Chat extends Component {
 				<h1 className='text-center mt-4'>Chat</h1>
 				<div className='container-fluid '>
 					<div className='row card-chat mb-4'>
-						<div className='chats col-3 p-1'>
+						<div className='chats col-4 col-xl-3 p-1' id='user-chat' >
 							<div className='bg'>
 								{this.state.chats_loaded ? this.state.chats.map((chat, index) => (
-									<RenderChats user={chat.reciver} message={chat.last} selected={this.state.chat_selected} selectChat={this.selectChat} key={index}/>
+									<RenderChats user={chat.reciver} message={chat.last} selected={this.state.chat_selected} selectChat={this.selectChat} chatsLength={this.state.chatsLength} key={index}/>
 								)) : 'Loading'}		
 							</div>
 						</div>
-						<div className='chat col-md-6 col-9 p-1'>
+						<div className='chat col-xl-6 col-8 p-1'>
 
 						{this.state.chat_loaded ? 
 							<RenderChat user={this.state.chat.receiver} messages={this.state.chat.messages} sendMessage={this.sendMessage} />
@@ -156,7 +183,7 @@ export default class Chat extends Component {
 								</div>
 							</form>
 						</div>
-						<div className='col-md-3 col-12 p-1 cards'>
+						<div className='col-xl-3 col-12 p-1 cards'>
 							<div className='bg'>
 								<h3 className='w-100 p-2 pt-3 m-0'>Cards</h3>
 								<div className='row offer-card p-2'>
@@ -211,17 +238,17 @@ export default class Chat extends Component {
 
 export function RenderChats(props) {
 	return (
-		<div className='user-chat' id={props.user.id} onClick={props.selectChat}>
-			<div className={'row p-2 ' + (props.selected === props.user.id ? 'active' : 'ei')}>
+		<div className={'user-chat' + (props.selected === props.user.id ? ' active' : '')} id={props.user.id} onClick={props.selectChat}>
+			<div className={'user-box p-2 '}>
 				<img
 					className='pr-2 m-md-0 m-auto'
 					src='/assets/img/avatar-placeholder.png'
 					height='55px'
 					alt="avatar-placeholder"
 				/>
-				<div className='row '>
-					<div className='col-12 d-none d-md-block'>{props.user.name}</div>
-					<small className='d-none d-md-block'>{props.message.message}</small>
+				<div className='row'>
+					<div className='col-12 d-none d-md-block user'>{props.user.name}</div>
+					<small className='d-none d-md-block message'>{props.message.message.substring(0,props.chatsLength)}{props.message.message.length > props.chatsLength && '...'}</small>
 				</div>
 			</div>
 		</div>
@@ -243,7 +270,7 @@ export function RenderChat(props) {
 				</div>
 				<div className='mt-1 scroll' id='chat_box'>
 					{props.messages ? props.messages.map((message, index) => (
-						<Message sended={message.sended} message={message.message} key={index}/>
+						<Message sended={message.sended} message={message.message} data={message.sended_date} key={index}/>
 					)) : 'Loading'}
 				</div>
 			</div>
@@ -252,9 +279,10 @@ export function RenderChat(props) {
 
 export function Message(props) {
 	return (
-		<div className={"ml-3 mt-2 card rounded w-75 " + (props.sended === '1' ? 'bg-primary float-right': 'bg-light float-left')}>
+		<div className={"ml-3 mb-2 card rounded w-75 " + (props.sended === '1' ? 'sender float-right': 'reciever float-left')}>
 			<div className='card-body p-2'>
-				<p className='card-text black-text'> {props.message} </p>
+				<p className='card-text black-text message'> {props.message} </p>
+				<div className='data'>{props.data.substring(11,16)}</div>
 			</div>
 		</div>
 	);
