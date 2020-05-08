@@ -1,6 +1,6 @@
 import Wallet from '../components/app/components/Wallet';
 import Market from '../components/global/Market';
-import Chat from '../components/app/components/Chat';
+import Chat from '../components/app/components/chat/Chat';
 import MyWorks from '../components/app/components/MyWorks';
 import Profile from '../components/app/components/Profile';
 import Home from '../components/homepage/components/Home';

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { MdAddCircleOutline } from 'react-icons/md';
 import Axios from 'axios';
-import  { LocaleContext } from '../../../contexts/LocaleContext';
-import qs from 'qs'
-
+import  { LocaleContext } from '../../../../contexts/LocaleContext';
+import qs from 'qs';
+import {RenderChat} from './Messages';
+// import InfiniteScroll from 'react-infinite-scroll-component';
 
 export default class Chat extends Component {
 	static contextType = LocaleContext;
@@ -11,7 +12,6 @@ export default class Chat extends Component {
 		super(props);
 		this.state = {
 			message: '',
-			user_id: [],
 			chats: [],
 			chats_loaded: false,
 			chat_selected: '',
@@ -27,13 +27,13 @@ export default class Chat extends Component {
 		this.selectChat = this.selectChat.bind(this);
 		this.scrollDown = this.scrollDown.bind(this);
 		this.getChatsInterval = this.getChatsInterval.bind(this);
-		this.chastMessage = this.chastMessage.bind(this);
+		this.chatsMessage = this.chatsMessage.bind(this);
 	}
 	
 	componentDidMount() {
 		this.getChats();
 		this.chatsInterval = setInterval(this.getChatsInterval, 3000);
-		this.chastMessage();
+		this.chatsMessage();
 	}
 
 	componentDidUpdate() {
@@ -76,7 +76,7 @@ export default class Chat extends Component {
 
 	selectChat = ({ currentTarget: { id } }) => {
 		this.getChat(id);
-		this.chastMessage();
+		this.chatsMessage();
 	};
 
   handleSubmit(e) {
@@ -135,9 +135,8 @@ export default class Chat extends Component {
 		this.setState({new_data: false});
 	}
 	
-	chastMessage() {
+	chatsMessage() {
 		var objDiv = document.getElementById("user-chat");
-		console.log(objDiv.scrollWidth/10)
 		this.setState({chatsLength: objDiv.scrollWidth/15})
 	}
 
@@ -250,39 +249,6 @@ export function RenderChats(props) {
 					<div className='col-12 d-none d-md-block user'>{props.user.name}</div>
 					<small className='d-none d-md-block message'>{props.message.message.substring(0,props.chatsLength)}{props.message.message.length > props.chatsLength && '...'}</small>
 				</div>
-			</div>
-		</div>
-	);
-}
-
-export function RenderChat(props) {
-	
-	return(
-			<div className='messages mb-2'>
-				<div className='user p-2'>
-					<img
-						className='pr-2'
-						src='/assets/img/avatar-placeholder.png'
-						height='40px'
-						alt="avatar-placeholder"
-					/>
-					{props.user.name}
-				</div>
-				<div className='mt-1 scroll' id='chat_box'>
-					{props.messages ? props.messages.map((message, index) => (
-						<Message sended={message.sended} message={message.message} data={message.sended_date} key={index}/>
-					)) : 'Loading'}
-				</div>
-			</div>
-	);
-}
-
-export function Message(props) {
-	return (
-		<div className={"ml-3 mb-2 card rounded w-75 " + (props.sended === '1' ? 'sender float-right': 'reciever float-left')}>
-			<div className='card-body p-2'>
-				<p className='card-text black-text message'> {props.message} </p>
-				<div className='data'>{props.data.substring(11,16)}</div>
 			</div>
 		</div>
 	);
