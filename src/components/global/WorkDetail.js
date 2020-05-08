@@ -184,10 +184,11 @@ export default class WorkDetail extends React.Component {
 							</div>
 							<div className='row mt-4'>
 								<div className='container-fluid'>
-									<h4>Work info</h4>
+									{console.log(work.translations[0].title)}
+									<h4>{work.translations[0].title}</h4>
 									<hr />
 									<p>
-										{work.description ? work.description[0].description : <Translate string={'no-description'}/>}
+										{work.translations[0].description ? work.translations[0].description : <Translate string={'no-description'}/>}
 									</p>
 								</div>
 							</div>
