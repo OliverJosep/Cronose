@@ -1,5 +1,5 @@
 import React from 'react';
-import { SideBar } from '../../components/layouts/Nav';
+import { SideBar } from '../layouts/Nav';
 
 export default function App(props) {
 	return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavBar } from '../../components/layouts/Nav';
+import { NavBar } from '../layouts/Nav';
 
 export default function HomePage(props) {
 	return (
