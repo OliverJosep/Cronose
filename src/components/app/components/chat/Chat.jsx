@@ -49,14 +49,7 @@ export default class Chat extends Component {
 	newChat() {
 		let url = new URL(window.location.href)
 		let id = url.searchParams.get('id');
-		if (id) { 
-			this.setState({
-				chat_selected: id
-			}, function() {
-				this.getChat(id);
-				// console.log(this.state)
-			})
-		};
+		if (id) this.getChat(id);
 	}
 
 	getChats() {
@@ -84,7 +77,6 @@ export default class Chat extends Component {
 			this.setState({ chat_selected: id});
 			this.setState({chat: response.data || 'this.state.chat', chat_loaded: true || false, new_data: true}, function () {
 				this.scrollDown();
-				console.log(this.state)
 			});
 		});
 		this.scrollDown();

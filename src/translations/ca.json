@@ -11,6 +11,10 @@
 	"profile": "Perfil",
 	"wallet": "Cartera",
 
+	"ca": "Català",
+	"es": "Castellà",
+	"en": "Anglès",
+
 	"no-description": "No hi ha descripció disponible",
 
 	"share-time": "Comparteix el teu temps",

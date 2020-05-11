@@ -76,7 +76,7 @@ export default class Profile extends Component {
 												alt='...'
 												className=' rounded-circle shadow-sm'></img>
 											<h5>
-												{user.name}
+												{user.name ? user.name + ' | ' : ''} {user.initials}
 												<p className='d-inline text-muted'>
 													#{user.tag}
 												</p>
@@ -92,7 +92,11 @@ export default class Profile extends Component {
 								</div>
 								<div className='d-flex justify-content-md-end justify-content-center'>
 									{this.context.user.id === user.id 
-										? <button className='btn pl-4 pr-4 mr-3'>Edit</button>
+										? <NavLink
+												to={`/me/edit`}
+												className='btn pl-4 pr-4'>
+												Edit
+											</NavLink>
 										: <NavLink
 												to={`/chat?id=${user.id}`}
 												className='btn pl-4 pr-4'>

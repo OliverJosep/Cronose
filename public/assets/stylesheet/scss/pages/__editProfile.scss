@@ -1,0 +1,21 @@
+.edit_profile {
+  padding: 0;
+  .box{
+    border: 1px solid rgba(0,0,0,.125);
+    .title{
+      background-color: #f7f7f7;
+      border-bottom: 1px solid rgba(0,0,0,.125);
+      margin: 0;
+      font-weight: bold;
+      font-size: 24px;
+      .user{
+        font-size: 18px;
+        font-weight: normal;
+      }
+    }
+    .body{
+      background-color: #fff;
+    }
+
+  }
+}

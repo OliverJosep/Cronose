@@ -22,6 +22,7 @@ export default class LocaleContextProvider extends Component {
 		this.logout = this.logout.bind(this);
 		this.changeLanguage = this.changeLanguage.bind(this);
 		this.saveLocalStorage = this.saveLocalStorage.bind(this);
+		this.updateUser = this.updateUser.bind(this);
 	}
 
 	login(data) {
@@ -41,6 +42,20 @@ export default class LocaleContextProvider extends Component {
 				self.saveLocalStorage();
 			});
 		return this.state.isLogged;
+	}
+
+	updateUser(id) {
+		const self = this;
+		Axios.get(`${process.env.REACT_APP_API_URL}/user/id/${id}`)
+		.then(function(response) {
+			self.setState({
+				user: response.data
+			})
+		})
+		.finally(function() {
+			self.saveLocalStorage();
+		});
+
 	}
 
 	logout(error) {
@@ -65,7 +80,7 @@ export default class LocaleContextProvider extends Component {
 	render() {
 		return (
 			<LocaleContext.Provider
-				value={{ ...this.state, login: this.login, logout: this.logout, changeLanguage: this.changeLanguage }}>
+				value={{ ...this.state, login: this.login, logout: this.logout, changeLanguage: this.changeLanguage, updateUser: this.updateUser }}>
 				{this.props.children}
 			</LocaleContext.Provider>
 		);

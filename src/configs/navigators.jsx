@@ -3,6 +3,7 @@ import Market from '../components/global/Market';
 import Chat from '../components/app/components/chat/Chat';
 import MyWorks from '../components/app/components/MyWorks';
 import Profile from '../components/app/components/Profile';
+import EditProfile from '../components/app/components/EditProfile'
 import Home from '../components/homepage/components/Home';
 import Login from '../components/homepage/components/Login';
 import Register from '../components/homepage/components/Register';
@@ -59,6 +60,12 @@ export default [
 				path: '/my/works',
 				component: MyWorks,
 				icon: MdWork,
+			},
+			{
+				title: 'edit_profile',
+				path: '/me/edit',
+				component: EditProfile,
+				show: false
 			},
 			{
 				title: 'profile',
