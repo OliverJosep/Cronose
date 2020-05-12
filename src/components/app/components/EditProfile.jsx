@@ -3,7 +3,6 @@ import Axios from 'axios';
 import md5 from 'md5';
 import { LocaleContext } from '../../../contexts/LocaleContext';
 import Translate from '../../../translations/Translate';
-import {AiOutlinePlus} from 'react-icons/ai';
 
 export default class EditProfile extends Component {
 	static contextType = LocaleContext;
@@ -91,7 +90,7 @@ export default class EditProfile extends Component {
     Axios.get(`${process.env.REACT_APP_API_URL}/password/${this.context.user.id}`)
       .then((response) => {
         this.setState({password: response.data.password}, function() {
-          if (old_password == this.state.password && this.state.equals) {
+          if (old_password === this.state.password && this.state.equals) {
             Axios.post(`${process.env.REACT_APP_API_URL}/reset_password`, formData)
             .then((response) => {
               this.setState({password: '', equals: false});
@@ -222,7 +221,7 @@ export default class EditProfile extends Component {
             {this.state.descriptions && this.state.descriptions.map((description, index) => (
               <div className='row pt-4'>
               <div className='col-3 text-right pr-3'>
-                <label htmlFor='ca_description'> <Translate string={description.language_id} /></label>
+                <label htmlFor={description.language_id + '_description'}> <Translate string={description.language_id} /></label>
               </div>
               <div className='col-7'>
                 <textarea id={description.language_id + '_description' }

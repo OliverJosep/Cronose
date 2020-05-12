@@ -12,6 +12,7 @@ export default class NewOffer extends React.Component {
 		this.state = {
 			categories: [],
 			specialization: [],
+			lang: null
 		};
 		this.getCategories = this.getCategories.bind(this);
 		this.getSpecialization = this.getSpecialization.bind(this);
@@ -22,16 +23,26 @@ export default class NewOffer extends React.Component {
 		this.getCategories();
 	}
 
+	componentDidUpdate() {
+    if(this.state.lang !== this.context.lang){
+			this.getCategories();
+			this.getSpecialization();
+			this.setState((state) => {
+				return {lang: this.context.lang};
+			})
+		}
+	}
+	
 	getCategories() {
 		Axios.get(
-			`${process.env.REACT_APP_API_URL}/categories/ca`
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/categories`
 		).then((response) => this.setState({ categories: response.data }));
 	}
 
 	getSpecialization() {
 		const category_id = document.getElementById('category_id').value;
 		Axios.get(
-			`${process.env.REACT_APP_API_URL}/specialization/ca/${category_id}`
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/specialization/${category_id}`
 		).then((response) => this.setState({ specialization: response.data }));
 	}
 
@@ -42,7 +53,7 @@ export default class NewOffer extends React.Component {
 		const data = Object.fromEntries(formData);
 		console.log(data);
 		Axios.post(
-			`${process.env.REACT_APP_API_URL}/work`,
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/work`,
 			qs.stringify({
 				data: data,
 			})
@@ -155,7 +166,7 @@ export default class NewOffer extends React.Component {
 								rows='5'></textarea>
 							<small id='workSubtitle' className='form-text text-muted'>
 								Indica lo que puedes ofrecer y otra información que quieres que
-								sepan los demás usuarios.
+								sepan los demás usuarios. Una vez creada la oferta, podrá registrar más de un idioma.
 							</small>
 						</div>
 						<hr />

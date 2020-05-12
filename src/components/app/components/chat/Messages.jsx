@@ -13,7 +13,10 @@ export function RenderChat(props) {
 				/>
 				<NavLink
 					to={`/profile/${props.user.initials}/${props.user.tag}`}>
-					<span className='name'>{props.user.full_name}</span>
+					<span className='name'>{props.user.full_name 
+						? props.user.full_name 
+						: <InitialsTag user={props.user}/>}
+					</span>
 				</NavLink>
 			</div>
 			<div className='mt-1 scroll' id='chat_box'>
@@ -35,4 +38,33 @@ export function Message(props) {
 			</div>
 		</div>
 	);
+}
+
+export function RenderChats(props) {
+	return (
+		<div className={'user-chat' + (props.selected === props.user.id ? ' active' : '')} id={props.user.id} onClick={props.selectChat}>
+			<div className={'user-box p-2 '}>
+				<img
+					className='pr-2 m-md-0 m-auto'
+					src='/assets/img/avatar-placeholder.png'
+					height='55px'
+					alt="avatar-placeholder"
+				/>
+				<div className='row'>
+					<div className='col-12 d-none d-md-block user'>{props.user.full_name 
+						? props.user.name
+						: <InitialsTag user={props.user}/>}</div>
+					<small className='d-none d-md-block message'>{props.message.message.substring(0,props.chatsLength)}{props.message.message.length > props.chatsLength && '...'}</small>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+export function InitialsTag(props) {
+	return(
+		<>
+			{props.user.initials}<small>#{props.user.tag}</small>
+		</>
+	)
 }

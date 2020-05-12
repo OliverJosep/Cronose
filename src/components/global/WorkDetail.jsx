@@ -88,7 +88,6 @@ export default class WorkDetail extends React.Component {
 		return (
 			<section className='work'>
 				<div className='container mt-2'>
-							{console.log(this.state)}
 					<div className='row'>
 						<h1>{work.title}</h1>
 						<h3 className='my-auto ml-4'> Precio: {work.coin_price}</h3>
@@ -184,7 +183,6 @@ export default class WorkDetail extends React.Component {
 							</div>
 							<div className='row mt-4'>
 								<div className='container-fluid'>
-									{console.log(work.translations[0].title)}
 									<h4>{work.translations[0].title}</h4>
 									<hr />
 									<p>
@@ -371,11 +369,19 @@ export default class WorkDetail extends React.Component {
 								<Moves />
 							</div>
 							<div className='text-center mt-4'>
-								<NavLink
-									to={`/chat?id=${work.user.id}`}
-									className='btn btn-large btn-primary'>
-									Contactar
-								</NavLink>
+								{console.log(work)}
+								{this.context.user.id === work.user.id 
+									? <NavLink
+											to={`/work/edit/${work.specialization_id}`}
+											className='btn pl-4 pr-4'>
+											Edit
+										</NavLink>
+									: <NavLink
+											to={`/chat?id=${work.user.id}`}
+											className='btn pl-4 pr-4'>
+											Contact
+										</NavLink>
+								}
 							</div>
 						</div>
 					</div>

@@ -4,6 +4,7 @@ import Chat from '../components/app/components/chat/Chat';
 import MyWorks from '../components/app/components/MyWorks';
 import Profile from '../components/app/components/Profile';
 import EditProfile from '../components/app/components/EditProfile'
+import EditWork from '../components/app/components/EditWork'
 import Home from '../components/homepage/components/Home';
 import Login from '../components/homepage/components/Login';
 import Register from '../components/homepage/components/Register';
@@ -30,6 +31,12 @@ export default [
 				component: Market,
 				exact: true,
 				icon: FaStore,
+			},
+			{
+				title: 'Edit Work',
+				path: '/work/edit/:specialization',
+				component: EditWork,
+				show: false,
 			},
 			{
 				title: 'Work Details',

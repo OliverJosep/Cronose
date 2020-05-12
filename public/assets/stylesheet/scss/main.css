@@ -828,6 +828,10 @@ footer .links {
   color: #fff;
 }
 
+.card-chat .chats .active small {
+  color: var(--secondary-color);
+}
+
 .card-chat .chats small {
   color: #808080;
 }

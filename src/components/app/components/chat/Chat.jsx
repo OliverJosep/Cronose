@@ -3,7 +3,7 @@ import { MdAddCircleOutline } from 'react-icons/md';
 import Axios from 'axios';
 import  { LocaleContext } from '../../../../contexts/LocaleContext';
 import qs from 'qs';
-import {RenderChat} from './Messages';
+import {RenderChat, RenderChats} from './Messages';
 // import InfiniteScroll from 'react-infinite-scroll-component';
 
 export default class Chat extends Component {
@@ -243,21 +243,3 @@ export default class Chat extends Component {
 	};
 }
 
-export function RenderChats(props) {
-	return (
-		<div className={'user-chat' + (props.selected === props.user.id ? ' active' : '')} id={props.user.id} onClick={props.selectChat}>
-			<div className={'user-box p-2 '}>
-				<img
-					className='pr-2 m-md-0 m-auto'
-					src='/assets/img/avatar-placeholder.png'
-					height='55px'
-					alt="avatar-placeholder"
-				/>
-				<div className='row'>
-					<div className='col-12 d-none d-md-block user'>{props.user.name}</div>
-					<small className='d-none d-md-block message'>{props.message.message.substring(0,props.chatsLength)}{props.message.message.length > props.chatsLength && '...'}</small>
-				</div>
-			</div>
-		</div>
-	);
-}

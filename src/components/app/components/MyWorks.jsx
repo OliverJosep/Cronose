@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import WorkCard from '../../global/WorkCard';
 import Axios from 'axios';
 import { LocaleContext } from '../../../contexts/LocaleContext';
+import { NavLink } from 'react-router-dom';
 
 export default class MyWorks extends Component {
 	static contextType = LocaleContext;
@@ -17,7 +18,7 @@ export default class MyWorks extends Component {
 
 	getWorks() {
 		Axios.get(
-			`${process.env.REACT_APP_API_URL}/works/user/${this.context.user.id}`
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/works/user/${this.context.user.id}`
 		).then((response) => this.setState({ works: response.data }));
 	}
 
@@ -42,9 +43,11 @@ export default class MyWorks extends Component {
 					))}
 				</section>
 				<div className='text-center'>
-					<a href='/newoffer' className='btn btn-lg mb-4'>
+					<NavLink
+						to='/newoffer'
+						className='btn btn-lg mb-4'>
 						NEW OFFER
-					</a>
+					</NavLink>
 				</div>
 			</>
 		);
