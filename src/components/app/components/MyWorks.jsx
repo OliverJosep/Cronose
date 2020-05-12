@@ -39,6 +39,7 @@ export default class MyWorks extends Component {
 							key={index}
 							work={work}
 							translations={work.translations}
+							user={this.context.user}
 						/>
 					))}
 				</section>

@@ -99,7 +99,7 @@ export default class Market extends Component {
 	getSpecialization() {
 		const category_id = document.getElementById('category_id').value;
 		Axios.get(
-			`${process.env.REACT_APP_API_URL}/${this.context.lang}/specialization/${category_id}`
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/category/${category_id}`
 		).then((response) => this.setState({ specialization: response.data }));
 		this.getFilteredWorks();
 	}
@@ -123,6 +123,7 @@ export default class Market extends Component {
 							key={index}
 							work={work}
 							translations={work.translations}
+							user={this.context.user}
 						/>
 					))}
 				</section>

@@ -61,6 +61,13 @@ export default function WorkCard(props) {
 								className='btn text-white'>
 								See Offer
 							</NavLink>
+							{console.log(props)}
+							{( work.initials === props.user.initials && work.tag === props.user.tag ) 
+							&& <NavLink
+								to={`/work/edit/${work.specialization_id}`}
+								className='btn text-white'>
+								Edit
+							</NavLink>}
 						</section>
 					</div>
 				</div>

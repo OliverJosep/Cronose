@@ -42,7 +42,7 @@ export default class NewOffer extends React.Component {
 	getSpecialization() {
 		const category_id = document.getElementById('category_id').value;
 		Axios.get(
-			`${process.env.REACT_APP_API_URL}/${this.context.lang}/specialization/${category_id}`
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/category/${category_id}`
 		).then((response) => this.setState({ specialization: response.data }));
 	}
 
