@@ -8,12 +8,22 @@ export default class MyOffers extends Component {
 	static contextType = LocaleContext;
 	constructor(props) {
 		super(props);
-		this.state = { offers: [] };
+		this.state = { 
+			lang: null,
+			offers: [] };
 		this.getOffers = this.getOffers.bind(this);
 	}
 
 	componentDidMount() {
+		this.setState({lang: this.context.lang});
 		this.getOffers();
+	}
+
+	componentDidUpdate() {
+    if(this.state.lang !== this.context.lang){
+			this.getOffers();
+			this.setState({lang: this.context.lang});
+		}
 	}
 
 	getOffers() {

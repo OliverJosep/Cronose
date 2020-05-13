@@ -17,6 +17,7 @@ export default class Market extends Component {
 			lang: [],
 			offers: [],
 			categories: [],
+			selected_category: 0,
 			specialization: [],
 			loaded: false
 		};
@@ -29,9 +30,7 @@ export default class Market extends Component {
 	}
 
 	componentDidMount() {
-		this.setState((state) => {
-			return {lang: this.context.lang};
-		})
+		this.setState({lang: this.context.lang});
 
 		this.getOffers();
 		this.getCategories();
@@ -40,11 +39,8 @@ export default class Market extends Component {
 	componentDidUpdate() {
     if(this.state.lang !== this.context.lang){
 			this.getCategories();
-			this.getSpecialization();
-			this.state.specialization ? this.getFilteredOffers() : this.getOffers();
-			this.setState((state) => {
-				return {lang: this.context.lang};
-			})
+			this.state.selected_category === 0 ? this.getOffers() : this.getSpecialization();
+			this.setState({lang: this.context.lang});
 		}
 	}
 
@@ -83,7 +79,7 @@ export default class Market extends Component {
 	}
 
 	resetFilter() {
-		this.setState({ categories: [], specialization: [] });
+		this.setState({ categories: [], specialization: [], selected_category: 0 });
 		this.getOffers();
 		this.getCategories();
 	}
@@ -98,6 +94,7 @@ export default class Market extends Component {
 
 	getSpecialization() {
 		const category_id = document.getElementById('category_id').value;
+		this.setState({selected_category: category_id})
 		Axios.get(
 			`${process.env.REACT_APP_API_URL}/${this.context.lang}/category/${category_id}`
 		).then((response) => this.setState({ specialization: response.data }));

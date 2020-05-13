@@ -46,8 +46,9 @@ export default function OfferCard(props) {
 						<h4>
 							<b>{offer.title || offer.translations[0].title}</b>
 						</h4>
-						<small className='d-inline form-text'>{offer.initials}</small>
-						<small className='d-inline text-muted'>#{offer.tag}</small>
+						{offer.user.full_name && offer.user.full_name + ' | '}  
+						<small className='d-inline form-text'>{offer.user.initials}</small>
+						<small className='d-inline text-muted'>#{offer.user.tag}</small>
 						<hr></hr>
 						<p className='card-text'>
 							{offer.description || offer.translations[0].description}
@@ -61,7 +62,6 @@ export default function OfferCard(props) {
 								className='btn text-white'>
 								See Offer
 							</NavLink>
-							{console.log(props)}
 							{( offer.initials === props.user.initials && offer.tag === props.user.tag ) 
 							&& <NavLink
 								to={`/offer/edit/${offer.specialization_id}`}

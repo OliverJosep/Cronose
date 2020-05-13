@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { LocaleContext } from '../../../contexts/LocaleContext';
 import Axios from 'axios';
 import Translate from '../../../translations/Translate';
+import Loader from '../../layouts/Loader';
 
-export default class EditWork extends Component {
+export default class EditOffer extends Component {
 	static contextType = LocaleContext;
   constructor (props) {
     super(props);
@@ -89,7 +90,7 @@ export default class EditWork extends Component {
   }
 
   render() {
-    if (!this.state.loaded) return (<div>Loading</div>);
+    if (!this.state.loaded) return (<Loader/>);
     const {user} = this.context
     return (
       <div className='container edit_profile'>

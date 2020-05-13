@@ -34,7 +34,7 @@ export default [
 			},
 			{
 				title: 'Edit Work',
-				path: '/work/edit/:specialization',
+				path: '/offer/edit/:specialization',
 				component: EditOffer,
 				show: false,
 			},
