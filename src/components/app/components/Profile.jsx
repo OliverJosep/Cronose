@@ -6,6 +6,7 @@ import Rater from 'react-rater';
 import Translate from '../../../translations/Translate';
 import ProfileCard from './ProfileCard';
 import Loader from '../../layouts/Loader';
+import {UserAvatar} from '../../layouts/Avatar';
 import { NavLink } from 'react-router-dom';
 
 export default class Profile extends Component {
@@ -43,7 +44,7 @@ export default class Profile extends Component {
 		).then(response => {
 			this.setState({ user: response.data });
 			this.getOffers(response.data.id);
-		}); 
+		});
 	};
 
 	getOffers(user_id) {
@@ -71,12 +72,17 @@ export default class Profile extends Component {
 								<div className='row row-profile-name'>
 									<div className='col-md-6 d-flex justify-content-md-start justify-content-center'>
 										<div className='img-profile'>
-											<img
+											<UserAvatar 
+												name={user.full_name} 
+												avatar={user.avatar}
+												size={100}
+											/>
+											{/* <img
 												src='/assets/img/avatar-placeholder.png'
 												alt='...'
-												className=' rounded-circle shadow-sm'></img>
+												className=' rounded-circle shadow-sm'></img> */}
 											<h5>
-												{user.name ? user.name + ' | ' : ''} {user.initials}
+												{user.name ? user.full_name + ' | ' : ''} {user.initials}
 												<p className='d-inline text-muted'>
 													#{user.tag}
 												</p>
@@ -91,7 +97,7 @@ export default class Profile extends Component {
 									</div>
 								</div>
 								<div className='d-flex justify-content-md-end justify-content-center'>
-									{this.context.user.id === user.id 
+									{this.context.user.id === user.id
 										? <NavLink
 												to={`/me/edit`}
 												className='btn pl-4 pr-4'>

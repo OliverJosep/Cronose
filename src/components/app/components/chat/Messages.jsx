@@ -1,15 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { UserAvatar } from '../../../layouts/Avatar'
 
 export function RenderChat(props) {
 	return(
 		<div className='messages mb-2'>
 			<div className='user p-2'>
-				<img
-					className='pr-2'
-					src='/assets/img/avatar-placeholder.png'
-					height='40px'
-					alt="avatar-placeholder"
+				<UserAvatar 
+					name={props.user.full_name} 
+					avatar={props.user.avatar}
+					size={40}
 				/>
 				<NavLink
 					to={`/profile/${props.user.initials}/${props.user.tag}`}>
@@ -44,11 +44,10 @@ export function RenderChats(props) {
 	return (
 		<div className={'user-chat' + (props.selected === props.user.id ? ' active' : '')} id={props.user.id} onClick={props.selectChat}>
 			<div className={'user-box p-2 '}>
-				<img
-					className='pr-2 m-md-0 m-auto'
-					src='/assets/img/avatar-placeholder.png'
-					height='55px'
-					alt="avatar-placeholder"
+				<UserAvatar 
+					name={props.user.full_name} 
+					avatar={props.user.avatar}
+					size={55}
 				/>
 				<div className='row'>
 					<div className='col-12 d-none d-md-block user'>{props.user.full_name 

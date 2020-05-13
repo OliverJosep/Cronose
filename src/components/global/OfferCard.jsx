@@ -2,6 +2,7 @@ import React from 'react';
 import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
 import { NavLink } from 'react-router-dom';
+import {UserAvatar} from '../layouts/Avatar';
 
 export default function OfferCard(props) {
 	const offer = props.offer;
@@ -46,6 +47,11 @@ export default function OfferCard(props) {
 						<h4>
 							<b>{offer.title || offer.translations[0].title}</b>
 						</h4>
+						<UserAvatar 
+							name={offer.user.full_name} 
+							avatar={offer.user.avatar}
+							size={30}
+						/>
 						{offer.user.full_name && offer.user.full_name + ' | '}  
 						<small className='d-inline form-text'>{offer.user.initials}</small>
 						<small className='d-inline text-muted'>#{offer.user.tag}</small>
@@ -58,7 +64,7 @@ export default function OfferCard(props) {
 								<b>Precio: {offer.coin_price}</b>
 							</p>
 							<NavLink
-								to={`/offer/${offer.initials}/${offer.tag}/${offer.specialization_id}`}
+								to={`/offer/${offer.user.initials}/${offer.user.tag}/${offer.specialization_id}`}
 								className='btn text-white'>
 								See Offer
 							</NavLink>

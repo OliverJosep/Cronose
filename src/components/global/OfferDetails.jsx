@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import  { LocaleContext } from '../../contexts/LocaleContext';
 import Translate from '../../translations/Translate';
 import Loader from '../layouts/Loader';
+import {UserAvatar} from '../layouts/Avatar';
 
 const position = [39.5643576, 3.20227];
 
@@ -171,10 +172,10 @@ export default class OfferDetails extends React.Component {
 								</div>
 							</div>
 							<div className='row mt-2'>
-								<img
-									src={`${process.env.REACT_APP_API_URL}/images/${offer.user.avatar.url}`}
-									height='50px'
-									alt='user-avatar'
+								<UserAvatar 
+									name={offer.user.full_name} 
+									avatar={offer.user.avatar}
+									size={50}
 								/>
 								<div className='ml-2 my-auto'>
 									{offer.user.full_name || offer.user.initials}
