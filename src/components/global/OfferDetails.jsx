@@ -43,39 +43,39 @@ Moves.defaultProps = {
 	url: 'https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png',
 };
 
-export default class WorkDetail extends React.Component {
+export default class OfferDetails extends React.Component {
 	static contextType = LocaleContext;
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			work: null,
+			offer: null,
 			loaded: false
 		};
 
-		this.getWork = this.getWork.bind(this);
+		this.getOffer = this.getOffer.bind(this);
 	}
 
 	componentDidMount() {
-		this.getWork();
+		this.getOffer();
 	}
 	componentDidUpdate() {
     if(this.state.lang !== this.context.lang){
-			this.getWork();
+			this.getOffer();
 			this.setState((state) => {
 				return {lang: this.context.lang};
 			})
     }
 	}
 
-	getWork() {
+	getOffer() {
 		const self = this;
 		const { initials, tag, specialization } = this.props.match.params;
 		Axios.get(
-			`${process.env.REACT_APP_API_URL}/${this.context.lang}/work/${initials}/${tag}/${specialization}`
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/offer/${initials}/${tag}/${specialization}`
 		)
 			.then((response) => {
-				self.setState({ work: response.data, loaded: true });
+				self.setState({ offer: response.data, loaded: true });
 			})
 			.catch((error) => {
 				console.log('ERROR');
@@ -83,14 +83,14 @@ export default class WorkDetail extends React.Component {
 	}
 
 	render() {
-		const { work } = this.state;
+		const { offer } = this.state;
 		if (!this.state.loaded) return <Loader></Loader>;
 		return (
 			<section className='work'>
 				<div className='container mt-2'>
 					<div className='row'>
-						<h1>{work.title}</h1>
-						<h3 className='my-auto ml-4'> Precio: {work.coin_price}</h3>
+						<h1>{offer.title}</h1>
+						<h3 className='my-auto ml-4'> Precio: {offer.coin_price}</h3>
 					</div>
 					<div className='row'>
 						<div className='col-12 col-md-8'>
@@ -154,7 +154,7 @@ export default class WorkDetail extends React.Component {
 								<div className='col-6'>
 									<Rater
 										total={5}
-										rating={work.personal_valoration / 20}
+										rating={offer.personal_valoration / 20}
 										interactive={false}
 									/>
 									<small className='muted ml-2 my-auto'>
@@ -165,28 +165,28 @@ export default class WorkDetail extends React.Component {
 									<small className='muted mr-2 my-auto'>Users Valoration</small>
 									<Rater
 										total={5}
-										rating={work.valoration_avg / 20}
+										rating={offer.valoration_avg / 20}
 										interactive={false}
 									/>
 								</div>
 							</div>
 							<div className='row mt-2'>
 								<img
-									src={`${process.env.REACT_APP_API_URL}/images/${work.user.avatar.url}`}
+									src={`${process.env.REACT_APP_API_URL}/images/${offer.user.avatar.url}`}
 									height='50px'
 									alt='user-avatar'
 								/>
 								<div className='ml-2 my-auto'>
-									{work.user.full_name || work.user.initials}
-									<h6 className='d-inline text-muted'>#{work.user.tag}</h6>
+									{offer.user.full_name || offer.user.initials}
+									<h6 className='d-inline text-muted'>#{offer.user.tag}</h6>
 								</div>
 							</div>
 							<div className='row mt-4'>
 								<div className='container-fluid'>
-									<h4>{work.translations[0].title}</h4>
+									<h4>{offer.translations[0].title}</h4>
 									<hr />
 									<p>
-										{work.translations[0].description ? work.translations[0].description : <Translate string={'no-description'}/>}
+										{offer.translations[0].description ? offer.translations[0].description : <Translate string={'no-description'}/>}
 									</p>
 								</div>
 							</div>
@@ -200,7 +200,7 @@ export default class WorkDetail extends React.Component {
 											height='40px'
 											alt='avatar-placeholder'
 										/>
-										<h4 className='ml-2 my-auto'>{work.user.full_name}</h4>
+										<h4 className='ml-2 my-auto'>{offer.user.full_name}</h4>
 									</div>
 									<div className='row'>
 										<div className='container-fluid mt-4'>
@@ -209,7 +209,7 @@ export default class WorkDetail extends React.Component {
 												<hr />
 											</div>
 											<p>
-												{work.user.description ? work.user.description[0].description : <Translate string={'no-description'}/>}
+												{offer.user.description ? offer.user.description[0].description : <Translate string={'no-description'}/>}
 											</p>
 										</div>
 									</div>
@@ -369,15 +369,15 @@ export default class WorkDetail extends React.Component {
 								<Moves />
 							</div>
 							<div className='text-center mt-4'>
-								{console.log(work)}
-								{this.context.user.id === work.user.id 
+								{console.log(offer)}
+								{this.context.user.id === offer.user.id 
 									? <NavLink
-											to={`/work/edit/${work.specialization_id}`}
+											to={`/offer/edit/${offer.specialization_id}`}
 											className='btn pl-4 pr-4'>
 											Edit
 										</NavLink>
 									: <NavLink
-											to={`/chat?id=${work.user.id}`}
+											to={`/chat?id=${offer.user.id}`}
 											className='btn pl-4 pr-4'>
 											Contact
 										</NavLink>

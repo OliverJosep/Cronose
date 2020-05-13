@@ -3,7 +3,7 @@ import Axios from 'axios';
 import {
 	IoIosArrowDropleftCircle,
 } from 'react-icons/io';
-import WorkCard from './WorkCard';
+import OfferCard from './OfferCard';
 import qs from 'qs';
 import  { LocaleContext } from '../../contexts/LocaleContext';
 import Loader from '../layouts/Loader';
@@ -15,16 +15,16 @@ export default class Market extends Component {
 		super(props);
 		this.state = {
 			lang: [],
-			works: [],
+			offers: [],
 			categories: [],
 			specialization: [],
 			loaded: false
 		};
 
-		this.getWorks = this.getWorks.bind(this);
+		this.getOffers = this.getOffers.bind(this);
 		this.getCategories = this.getCategories.bind(this);
 		this.getSpecialization = this.getSpecialization.bind(this);
-		this.getFilteredWorks = this.getFilteredWorks.bind(this);
+		this.getFilteredOffers = this.getFilteredOffers.bind(this);
 		this.resetFilter = this.resetFilter.bind(this);
 	}
 
@@ -33,7 +33,7 @@ export default class Market extends Component {
 			return {lang: this.context.lang};
 		})
 
-		this.getWorks();
+		this.getOffers();
 		this.getCategories();
 	}
 
@@ -41,26 +41,26 @@ export default class Market extends Component {
     if(this.state.lang !== this.context.lang){
 			this.getCategories();
 			this.getSpecialization();
-			this.state.specialization ? this.getFilteredWorks() : this.getWorks();
+			this.state.specialization ? this.getFilteredOffers() : this.getOffers();
 			this.setState((state) => {
 				return {lang: this.context.lang};
 			})
 		}
 	}
 
-	// Get Works
+	// Get Offers
 
-	getWorks() {
+	getOffers() {
 		Axios.get(
-			`${process.env.REACT_APP_API_URL}/${this.context.lang}/works/all/0/10`
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/offers/all/0/10`
 		).then((response) =>
-			this.setState({ works: response.data || this.state.works, loaded: true })
+			this.setState({ offers: response.data || this.state.offers, loaded: true })
 		);
 	}
 
 	// Fliter
 
-	getFilteredWorks() {
+	getFilteredOffers() {
 		const category_id = document.getElementById('category_id').value;
 		const specialization_id =
 			category_id !== '0'
@@ -70,7 +70,7 @@ export default class Market extends Component {
 		const string = document.getElementById('search').value;
 
 		Axios.post(
-			`${process.env.REACT_APP_API_URL}/works/filter`,
+			`${process.env.REACT_APP_API_URL}/job-offers/filter`,
 			qs.stringify({
 				filter: {
 					category: category_id,
@@ -79,12 +79,12 @@ export default class Market extends Component {
 					defaultLang: this.context.lang,
 				},
 			})
-		).then((response) => this.setState({ works: response.data }));
+		).then((response) => this.setState({ offers: response.data }));
 	}
 
 	resetFilter() {
 		this.setState({ categories: [], specialization: [] });
-		this.getWorks();
+		this.getOffers();
 		this.getCategories();
 	}
 
@@ -101,7 +101,7 @@ export default class Market extends Component {
 		Axios.get(
 			`${process.env.REACT_APP_API_URL}/${this.context.lang}/category/${category_id}`
 		).then((response) => this.setState({ specialization: response.data }));
-		this.getFilteredWorks();
+		this.getFilteredOffers();
 	}
 
 	render() {
@@ -113,16 +113,16 @@ export default class Market extends Component {
 						className='form-control'
 						type='text'
 						id='search'
-						onChange={this.getFilteredWorks}
+						onChange={this.getFilteredOffers}
 						placeholder='Search'
 						aria-label='Search'></input>
 				</div>
 				<section className='works'>
-					{this.state.works.map((work, index) => (
-						<WorkCard
+					{this.state.offers.map((offer, index) => (
+						<OfferCard
 							key={index}
-							work={work}
-							translations={work.translations}
+							offer={offer}
+							translations={offer.translations}
 							user={this.context.user}
 						/>
 					))}
@@ -163,7 +163,7 @@ export default class Market extends Component {
 								id='specialization_id'
 								name='specialization_id'
 								className='rowser-default custom-select'
-								onChange={this.getFilteredWorks}
+								onChange={this.getFilteredOffers}
 								defaultValue='0'
 								required>
 								<option value='0'>

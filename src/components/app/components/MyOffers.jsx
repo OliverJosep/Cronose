@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
-import WorkCard from '../../global/WorkCard';
+import OfferCard from '../../global/OfferCard';
 import Axios from 'axios';
 import { LocaleContext } from '../../../contexts/LocaleContext';
 import { NavLink } from 'react-router-dom';
 
-export default class MyWorks extends Component {
+export default class MyOffers extends Component {
 	static contextType = LocaleContext;
 	constructor(props) {
 		super(props);
-		this.state = { works: [] };
-		this.getWorks = this.getWorks.bind(this);
+		this.state = { offers: [] };
+		this.getOffers = this.getOffers.bind(this);
 	}
 
 	componentDidMount() {
-		this.getWorks();
+		this.getOffers();
 	}
 
-	getWorks() {
+	getOffers() {
 		Axios.get(
-			`${process.env.REACT_APP_API_URL}/${this.context.lang}/works/user/${this.context.user.id}`
-		).then((response) => this.setState({ works: response.data }));
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/offers/user/${this.context.user.id}`
+		).then((response) => this.setState({ offers: response.data }));
 	}
 
 	render() {
@@ -31,14 +31,14 @@ export default class MyWorks extends Component {
 					</a>
 				</div>
 				<div className='text-center pt-2'>
-					<h1>My Works</h1>
+					<h1>My Offers</h1>
 				</div>
 				<section className='works'>
-					{this.state.works.map((work, index) => (
-						<WorkCard
+					{this.state.offers.map((offer, index) => (
+						<OfferCard
 							key={index}
-							work={work}
-							translations={work.translations}
+							offer={offer}
+							translations={offer.translations}
 							user={this.context.user}
 						/>
 					))}

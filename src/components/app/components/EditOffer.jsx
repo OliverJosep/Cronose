@@ -33,7 +33,7 @@ export default class EditWork extends Component {
 
   getWork(){
     const { specialization } = this.props.match.params;
-    Axios.get(`${process.env.REACT_APP_API_URL}/work/translations`, {
+    Axios.get(`${process.env.REACT_APP_API_URL}/offer/translations`, {
         params: {
           user_id: this.context.user.id,
           specialization_id: specialization
@@ -56,7 +56,7 @@ export default class EditWork extends Component {
 
   getVisibility() {
     const { specialization } = this.props.match.params;
-    Axios.get(`${process.env.REACT_APP_API_URL}/work/visible`, {
+    Axios.get(`${process.env.REACT_APP_API_URL}/offer/visible`, {
       params: {
         user_id: this.context.user.id,
         specialization_id: specialization
@@ -73,7 +73,7 @@ export default class EditWork extends Component {
     formData.set('user_id', this.context.user.id)
     formData.set('specialization_id', specialization)
     Axios.post(
-			`${process.env.REACT_APP_API_URL}/work/translations`, formData
+			`${process.env.REACT_APP_API_URL}/offer/translations`, formData
 		)
   }
 
@@ -84,7 +84,7 @@ export default class EditWork extends Component {
     formData.set('user_id', this.context.user.id)
     formData.set('specialization_id', specialization)
     Axios.post(
-			`${process.env.REACT_APP_API_URL}/work/switch`, formData
+			`${process.env.REACT_APP_API_URL}/offer/switch`, formData
 		)
   }
 

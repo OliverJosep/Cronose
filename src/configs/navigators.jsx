@@ -1,14 +1,14 @@
 import Wallet from '../components/app/components/Wallet';
 import Market from '../components/global/Market';
 import Chat from '../components/app/components/chat/Chat';
-import MyWorks from '../components/app/components/MyWorks';
+import MyOffers from '../components/app/components/MyOffers';
 import Profile from '../components/app/components/Profile';
 import EditProfile from '../components/app/components/EditProfile'
-import EditWork from '../components/app/components/EditWork'
+import EditOffer from '../components/app/components/EditOffer'
 import Home from '../components/homepage/components/Home';
 import Login from '../components/homepage/components/Login';
 import Register from '../components/homepage/components/Register';
-import WorkDetail from '../components/global/WorkDetail';
+import OfferDetails from '../components/global/OfferDetails';
 import NewOffer from '../components/app/components/NewOffer';
 import ResetPassword from '../components/global/ResetPassword';
 import UserValidator from '../components/global/UserValidator';
@@ -35,13 +35,13 @@ export default [
 			{
 				title: 'Edit Work',
 				path: '/work/edit/:specialization',
-				component: EditWork,
+				component: EditOffer,
 				show: false,
 			},
 			{
-				title: 'Work Details',
-				path: '/work/:initials/:tag/:specialization',
-				component: WorkDetail,
+				title: 'Offer Details',
+				path: '/offer/:initials/:tag/:specialization',
+				component: OfferDetails,
 				show: false,
 			},
 			{
@@ -64,8 +64,8 @@ export default [
 			},
 			{
 				title: 'my-job-offers',
-				path: '/my/works',
-				component: MyWorks,
+				path: '/my/offers',
+				component: MyOffers,
 				icon: MdWork,
 			},
 			{
@@ -156,9 +156,9 @@ export default [
 				component: Market,
 			},
 			{
-				title: 'work-details',
-				path: '/work/:initials/:tag/:specialization',
-				component: WorkDetail,
+				title: 'offer-details',
+				path: '/offer/:initials/:tag/:specialization',
+				component: OfferDetails,
 				show: false,
 			},
 			{

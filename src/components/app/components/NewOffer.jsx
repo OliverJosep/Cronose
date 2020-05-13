@@ -53,7 +53,7 @@ export default class NewOffer extends React.Component {
 		const data = Object.fromEntries(formData);
 		console.log(data);
 		Axios.post(
-			`${process.env.REACT_APP_API_URL}/${this.context.lang}/work`,
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/offer`,
 			qs.stringify({
 				data: data,
 			})

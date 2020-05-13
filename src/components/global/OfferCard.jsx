@@ -3,8 +3,8 @@ import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
 import { NavLink } from 'react-router-dom';
 
-export default function WorkCard(props) {
-	const work = props.work;
+export default function OfferCard(props) {
+	const offer = props.offer;
 
 	return (
 		<article className='card work-card'>
@@ -37,34 +37,34 @@ export default function WorkCard(props) {
 						<div className='valuation col-4 text-right my-auto'>
 							<Rater
 								total={5}
-								rating={work.valoration_avg / 20}
+								rating={offer.valoration_avg / 20}
 								interactive={false}
 							/>
 						</div>
 					</section>
 					<div className='card-body'>
 						<h4>
-							<b>{work.title || work.translations[0].title}</b>
+							<b>{offer.title || offer.translations[0].title}</b>
 						</h4>
-						<small className='d-inline form-text'>{work.initials}</small>
-						<small className='d-inline text-muted'>#{work.tag}</small>
+						<small className='d-inline form-text'>{offer.initials}</small>
+						<small className='d-inline text-muted'>#{offer.tag}</small>
 						<hr></hr>
 						<p className='card-text'>
-							{work.description || work.translations[0].description}
+							{offer.description || offer.translations[0].description}
 						</p>
 						<section className='text-right'>
 							<p className='price d-inline'>
-								<b>Precio: {work.coin_price}</b>
+								<b>Precio: {offer.coin_price}</b>
 							</p>
 							<NavLink
-								to={`/work/${work.initials}/${work.tag}/${work.specialization_id}`}
+								to={`/offer/${offer.initials}/${offer.tag}/${offer.specialization_id}`}
 								className='btn text-white'>
 								See Offer
 							</NavLink>
 							{console.log(props)}
-							{( work.initials === props.user.initials && work.tag === props.user.tag ) 
+							{( offer.initials === props.user.initials && offer.tag === props.user.tag ) 
 							&& <NavLink
-								to={`/work/edit/${work.specialization_id}`}
+								to={`/offer/edit/${offer.specialization_id}`}
 								className='btn text-white'>
 								Edit
 							</NavLink>}

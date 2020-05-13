@@ -12,8 +12,8 @@ export default class Profile extends Component {
 	static contextType = LocaleContext;
 	constructor(props) {
 		super(props);
-		this.state = {lang: [], user: [], works: [] , loaded: false };
-		this.getWorks = this.getWorks.bind(this);
+		this.state = {lang: [], user: [], offers: [] , loaded: false };
+		this.getOffers = this.getOffers.bind(this);
 		this.getUserProfile = this.getUserProfile.bind(this);
 	}
 
@@ -42,15 +42,15 @@ export default class Profile extends Component {
 			`${process.env.REACT_APP_API_URL}/${this.context.lang}/user/${initials}/${tag}`
 		).then(response => {
 			this.setState({ user: response.data });
-			this.getWorks(response.data.id);
+			this.getOffers(response.data.id);
 		}); 
 	};
 
-	getWorks(user_id) {
+	getOffers(user_id) {
 		Axios.get(
-			`${process.env.REACT_APP_API_URL}/${this.context.lang}/works/user/${user_id}`
+			`${process.env.REACT_APP_API_URL}/${this.context.lang}/offers/user/${user_id}`
 		).then(response => {
-			this.setState({ works: response.data, loaded: true });
+			this.setState({ offers: response.data, loaded: true });
 		});
 	}
 	render() {
@@ -137,7 +137,7 @@ export default class Profile extends Component {
 										<b>My Offers</b>
 									</h3>
 									<div className='card-deck text-center'>
-										{this.state.works.map((work, index) => (
+										{this.state.offers.map((work, index) => (
 											<ProfileCard
 												key={index}
 												work={work}
