@@ -370,8 +370,7 @@ export default class OfferDetails extends React.Component {
 								<Moves />
 							</div>
 							<div className='text-center mt-4'>
-								{console.log(offer)}
-								{this.context.user.id === offer.user.id 
+								{this.context.user && this.context.user.id === offer.user.id 
 									? <NavLink
 											to={`/offer/edit/${offer.specialization_id}`}
 											className='btn pl-4 pr-4'>

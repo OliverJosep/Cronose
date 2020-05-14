@@ -11,7 +11,7 @@ export default class Login extends React.Component {
 		super(props);
 		this.login = this.login.bind(this);
 	}
-
+	
 	login(e) {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);

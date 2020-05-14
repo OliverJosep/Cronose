@@ -14,8 +14,7 @@ export default class LocaleContextProvider extends Component {
 		this.state = JSON.parse(localStorage.getItem('app')) || {
 			lang: defaulLang,
 			user: {},
-			jwt: '',
-			isLogged: false,
+			jwt: ''
 		};
 		
 		this.login = this.login.bind(this);
@@ -25,14 +24,21 @@ export default class LocaleContextProvider extends Component {
 		this.updateUser = this.updateUser.bind(this);
 	}
 
+	componentDidMount() {
+		// // this.login(localStorage.get('jwt'));
+		// const app = JSON.parse(localStorage.getItem('app'));
+		
+		// console.log(app.jwt);
+	}
+
 	login(data) {
 		const self = this;
+		console.log(data);
 		Axios.post(`${process.env.REACT_APP_API_URL}/login`, qs.stringify(data))
 			.then(function(response) {
 				self.setState({
 					user: response.data.user,
-					jwt: response.data.jwt,
-					isLogged: true,
+					jwt: response.data.jwt
 				});
 			})
 			.catch(function(error) {
@@ -41,7 +47,6 @@ export default class LocaleContextProvider extends Component {
 			.finally(function() {
 				self.saveLocalStorage();
 			});
-		return this.state.isLogged;
 	}
 
 	updateUser(id) {
@@ -71,16 +76,20 @@ export default class LocaleContextProvider extends Component {
 		this.saveLocalStorage();
 	};
 
-	saveLocalStorage() {
+	saveLocalStorage() {		
 		setTimeout(() => {
-			localStorage.setItem('app', JSON.stringify({lang: this.state.lang, user: this.state.user, isLogged: this.state.isLogged, jwt: this.state.jwt}));
+			localStorage.setItem('app', JSON.stringify({jwt: this.state.jwt, lang: this.state.lang}));
 		}, 100);
+
+		// 	localStorage.setItem('app', JSON.stringify({lang: this.state.lang,jwt: this.state.jwt}));
+		// }, 100);
 	}
 
 	render() {
 		return (
-			<LocaleContext.Provider
-				value={{ ...this.state, login: this.login, logout: this.logout, changeLanguage: this.changeLanguage, updateUser: this.updateUser }}>
+			<LocaleContext.Provider 
+				value={{ lang: this.state.lang, jwt: this.state.jwt, user:this.state.user, login: this.login, logout: this.logout, changeLanguage: this.changeLanguage, updateUser: this.updateUser }}>
+			
 				{this.props.children}
 			</LocaleContext.Provider>
 		);

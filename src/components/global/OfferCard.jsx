@@ -68,7 +68,7 @@ export default function OfferCard(props) {
 								className='btn text-white'>
 								See Offer
 							</NavLink>
-							{( offer.initials === props.user.initials && offer.tag === props.user.tag ) 
+							{(props.user && offer.user.initials === props.user.initials && offer.user.tag === props.user.tag ) 
 							&& <NavLink
 								to={`/offer/edit/${offer.specialization_id}`}
 								className='btn text-white'>

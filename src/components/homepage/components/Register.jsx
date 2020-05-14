@@ -20,18 +20,21 @@ export default class Register extends Component {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
 		formData.set('password', md5(formData.get('password')));
-		Axios.post(`${process.env.REACT_APP_API_URL}/register`, formData, {
-			headers: {
-				'Content-Type':
-					'multipart/form-data; boundary=899579491390198298378346',
-			},
-		})
-			.then(function(response) {
-				console.log(response);
+		formData.set('r_password', md5(formData.get('r_password')));
+		if (formData.get('password') === formData.get('r_password')) {
+			Axios.post(`${process.env.REACT_APP_API_URL}/register`, formData, {
+				headers: {
+					'Content-Type':
+						'multipart/form-data; boundary=899579491390198298378346',
+				},
 			})
-			.catch(function(error) {
-				console.log(error);
-			});
+				.then(function(response) {
+					console.log(response);
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		}
 	}
 
 	getProvinces() {
@@ -96,7 +99,6 @@ export default class Register extends Component {
 									name='surname_2'
 									className='form-control'
 									placeholder='Your second surname'
-									required
 								/>
 							</div>
 						</div>
@@ -193,7 +195,7 @@ export default class Register extends Component {
 										type='file'
 										name='avatar'
 										className='form-control-file'
-										required></input>
+										/>
 								</div>
 								<div className='form-group col p-1'>
 									<label htmlFor='dni_img'>DNI</label>
@@ -202,7 +204,8 @@ export default class Register extends Component {
 										type='file'
 										name='dni_img'
 										className='form-control-file'
-										required></input>
+										required
+									/>
 								</div>
 							</div>
 						</div>

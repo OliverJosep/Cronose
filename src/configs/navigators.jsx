@@ -13,6 +13,7 @@ import NewOffer from '../components/app/components/NewOffer';
 import ResetPassword from '../components/global/ResetPassword';
 import UserValidator from '../components/global/UserValidator';
 import Reset from '../components/homepage/components/Reset';
+import notFound from '../components/global/404'
 
 import { IoIosChatbubbles } from 'react-icons/io';
 import { FaStore } from 'react-icons/fa';
@@ -123,6 +124,12 @@ export default [
 				component: UserValidator,
 				show: false,
 			},
+			{
+				title: 'not found',
+				path: '*',
+				component: notFound,
+				show: false
+			},
 		],
 	},
 	{
@@ -193,6 +200,12 @@ export default [
 				title: 'profile',
 				path: '/profile/:initials/:tag',
 				component: Profile,
+				show: false
+			},
+			{
+				title: 'not found',
+				path: '*',
+				component: notFound,
 				show: false
 			},
 		],
