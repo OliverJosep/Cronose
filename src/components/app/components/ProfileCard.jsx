@@ -28,7 +28,10 @@ export default function ProfileCard(props) {
         <p className="card-text">
           {work.description || work.translations[0].description}
         </p>
-        <NavLink to="#" className="btn btn-block text-white">
+        <NavLink
+          to={`/offer/${work.user.initials}/${work.user.tag}/${work.specialization_id}`}
+          className="btn btn-block text-white"
+        >
           See Offer
         </NavLink>
       </div>

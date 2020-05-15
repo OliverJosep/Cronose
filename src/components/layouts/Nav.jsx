@@ -17,9 +17,9 @@ function NavBar(props) {
       <nav className="navbar navbar-expand-xl w-100 container">
         <div>
           <img className="img-logo" src="/assets/img/svg/logo.svg" alt="logo" />
-          <a className="pl-3 navbar-brand" href="/">
+          <NavLink className="pl-3 navbar-brand" to="/">
             Cronose
-          </a>
+          </NavLink>
         </div>
         <button
           className="navbar-toggler"

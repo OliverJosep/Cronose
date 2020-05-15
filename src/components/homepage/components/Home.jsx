@@ -3,6 +3,7 @@ import AboutUs from "./AboutUs";
 import Translate from "../../../translations/Translate";
 import HowItWorks from "./HowItWorks";
 import Contact from "./Contact";
+import { NavLink } from "react-router-dom";
 
 export default function Home(props) {
   return (
@@ -17,13 +18,13 @@ export default function Home(props) {
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book.
         </p>
-        <a href="/market">
+        <NavLink to="/market">
           <input
             type="button"
             className="btn btn-orange"
             value="See Our Market"
           ></input>
-        </a>
+        </NavLink>
       </div>
       <HowItWorks />
       <AboutUs />

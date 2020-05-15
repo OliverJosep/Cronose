@@ -48,9 +48,7 @@ export default class EditProfile extends Component {
     Axios.get(
       `${process.env.REACT_APP_API_URL}/user/description/${this.context.user.id}`
     ).then((response) => {
-      this.setState({ descriptions: response.data }, function () {
-        console.log(this.state);
-      });
+      this.setState({ descriptions: response.data });
     });
   }
 
@@ -250,7 +248,7 @@ export default class EditProfile extends Component {
             >
               {this.state.descriptions &&
                 this.state.descriptions.map((description, index) => (
-                  <div className="row pt-4">
+                  <div className="row pt-4" key={index}>
                     <div className="col-3 text-right pr-3">
                       <label htmlFor={description.language_id + "_description"}>
                         {" "}

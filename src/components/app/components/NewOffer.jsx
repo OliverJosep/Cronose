@@ -98,7 +98,7 @@ export default class NewOffer extends React.Component {
                   onChange={this.getSpecialization}
                   required
                 >
-                  <option value="0" selected="selected">
+                  <option value="0" defaultValue="0">
                     Select category
                   </option>
                   {this.state.categories.map((category, index) => (
@@ -122,11 +122,11 @@ export default class NewOffer extends React.Component {
                   onChange={this.getFilteredWorks}
                   required
                 >
-                  <option value="0" selected="selected">
+                  <option value="0" defaultValue="0">
                     Select specialization
                   </option>
                   {this.state.specialization.map((specialization, index) => (
-                    <option value={specialization.id}>
+                    <option value={specialization.id} key={index}>
                       {specialization.name}
                     </option>
                   ))}
@@ -138,7 +138,7 @@ export default class NewOffer extends React.Component {
               </div>
             </div>
             <div className="form-group bg-secondary text-white p-2">
-              <label for="rating">
+              <label htmlFor="rating">
                 ¿Cuál es tu nivel de profesionalidad en este sector?
               </label>
               <div className="col">
@@ -146,7 +146,7 @@ export default class NewOffer extends React.Component {
               </div>
             </div>
             <div className="form-group">
-              <label for="workTitle">Título</label>
+              <label htmlFor="workTitle">Título</label>
               <input
                 type="text"
                 className="form-control"
@@ -160,7 +160,7 @@ export default class NewOffer extends React.Component {
               </small>
             </div>
             <div className="form-group">
-              <label for="workTitle">Descripción</label>
+              <label htmlFor="workTitle">Descripción</label>
               <textarea
                 type="text"
                 className="form-control"
@@ -186,7 +186,7 @@ export default class NewOffer extends React.Component {
                     className="form-check-input"
                     id="materialInline1"
                   />
-                  <label className="form-check-label" for="materialInline1">
+                  <label className="form-check-label" htmlFor="materialInline1">
                     Lunes
                   </label>
                 </div>
@@ -196,7 +196,7 @@ export default class NewOffer extends React.Component {
                     className="form-check-input"
                     id="materialInline2"
                   />
-                  <label className="form-check-label" for="materialInline2">
+                  <label className="form-check-label" htmlFor="materialInline2">
                     Martes
                   </label>
                 </div>
@@ -206,7 +206,7 @@ export default class NewOffer extends React.Component {
                     className="form-check-input"
                     id="materialInline3"
                   />
-                  <label className="form-check-label" for="materialInline3">
+                  <label className="form-check-label" htmlFor="materialInline3">
                     Miércoles
                   </label>
                 </div>
@@ -216,7 +216,7 @@ export default class NewOffer extends React.Component {
                     className="form-check-input"
                     id="materialInline3"
                   />
-                  <label className="form-check-label" for="materialInline3">
+                  <label className="form-check-label" htmlFor="materialInline3">
                     Jueves
                   </label>
                 </div>
@@ -226,7 +226,7 @@ export default class NewOffer extends React.Component {
                     className="form-check-input"
                     id="materialInline3"
                   />
-                  <label className="form-check-label" for="materialInline3">
+                  <label className="form-check-label" htmlFor="materialInline3">
                     Viernes
                   </label>
                 </div>
@@ -236,7 +236,7 @@ export default class NewOffer extends React.Component {
                     className="form-check-input"
                     id="materialInline3"
                   />
-                  <label className="form-check-label" for="materialInline3">
+                  <label className="form-check-label" htmlFor="materialInline3">
                     Sábado
                   </label>
                 </div>
@@ -246,7 +246,7 @@ export default class NewOffer extends React.Component {
                     className="form-check-input"
                     id="materialInline3"
                   />
-                  <label className="form-check-label" for="materialInline3">
+                  <label className="form-check-label" htmlFor="materialInline3">
                     Domingo
                   </label>
                 </div>
@@ -258,7 +258,7 @@ export default class NewOffer extends React.Component {
                 <div className="form-row">
                   <div className="col">
                     <div className="md-form">
-                      <label className="form-label" for="date1">
+                      <label className="form-label" htmlFor="date1">
                         De las{" "}
                       </label>
                       <input
@@ -271,7 +271,7 @@ export default class NewOffer extends React.Component {
                   </div>
                   <div className="col">
                     <div className="md-form">
-                      <label className="form-label" for="date2">
+                      <label className="form-label" htmlFor="date2">
                         Hasta las{" "}
                       </label>
                       <input

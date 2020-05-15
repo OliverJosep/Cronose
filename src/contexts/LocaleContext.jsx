@@ -8,13 +8,13 @@ export default class LocaleContextProvider extends Component {
   constructor(props) {
     super(props);
 
-    let avaliableLangs = ["ca", "es", "en"];
-    let defaulLang = avaliableLangs.includes(
+    const avaliableLangs = ["ca", "es", "en"];
+    const defaulLang = avaliableLangs.includes(
       window.navigator.language.slice(0, 2)
     )
       ? window.navigator.language.slice(0, 2)
       : "es";
-    // let lang = avaliableLangs.includes(localStorage.getItem('app').lang) ? localStorage.getItem('app').lang : defaulLang;
+
     this.state = JSON.parse(localStorage.getItem("app")) || {
       lang: defaulLang,
       user: {},
@@ -28,15 +28,8 @@ export default class LocaleContextProvider extends Component {
     this.updateUser = this.updateUser.bind(this);
   }
 
-  componentDidMount() {
-    // // this.login(localStorage.get('jwt'));
-    // const app = JSON.parse(localStorage.getItem('app'));
-    // console.log(app.jwt);
-  }
-
   login(data) {
     const self = this;
-    console.log(data);
     Axios.post(`${process.env.REACT_APP_API_URL}/login`, qs.stringify(data))
       .then(function (response) {
         self.setState({
@@ -88,9 +81,6 @@ export default class LocaleContextProvider extends Component {
         JSON.stringify({ jwt: this.state.jwt, lang: this.state.lang })
       );
     }, 100);
-
-    // 	localStorage.setItem('app', JSON.stringify({lang: this.state.lang,jwt: this.state.jwt}));
-    // }, 100);
   }
 
   render() {

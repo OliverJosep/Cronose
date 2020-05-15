@@ -157,9 +157,9 @@ export default class Profile extends Component {
                     ))}
                   </div>
                   <div className="icon-more text-center ">
-                    <a href="/newoffer">
+                    <NavLink to="/newoffer">
                       <MdAddBox />
-                    </a>
+                    </NavLink>
                   </div>
                 </div>
               </div>
