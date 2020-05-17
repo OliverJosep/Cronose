@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import  { LocaleContext } from '../../contexts/LocaleContext';
 import Translate from '../../translations/Translate';
 import Loader from '../layouts/Loader';
-import {UserAvatar} from '../layouts/Avatar';
+import UserAvatar from '../layouts/Avatar';
 
 const position = [39.5643576, 3.20227];
 

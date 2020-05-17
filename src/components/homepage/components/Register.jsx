@@ -2,14 +2,18 @@ import React, { Component } from "react";
 import Axios from "axios";
 import md5 from "md5";
 import { NavLink } from "react-router-dom";
+import Avatar from "react-avatar";
 
 export default class Register extends Component {
   constructor(props) {
     super(props);
-    this.state = { province: [], cities: [] };
+    this.state = { province: [], cities: [], avatar: null, url: null };
     this.register = this.register.bind(this);
     this.getProvinces = this.getProvinces.bind(this);
     this.getCities = this.getCities.bind(this);
+    this.showFileSize = this.showFileSize.bind(this);
+    this.updateAvatar = this.updateAvatar.bind(this);
+    this.isValid = this.isValid.bind(this);
   }
 
   componentDidMount() {
@@ -53,6 +57,31 @@ export default class Register extends Component {
       .catch((err) => console.error(err));
   }
 
+  updateAvatar() {
+    const name = document.getElementById("name").value.substr(0, 1);
+    const surname = document.getElementById("surname").value.substr(0, 1);
+    const surname_2 = document.getElementById("surname_2").value.substr(0, 1);
+    this.setState({ avatar: `${name} ${surname} ${surname_2}` });
+  }
+
+  showFileSize(event) {
+    const maxSize = 1048576; // 1 MB
+    const file = event.target.files[0];
+    if (this.isValid(file, maxSize) === true)
+      return this.setState({ url: URL.createObjectURL(file) });
+    console.log(this.isValid(file, maxSize));
+    document.getElementById("avatar").value = null;
+    this.setState({ url: null });
+  }
+
+  isValid(img, size) {
+    if (!img) return;
+    if (!img.type.match("image/jpeg") && !img.type.match("image/png"))
+      return "Invalid image";
+    if (size < img.size) return "Max 1 MB";
+    return true;
+  }
+
   render() {
     return (
       <div className="jumbotron">
@@ -74,6 +103,7 @@ export default class Register extends Component {
                   name="name"
                   className="form-control"
                   placeholder="Enter your name"
+                  onChange={this.updateAvatar}
                   required
                 />
               </div>
@@ -87,6 +117,7 @@ export default class Register extends Component {
                   name="surname"
                   className="form-control"
                   placeholder="Your first surname"
+                  onChange={this.updateAvatar}
                   required
                 />
               </div>
@@ -100,6 +131,7 @@ export default class Register extends Component {
                   name="surname_2"
                   className="form-control"
                   placeholder="Your second surname"
+                  onChange={this.updateAvatar}
                 />
               </div>
             </div>
@@ -140,7 +172,9 @@ export default class Register extends Component {
                 >
                   <option value="0">Select province</option>
                   {this.state.province.map((province, index) => (
-                    <option value={province.id}>{province.name}</option>
+                    <option value={province.id} key={index}>
+                      {province.name}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -189,16 +223,37 @@ export default class Register extends Component {
                 </div>
               </div>
               <div className="col-12 col-md-6 pl-3">
-                <div className="form-group col p-1">
-                  <label htmlFor="avatar">Avatar</label>
-                  <input
-                    id="avatar"
-                    type="file"
-                    name="avatar"
-                    className="form-control-file"
-                  />
+                <div className="row m-0">
+                  <div className="form-group col-12 col-md-6 p-1">
+                    <label htmlFor="avatar">Avatar</label>
+                    <input
+                      id="avatar"
+                      type="file"
+                      name="avatar"
+                      className="form-control-file"
+                      onChange={(event) => this.showFileSize(event)}
+                    />
+                  </div>
+                  <div className="col-12 col-md-6 text-center">
+                    {this.state.url ? (
+                      <Avatar
+                        src={this.state.url}
+                        size={150}
+                        round={true}
+                        className="mr-2"
+                      />
+                    ) : (
+                      <Avatar
+                        name={this.state.avatar}
+                        size={150}
+                        round={true}
+                        className="mr-2"
+                      />
+                    )}
+                  </div>
                 </div>
-                <div className="form-group col p-1">
+
+                {/* <div className="form-group col p-1">
                   <label htmlFor="dni_img">DNI</label>
                   <input
                     id="dni_img"
@@ -207,7 +262,7 @@ export default class Register extends Component {
                     className="form-control-file"
                     required
                   />
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="row">

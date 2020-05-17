@@ -2,7 +2,7 @@ import React from "react";
 import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
 import { NavLink } from "react-router-dom";
-import { UserAvatar } from "../layouts/Avatar";
+import UserAvatar from "../layouts/Avatar";
 
 export default function OfferCard(props) {
   const offer = props.offer;

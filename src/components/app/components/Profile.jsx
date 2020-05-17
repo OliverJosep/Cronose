@@ -6,7 +6,7 @@ import Rater from "react-rater";
 import Translate from "../../../translations/Translate";
 import ProfileCard from "./ProfileCard";
 import Loader from "../../layouts/Loader";
-import { UserAvatar } from "../../layouts/Avatar";
+import UserAvatar from "../../layouts/Avatar";
 import { NavLink } from "react-router-dom";
 
 export default class Profile extends Component {

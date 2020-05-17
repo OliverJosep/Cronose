@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { UserAvatar } from "../../../layouts/Avatar";
+import UserAvatar from "../../../layouts/Avatar";
 
 export function RenderChat(props) {
   return (

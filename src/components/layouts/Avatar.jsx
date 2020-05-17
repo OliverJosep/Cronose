@@ -1,7 +1,7 @@
 import React from "react";
 import Avatar from "react-avatar";
 
-export function UserAvatar(props) {
+export default function UserAvatar(props) {
   if (props.avatar)
     return (
       <Avatar

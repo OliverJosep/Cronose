@@ -3,6 +3,8 @@ import Axios from "axios";
 import md5 from "md5";
 import { LocaleContext } from "../../../contexts/LocaleContext";
 import Translate from "../../../translations/Translate";
+import UserAvatar from "../../layouts/Avatar";
+import Avatar from "react-avatar";
 
 export default class EditProfile extends Component {
   static contextType = LocaleContext;
@@ -14,13 +16,17 @@ export default class EditProfile extends Component {
       descriptions: [],
       password: [],
       equals: false,
+      url: null,
     };
     this.getProvinces = this.getProvinces.bind(this);
     this.getCities = this.getCities.bind(this);
     this.getDescriptions = this.getDescriptions.bind(this);
     this.updateUserData = this.updateUserData.bind(this);
+    this.updateAvatar = this.updateAvatar.bind(this);
     this.updateDescription = this.updateDescription.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
+    this.updateAvatar = this.updateAvatar.bind(this);
+    this.isValid = this.isValid.bind(this);
   }
 
   componentDidMount() {
@@ -64,6 +70,19 @@ export default class EditProfile extends Component {
     );
   }
 
+  updateAvatar(e) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    formData.set("user_initials", this.context.user.initials);
+    formData.set("user_tag", this.context.user.tag);
+    Axios.post(
+      `${process.env.REACT_APP_API_URL}/user/avatar/update`,
+      formData
+    ).then((response) => {
+      window.location.reload(false);
+    });
+  }
+
   updateDescription(e) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -104,6 +123,24 @@ export default class EditProfile extends Component {
         }
       });
     });
+  }
+
+  showFileSize(event) {
+    const maxSize = 1048576; // 1 MB
+    const file = event.target.files[0];
+    if (this.isValid(file, maxSize) === true)
+      return this.setState({ url: URL.createObjectURL(file) });
+    console.log(this.isValid(file, maxSize));
+    document.getElementById("avatar").value = null;
+    this.setState({ url: null });
+  }
+
+  isValid(img, size) {
+    if (!img) return;
+    if (!img.type.match("image/jpeg") && !img.type.match("image/png"))
+      return "Invalid image";
+    if (size < img.size) return "Max 1 MB";
+    return true;
   }
 
   render() {
@@ -222,6 +259,54 @@ export default class EditProfile extends Component {
                   />
                 </div>
               </div>
+              <input
+                className="btn btn-lg btn-register w-100 mt-3 text-white"
+                type="submit"
+                value="Save changes"
+              />
+            </form>
+          </div>
+        </div>
+        {/* Avatar */}
+        <div className="mt-4 box">
+          <div className="title p-2">
+            Avatar |{" "}
+            <span className="user">
+              {user.initials}#<span className="text-muted">{user.tag}</span>
+            </span>
+          </div>
+          <div className="body">
+            <form
+              id="avatar_form"
+              method="post"
+              target="_self"
+              className="form-signin text-center pt-3"
+              onSubmit={this.updateAvatar}
+            >
+              <div>
+                {this.state.url ? (
+                  <Avatar
+                    src={this.state.url}
+                    size={100}
+                    round={true}
+                    className="mr-2"
+                  />
+                ) : (
+                  <UserAvatar
+                    name={user.full_name}
+                    avatar={user.avatar}
+                    size={100}
+                  />
+                )}
+              </div>
+              <input
+                id="avatar"
+                type="file"
+                name="avatar"
+                className="mt-3"
+                onChange={(event) => this.showFileSize(event)}
+                style={{ width: "250px" }}
+              />
               <input
                 className="btn btn-lg btn-register w-100 mt-3 text-white"
                 type="submit"
