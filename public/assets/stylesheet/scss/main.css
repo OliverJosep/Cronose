@@ -912,41 +912,13 @@ footer .links {
   background-color: var(--primary-color);
 }
 
-.card-chat .cards {
-  border-radius: 10px 10px;
-}
-
-.card-chat .cards .bg {
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 10px 10px;
-  height: 591px;
-}
-
-.card-chat .cards .bg .offer-card {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-  cursor: pointer;
-}
-
-.card-chat .cards .bg .offer-card .title {
-  font-weight: bold;
-  color: var(--secondary-color);
-}
-
-.card-chat .cards .bg .add {
-  cursor: pointer;
-  color: var(--secondary-color);
-  font-size: 30px;
-  font-weight: bold;
-}
-
 @media (max-width: 767px) {
-  .card-chat .cards .bg {
+  .card-chat .bg {
     height: auto;
   }
 }
 
-.card-chat .cards h3 {
+.card-chat h3 {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
@@ -988,5 +960,33 @@ footer .links {
 .edit_offer .bottom {
   margin: 0px 20px 0px 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.cards {
+  border-radius: 10px 10px;
+}
+
+.cards .bg {
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 10px 10px;
+  height: 591px;
+}
+
+.cards .bg .offer-card {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  cursor: pointer;
+}
+
+.cards .bg .offer-card .title {
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+.cards .bg .add {
+  cursor: pointer;
+  color: var(--secondary-color);
+  font-size: 30px;
+  font-weight: bold;
 }
 /*# sourceMappingURL=main.css.map */

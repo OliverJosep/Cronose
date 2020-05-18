@@ -1,0 +1,23 @@
+.cards {
+  border-radius: 10px 10px;
+  .bg {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 10px 10px;
+    height: 591px;
+    .offer-card {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+      cursor: pointer;
+      .title {
+        font-weight: bold;
+        color: var(--secondary-color);
+      }
+    }
+    .add {
+      cursor: pointer;
+      color: var(--secondary-color);
+      font-size: 30px;
+      font-weight: bold;
+    }
+  }
+}
