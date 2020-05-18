@@ -23,6 +23,7 @@ export default class EditProfile extends Component {
     this.getDescriptions = this.getDescriptions.bind(this);
     this.updateUserData = this.updateUserData.bind(this);
     this.updateAvatar = this.updateAvatar.bind(this);
+    this.toggleAvatar = this.toggleAvatar.bind(this);
     this.updateDescription = this.updateDescription.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
     this.updateAvatar = this.updateAvatar.bind(this);
@@ -41,7 +42,6 @@ export default class EditProfile extends Component {
         this.setState({ cities: response.data || this.state.cities });
       })
       .catch((err) => console.error(err));
-    console.log(this.state);
   }
 
   getProvinces() {
@@ -73,6 +73,11 @@ export default class EditProfile extends Component {
   updateAvatar(e) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    let visible = formData.get("visible") ? "1" : "0";
+    formData.delete("visible");
+    if (visible !== this.context.user.avatar.visible)
+      this.toggleAvatar(visible);
+    if (formData.get("avatar").name === "") return;
     formData.set("user_initials", this.context.user.initials);
     formData.set("user_tag", this.context.user.tag);
     Axios.post(
@@ -80,6 +85,18 @@ export default class EditProfile extends Component {
       formData
     ).then((response) => {
       window.location.reload(false);
+    });
+  }
+
+  toggleAvatar(visible) {
+    let formData = new FormData();
+    formData.set("media_id", this.context.user.avatar.id);
+    formData.set("visible", visible);
+    Axios.post(
+      `${process.env.REACT_APP_API_URL}/user/avatar/visible`,
+      formData
+    ).then((response) => {
+      this.context.updateUser(this.context.user.id);
     });
   }
 
@@ -130,7 +147,6 @@ export default class EditProfile extends Component {
     const file = event.target.files[0];
     if (this.isValid(file, maxSize) === true)
       return this.setState({ url: URL.createObjectURL(file) });
-    console.log(this.isValid(file, maxSize));
     document.getElementById("avatar").value = null;
     this.setState({ url: null });
   }
@@ -306,6 +322,17 @@ export default class EditProfile extends Component {
                 className="mt-3"
                 onChange={(event) => this.showFileSize(event)}
                 style={{ width: "250px" }}
+              />
+              <br />
+              <label className="mt-2" htmlFor="visible">
+                Visible
+              </label>
+              <input
+                className="ml-2 mt-3"
+                id="visible"
+                name="visible"
+                defaultChecked={user.avatar.visible === "1"}
+                type="checkbox"
               />
               <input
                 className="btn btn-lg btn-register w-100 mt-3 text-white"
