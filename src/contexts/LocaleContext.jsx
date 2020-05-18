@@ -17,8 +17,9 @@ export default class LocaleContextProvider extends Component {
 
     this.state = JSON.parse(localStorage.getItem("app")) || {
       lang: defaulLang,
-      user: {},
+      user: null,
       jwt: "",
+      error: "",
     };
 
     this.login = this.login.bind(this);
@@ -32,17 +33,25 @@ export default class LocaleContextProvider extends Component {
     const self = this;
     Axios.post(`${process.env.REACT_APP_API_URL}/login`, qs.stringify(data))
       .then(function (response) {
-        self.setState({
-          user: response.data.user,
-          jwt: response.data.jwt,
-        });
+        response.data.message
+          ? self.setState({ user: response.data.message })
+          : self.setState(
+              {
+                user: response.data.user,
+                jwt: response.data.jwt,
+              },
+              function () {
+                self.saveLocalStorage();
+              }
+            );
       })
       .catch(function (error) {
+        console.log(error.message);
         self.logout(error);
-      })
-      .finally(function () {
-        self.saveLocalStorage();
       });
+    // .finally(function () {
+    //   self.saveLocalStorage();
+    // });
   }
 
   updateUser(id) {
@@ -59,12 +68,9 @@ export default class LocaleContextProvider extends Component {
   }
 
   logout(error) {
-    this.setState(
-      { user: {}, lang: this.state.lang, jwt: {}, isLogged: false },
-      () => {
-        this.saveLocalStorage();
-      }
-    );
+    this.setState({ user: null, lang: this.state.lang, jwt: {} }, () => {
+      this.saveLocalStorage();
+    });
   }
 
   changeLanguage = ({ currentTarget: { id } }) => {

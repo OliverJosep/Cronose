@@ -7,13 +7,22 @@ import Avatar from "react-avatar";
 export default class Register extends Component {
   constructor(props) {
     super(props);
-    this.state = { province: [], cities: [], avatar: null, url: null };
+    this.state = {
+      province: [],
+      cities: [],
+      avatar: null,
+      url: null,
+      dni: true,
+      email: null,
+    };
     this.register = this.register.bind(this);
     this.getProvinces = this.getProvinces.bind(this);
     this.getCities = this.getCities.bind(this);
     this.showFileSize = this.showFileSize.bind(this);
     this.updateAvatar = this.updateAvatar.bind(this);
     this.isValid = this.isValid.bind(this);
+    this.validDNI = this.validDNI.bind(this);
+    this.validEmail = this.validEmail.bind(this);
   }
 
   componentDidMount() {
@@ -82,6 +91,58 @@ export default class Register extends Component {
     return true;
   }
 
+  validDNI() {
+    let dni = document.getElementById("dni").value;
+    if (/(^[0-9]{8,8})([a-zA-Z])$$/.test(dni)) {
+      Axios.get(`${process.env.REACT_APP_API_URL}/dni`, {
+        params: {
+          dni: dni,
+        },
+      }).then((response) => {
+        if (response.data === true)
+          this.setState({
+            dni: "This dni already exists!",
+          });
+        if (response.data === false)
+          this.setState({
+            dni: null,
+          });
+      });
+    } else {
+      this.setState({
+        dni: "Invalid DNI!",
+      });
+    }
+  }
+
+  validEmail() {
+    let email = document.getElementById("email").value;
+    if (
+      /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(
+        email
+      )
+    ) {
+      Axios.get(`${process.env.REACT_APP_API_URL}/email`, {
+        params: {
+          email: email,
+        },
+      }).then((response) => {
+        if (response.data === true)
+          this.setState({
+            email: "This email already exists!",
+          });
+        if (response.data === false)
+          this.setState({
+            email: null,
+          });
+      });
+    } else {
+      this.setState({
+        email: "Invalid Email!",
+      });
+    }
+  }
+
   render() {
     return (
       <div className="jumbotron">
@@ -138,23 +199,31 @@ export default class Register extends Component {
             <div className="row">
               <div className="form-group col-md-3 p-1">
                 <label htmlFor="dni">DNI:</label>
+                {this.state.dni && (
+                  <span className="ml-1 error">{this.state.dni}</span>
+                )}
                 <input
                   id="dni"
                   type="text"
                   name="dni"
                   className="form-control"
                   placeholder="National document"
+                  onBlur={this.validDNI}
                   required
                 />
               </div>
               <div className="form-group col-md-9 p-1">
                 <label htmlFor="email">Email:</label>
+                {this.state.email && (
+                  <span className="ml-1 error">{this.state.email}</span>
+                )}
                 <input
                   id="email"
                   type="email"
                   name="email"
                   className="form-control"
                   placeholder="example@email.com"
+                  onBlur={this.validEmail}
                   required
                 />
               </div>

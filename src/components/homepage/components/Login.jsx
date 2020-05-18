@@ -12,12 +12,17 @@ export default class Login extends React.Component {
     this.login = this.login.bind(this);
   }
 
+  componentWillMount() {
+    this.context.logout();
+  }
+
   login(e) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     formData.set("password", md5(formData.get("password")));
     const data = Object.fromEntries(formData);
     this.context.login(data);
+    // this.setState({ error: error });
   }
 
   render() {
@@ -54,6 +59,7 @@ export default class Login extends React.Component {
               required
             />
           </div>
+          <div className="error mt-2">{this.context.user}</div>
           <input
             className="btn-login btn btn-lg btn-primary btn-block mt-4"
             type="submit"

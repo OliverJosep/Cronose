@@ -476,6 +476,10 @@ footer .links {
   color: var(--secondary-color);
 }
 
+.card-login .error {
+  color: #ff0000;
+}
+
 .img-back-profile {
   z-index: -100;
 }
@@ -698,6 +702,10 @@ footer .links {
   color: var(--secondary-color);
 }
 
+.register .error {
+  color: #ff0000;
+}
+
 .register .btn-register {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
@@ -710,6 +718,10 @@ footer .links {
 
 .register a {
   color: var(--secondary-color);
+}
+
+.register .error {
+  color: #ff0000;
 }
 
 .my-work-card {
