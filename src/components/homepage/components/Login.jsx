@@ -22,7 +22,6 @@ export default class Login extends React.Component {
     formData.set("password", md5(formData.get("password")));
     const data = Object.fromEntries(formData);
     this.context.login(data);
-    // this.setState({ error: error });
   }
 
   render() {

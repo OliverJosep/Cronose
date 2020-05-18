@@ -12,8 +12,11 @@ export default class Register extends Component {
       cities: [],
       avatar: null,
       url: null,
-      dni: true,
+      dni: null,
       email: null,
+      password: null,
+      r_password: null,
+      registered: null,
     };
     this.register = this.register.bind(this);
     this.getProvinces = this.getProvinces.bind(this);
@@ -23,6 +26,8 @@ export default class Register extends Component {
     this.isValid = this.isValid.bind(this);
     this.validDNI = this.validDNI.bind(this);
     this.validEmail = this.validEmail.bind(this);
+    this.password = this.password.bind(this);
+    this.r_password = this.r_password.bind(this);
   }
 
   componentDidMount() {
@@ -34,19 +39,20 @@ export default class Register extends Component {
     const formData = new FormData(e.currentTarget);
     formData.set("password", md5(formData.get("password")));
     formData.set("r_password", md5(formData.get("r_password")));
-    if (formData.get("password") === formData.get("r_password")) {
-      Axios.post(`${process.env.REACT_APP_API_URL}/register`, formData, {
-        headers: {
-          "Content-Type":
-            "multipart/form-data; boundary=899579491390198298378346",
-        },
-      })
-        .then(function (response) {
+    if (
+      this.state.dni === true &&
+      this.state.email === true &&
+      this.state.password === true &&
+      this.state.r_password === true
+    ) {
+      Axios.post(`${process.env.REACT_APP_API_URL}/register`, formData)
+        .then((response) => {
           console.log(response);
+          this.setState({
+            registered: true,
+          });
         })
-        .catch(function (error) {
-          console.log(error);
-        });
+        .catch((err) => console.error(err));
     }
   }
 
@@ -61,7 +67,6 @@ export default class Register extends Component {
     Axios.get(`${process.env.REACT_APP_API_URL}/cities/${province_id}`)
       .then((response) => {
         this.setState({ cities: response.data || this.state.cities });
-        // const cities = document.getElementById('cities');
       })
       .catch((err) => console.error(err));
   }
@@ -78,7 +83,6 @@ export default class Register extends Component {
     const file = event.target.files[0];
     if (this.isValid(file, maxSize) === true)
       return this.setState({ url: URL.createObjectURL(file) });
-    console.log(this.isValid(file, maxSize));
     document.getElementById("avatar").value = null;
     this.setState({ url: null });
   }
@@ -99,14 +103,13 @@ export default class Register extends Component {
           dni: dni,
         },
       }).then((response) => {
-        if (response.data === true)
-          this.setState({
-            dni: "This dni already exists!",
-          });
-        if (response.data === false)
-          this.setState({
-            dni: null,
-          });
+        response.data === true
+          ? this.setState({
+              dni: "This dni already exists!",
+            })
+          : this.setState({
+              dni: true,
+            });
       });
     } else {
       this.setState({
@@ -115,10 +118,25 @@ export default class Register extends Component {
     }
   }
 
+  password() {
+    const password = document.getElementById("password").value;
+    password.length < 5
+      ? this.setState({ password: "Min 5 characters!" })
+      : this.setState({ password: true });
+  }
+
+  r_password() {
+    const password = md5(document.getElementById("password").value);
+    const r_password = md5(document.getElementById("r_password").value);
+    password !== r_password
+      ? this.setState({ r_password: "The passwords are differents!" })
+      : this.setState({ r_password: true });
+  }
+
   validEmail() {
-    let email = document.getElementById("email").value;
+    const email = document.getElementById("email").value;
     if (
-      /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(
+      /^([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(
         email
       )
     ) {
@@ -133,7 +151,7 @@ export default class Register extends Component {
           });
         if (response.data === false)
           this.setState({
-            email: null,
+            email: true,
           });
       });
     } else {
@@ -270,23 +288,31 @@ export default class Register extends Component {
               <div className="col-12 col-md-6">
                 <div className="form-label col p-1">
                   <label htmlFor="password">Password</label>
+                  {this.state.password && (
+                    <span className="ml-1 error">{this.state.password}</span>
+                  )}
                   <input
                     id="password"
                     type="password"
                     name="password"
                     className="form-control"
                     placeholder="password"
+                    onChange={this.password}
                     required
                   />
                 </div>
                 <div className="form-label-group col p-1">
                   <label htmlFor="r_password">Repeat password</label>
+                  {this.state.r_password && (
+                    <span className="ml-1 error">{this.state.r_password}</span>
+                  )}
                   <input
                     id="r_password"
                     type="password"
                     name="r_password"
                     className="form-control"
                     placeholder="password"
+                    onChange={this.r_password}
                     required
                   />
                 </div>
@@ -366,6 +392,9 @@ export default class Register extends Component {
                   type="submit"
                   value="Submit"
                 />
+                {this.state.registered === true && (
+                  <span className="registered">Registered succesfully!!</span>
+                )}
                 <div className="form-label-group col-12 mt-2">
                   <label className="ml-2" htmlFor="terms_and_conditions">
                     You already have an account? Please

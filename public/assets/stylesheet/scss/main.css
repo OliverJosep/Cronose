@@ -706,6 +706,11 @@ footer .links {
   color: #ff0000;
 }
 
+.register .registered {
+  color: #06c258;
+  font-weight: bold;
+}
+
 .register .btn-register {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
@@ -722,6 +727,11 @@ footer .links {
 
 .register .error {
   color: #ff0000;
+}
+
+.register .registered {
+  color: #06c258;
+  font-weight: bold;
 }
 
 .my-work-card {
