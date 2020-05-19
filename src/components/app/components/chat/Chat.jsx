@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { MdAddCircleOutline } from "react-icons/md";
 import Axios from "axios";
 import { LocaleContext } from "../../../../contexts/LocaleContext";
 import qs from "qs";
@@ -20,6 +19,7 @@ export default class Chat extends Component {
       chat_loaded: false,
       new_data: false,
       chatsLength: "10",
+      cards: null,
     };
     this.getChat = this.getChat.bind(this);
     this.getChats = this.getChats.bind(this);
@@ -35,7 +35,7 @@ export default class Chat extends Component {
   componentDidMount() {
     this.newChat();
     this.getChats();
-    this.chatsInterval = setInterval(this.getChatsInterval, 10000);
+    this.chatsInterval = setInterval(this.getChatsInterval, 5000);
     this.chatsMessage();
   }
 
@@ -71,6 +71,7 @@ export default class Chat extends Component {
         chats: response.data.chats || this.state.chats,
         chats_loaded: true || false,
       });
+      this.getCards();
     });
   }
 
@@ -78,8 +79,10 @@ export default class Chat extends Component {
     Axios.get(
       `${process.env.REACT_APP_API_URL}/chat/${this.context.user.id}/${id}`
     ).then((response) => {
-      !this.state.chat_selected &&
-        (this.chatInterval = setInterval(this.getLastMessage, 10000));
+      if (this.state.chat_selected) {
+        this.chatInterval = setInterval(this.getLastMessage, 10000);
+      }
+
       this.setState({ chat_selected: id });
       this.setState(
         {
@@ -89,6 +92,7 @@ export default class Chat extends Component {
         },
         function () {
           this.scrollDown();
+          this.getCards();
         }
       );
     });
@@ -172,6 +176,17 @@ export default class Chat extends Component {
     this.setState({ chatsLength: objDiv.scrollWidth / 15 });
   }
 
+  // Cards
+  getCards() {
+    Axios.get(
+      `${process.env.REACT_APP_API_URL}/${this.context.lang}/cards/${this.context.user.id}/${this.state.chat_selected}`
+    ).then((response) => {
+      this.setState({
+        cards: response.data.length !== 0 ? response.data : null,
+      });
+    });
+  }
+
   render() {
     return (
       <>
@@ -232,6 +247,7 @@ export default class Chat extends Component {
             <Cards
               user1={this.context.user.id}
               user2={this.state.chat_selected}
+              cards={this.state.cards}
             />
           </div>
         </div>
