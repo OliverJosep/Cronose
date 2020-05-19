@@ -6,7 +6,7 @@ import UserAvatar from "../layouts/Avatar";
 
 export default function OfferCard(props) {
   const offer = props.offer;
-  const user = props.user;
+  const user = props.offerUser;
 
   return (
     <article className="card work-card">
@@ -67,6 +67,7 @@ export default function OfferCard(props) {
               >
                 See Offer
               </NavLink>
+              {console.log(props)}
               {props.user &&
                 user.initials === props.user.initials &&
                 user.tag === props.user.tag && (

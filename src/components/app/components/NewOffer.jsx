@@ -64,7 +64,7 @@ export default class NewOffer extends React.Component {
     return (
       <div
         className="langSelector container shadow m-2 p-3 text-center"
-        id="workForm"
+        id="offerForm"
       >
         <h5>¿En qué idioma ofrecerás tu trabajo?</h5>
         <p>Después podrás añadir más idiomas complementarios</p>
@@ -84,7 +84,7 @@ export default class NewOffer extends React.Component {
           aria-labelledby="dropdownMenuButton"
         ></div>
 
-        <div id="workForm2" className="container text-left">
+        <div id="offerForm2" className="container text-left">
           <hr />
 
           <form method="post" target="_self" onSubmit={this.send}>
@@ -119,7 +119,7 @@ export default class NewOffer extends React.Component {
                   id="specialization_id"
                   name="specialization_id"
                   className="rowser-default custom-select"
-                  onChange={this.getFilteredWorks}
+                  onChange={this.getFilteredOffers}
                   required
                 >
                   <option value="0" defaultValue="0">
@@ -146,31 +146,31 @@ export default class NewOffer extends React.Component {
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="workTitle">Título</label>
+              <label htmlFor="offerTitle">Título</label>
               <input
                 type="text"
                 className="form-control"
-                name="workTitle"
-                id="workTitle"
+                name="offerTitle"
+                id="offerTitle"
                 aria-describedby="emailHelp"
                 placeholder="Introduce tu título..."
               />
-              <small id="workSubtitle" className="form-text text-muted">
+              <small id="offerSubtitle" className="form-text text-muted">
                 Utiliza un título lo más descriptivo posible
               </small>
             </div>
             <div className="form-group">
-              <label htmlFor="workTitle">Descripción</label>
+              <label htmlFor="offerTitle">Descripción</label>
               <textarea
                 type="text"
                 className="form-control"
-                name="workDescription"
-                id="workDescription"
+                name="offerDescription"
+                id="offerDescription"
                 aria-describedby="emailHelp"
                 placeholder="Describe tu actividad..."
                 rows="5"
               ></textarea>
-              <small id="workSubtitle" className="form-text text-muted">
+              <small id="offerSubtitle" className="form-text text-muted">
                 Indica lo que puedes ofrecer y otra información que quieres que
                 sepan los demás usuarios. Una vez creada la oferta, podrá
                 registrar más de un idioma.
@@ -250,7 +250,7 @@ export default class NewOffer extends React.Component {
                     Domingo
                   </label>
                 </div>
-                <small id="workSubtitle" className="form-text text-muted">
+                <small id="offerSubtitle" className="form-text text-muted">
                   Indica los días que puedes reaizar el trabajo.
                 </small>
               </div>
@@ -282,7 +282,7 @@ export default class NewOffer extends React.Component {
                       />
                     </div>
                   </div>
-                  <small id="workSubtitle" className="form-text text-muted">
+                  <small id="offerSubtitle" className="form-text text-muted">
                     Escribe de que hora a que hora puedes realizar el trabajo
                   </small>
                 </div>

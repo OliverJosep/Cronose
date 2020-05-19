@@ -51,7 +51,7 @@ export default class MyOffers extends Component {
             <OfferCard
               key={index}
               offer={offer}
-              translations={offer.translations}
+              offerUser={this.context.user}
               user={this.context.user}
             />
           ))}
