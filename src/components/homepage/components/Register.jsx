@@ -48,9 +48,10 @@ export default class Register extends Component {
       Axios.post(`${process.env.REACT_APP_API_URL}/register`, formData)
         .then((response) => {
           console.log(response);
-          this.setState({
-            registered: true,
-          });
+          response.data !== null &&
+            this.setState({
+              registered: true,
+            });
         })
         .catch((err) => console.error(err));
     }

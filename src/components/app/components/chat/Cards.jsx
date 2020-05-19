@@ -1,5 +1,6 @@
 import React from "react";
 import { MdAddCircleOutline } from "react-icons/md";
+import { NavLink } from "react-router-dom";
 
 export default function Cards(props) {
   return (
@@ -8,7 +9,7 @@ export default function Cards(props) {
         <h3 className="w-100 p-2 pt-3 m-0">Cards</h3>
         {props.cards === null ? <NoCards /> : <MyCards cards={props.cards} />}
         <div className="text-center mt-2">
-          <MdAddCircleOutline className="add" />
+          <CreateDemand />
         </div>
       </div>
     </div>
@@ -52,6 +53,32 @@ export function MyCards(props) {
           </div>
         </div>
       ))}
+    </>
+  );
+}
+
+export function CreateDemand() {
+  return (
+    <>
+      <NavLink to={`/#`} data-toggle="modal" data-target="#createDemand">
+        <MdAddCircleOutline className="add" />
+      </NavLink>
+      <div
+        className="modal fade "
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="bannerformmodal"
+        aria-hidden="true"
+        id="createDemand"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content p-4">
+            <h4 className="modal-title mb-4">
+              Condiciones generales de Cronose
+            </h4>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
