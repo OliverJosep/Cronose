@@ -10,7 +10,7 @@ export default class MyOffers extends Component {
     super(props);
     this.state = {
       lang: null,
-      offers: [],
+      offers: null,
     };
     this.getOffers = this.getOffers.bind(this);
   }
@@ -29,11 +29,12 @@ export default class MyOffers extends Component {
 
   getOffers() {
     Axios.get(
-      `${process.env.REACT_APP_API_URL}/${this.context.lang}/offers/user/${this.context.user.id}`
+      `${process.env.REACT_APP_API_URL}/${this.context.lang}/offers/user/${this.context.user.id}/all`
     ).then((response) => this.setState({ offers: response.data }));
   }
 
   render() {
+    if (!this.state.offers) return <>loading</>;
     return (
       <>
         <div className="text-right pt-4 mr-4">
@@ -45,7 +46,8 @@ export default class MyOffers extends Component {
           <h1>My Offers</h1>
         </div>
         <section className="works">
-          {this.state.offers.map((offer, index) => (
+          {console.log(this.state.offers)}
+          {this.state.offers.offers.map((offer, index) => (
             <OfferCard
               key={index}
               offer={offer}

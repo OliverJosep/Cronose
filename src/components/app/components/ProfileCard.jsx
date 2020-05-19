@@ -4,7 +4,7 @@ import "react-rater/lib/react-rater.css";
 import { NavLink } from "react-router-dom";
 
 export default function ProfileCard(props) {
-  const work = props.work;
+  const offer = props.offer;
   return (
     <div className="card card-profile mt-3">
       <img
@@ -17,19 +17,19 @@ export default function ProfileCard(props) {
           <div className="d-flex justify-content-end">
             <Rater
               total={5}
-              rating={work.valoration_avg / 10 / 2}
+              rating={offer.valoration_avg / 10 / 2}
               interactive={false}
             />
           </div>
           <h4>
-            <b>{work.title || work.translations[0].title}</b>
+            <b>{offer.title || offer.translations[0].title}</b>
           </h4>
         </div>
         <p className="card-text">
-          {work.description || work.translations[0].description}
+          {offer.description || offer.translations[0].description}
         </p>
         <NavLink
-          to={`/offer/${work.user.initials}/${work.user.tag}/${work.specialization_id}`}
+          to={`/offer/${props.user.initials}/${props.user.tag}/${offer.specialization_id}`}
           className="btn btn-block text-white"
         >
           See Offer

@@ -6,6 +6,7 @@ import UserAvatar from "../layouts/Avatar";
 
 export default function OfferCard(props) {
   const offer = props.offer;
+  const user = props.user;
 
   return (
     <article className="card work-card">
@@ -48,14 +49,10 @@ export default function OfferCard(props) {
             <h4>
               <b>{offer.title || offer.translations[0].title}</b>
             </h4>
-            <UserAvatar
-              name={offer.user.full_name}
-              avatar={offer.user.avatar}
-              size={30}
-            />
-            {offer.user.full_name && offer.user.full_name + " | "}
-            <small className="d-inline form-text">{offer.user.initials}</small>
-            <small className="d-inline text-muted">#{offer.user.tag}</small>
+            <UserAvatar name={user.full_name} avatar={user.avatar} size={30} />
+            {user.full_name && user.full_name + " | "}
+            <small className="d-inline form-text">{user.initials}</small>
+            <small className="d-inline text-muted">#{user.tag}</small>
             <hr></hr>
             <p className="card-text">
               {offer.description || offer.translations[0].description}
@@ -65,14 +62,14 @@ export default function OfferCard(props) {
                 <b>Precio: {offer.coin_price}</b>
               </p>
               <NavLink
-                to={`/offer/${offer.user.initials}/${offer.user.tag}/${offer.specialization_id}`}
+                to={`/offer/${user.initials}/${user.tag}/${offer.specialization_id}`}
                 className="btn text-white"
               >
                 See Offer
               </NavLink>
               {props.user &&
-                offer.user.initials === props.user.initials &&
-                offer.user.tag === props.user.tag && (
+                user.initials === props.user.initials &&
+                user.tag === props.user.tag && (
                   <NavLink
                     to={`/offer/edit/${offer.specialization_id}`}
                     className="btn text-white"

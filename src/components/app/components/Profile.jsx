@@ -148,11 +148,12 @@ export default class Profile extends Component {
                     <b>My Offers</b>
                   </h3>
                   <div className="card-deck text-center">
-                    {this.state.offers.map((work, index) => (
+                    {console.log(this.state.offers)}
+                    {this.state.offers.offers.map((offer, index) => (
                       <ProfileCard
                         key={index}
-                        work={work}
-                        translations={work.translations}
+                        offer={offer}
+                        user={this.state.offers.user}
                       />
                     ))}
                   </div>

@@ -128,7 +128,7 @@ export default class Market extends Component {
               key={index}
               offer={offer}
               translations={offer.translations}
-              user={this.context.user}
+              user={offer.user}
             />
           ))}
         </section>

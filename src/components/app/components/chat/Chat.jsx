@@ -20,6 +20,7 @@ export default class Chat extends Component {
       new_data: false,
       chatsLength: "10",
       cards: null,
+      user_offers: null,
     };
     this.getChat = this.getChat.bind(this);
     this.getChats = this.getChats.bind(this);
@@ -102,6 +103,7 @@ export default class Chat extends Component {
   selectChat = ({ currentTarget: { id } }) => {
     this.getChat(id);
     this.chatsMessage();
+    this.getOffers(id);
   };
 
   handleSubmit(e) {
@@ -140,6 +142,14 @@ export default class Chat extends Component {
 
   updateMessage(e) {
     this.setState({ message: e.target.value });
+  }
+
+  getOffers(user_id) {
+    Axios.get(
+      `${process.env.REACT_APP_API_URL}/${this.context.lang}/offers/user/${user_id}`
+    ).then((response) => {
+      this.setState({ user_offers: response.data });
+    });
   }
 
   getLastMessage() {
@@ -247,6 +257,7 @@ export default class Chat extends Component {
             <Cards
               user1={this.context.user.id}
               user2={this.state.chat_selected}
+              offers={this.state.user_offers}
               cards={this.state.cards}
             />
           </div>
