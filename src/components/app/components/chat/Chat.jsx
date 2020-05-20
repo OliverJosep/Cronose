@@ -31,6 +31,7 @@ export default class Chat extends Component {
     this.getChatsInterval = this.getChatsInterval.bind(this);
     this.chatsMessage = this.chatsMessage.bind(this);
     this.newChat = this.newChat.bind(this);
+    this.getCancellations = this.getCancellations.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +39,7 @@ export default class Chat extends Component {
     this.getChats();
     this.chatsInterval = setInterval(this.getChatsInterval, 5000);
     this.chatsMessage();
+    this.getCancellations();
   }
 
   componentDidUpdate() {}
@@ -197,6 +199,16 @@ export default class Chat extends Component {
     });
   }
 
+  getCancellations() {
+    Axios.get(
+      `${process.env.REACT_APP_API_URL}/${this.context.lang}/cancellations`
+    ).then((response) => {
+      this.setState({
+        cancellations: response.data,
+      });
+    });
+  }
+
   render() {
     return (
       <>
@@ -255,10 +267,11 @@ export default class Chat extends Component {
               </form>
             </div>
             <Cards
-              user1={this.context.user.id}
-              user2={this.state.chat_selected}
+              // user1={this.context.user.id}
+              user={this.state.chat_selected}
               offers={this.state.user_offers}
               cards={this.state.cards}
+              cancellations={this.state.cancellations}
             />
           </div>
         </div>

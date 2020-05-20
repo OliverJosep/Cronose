@@ -1,35 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import { MdAddCircleOutline } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 
-export default function Cards(props) {
+const Cards = ({ cards, user, offers, cancellations }) => {
   return (
     <div className="col-xl-3 col-12 p-1 cards">
       <div className="bg">
         <h3 className="w-100 p-2 pt-3 m-0">Cards</h3>
-        {props.cards === null ? <NoCards /> : <MyCards cards={props.cards} />}
+        {cards === null ? <NoCards /> : <MyCards cards={cards} />}
         <div className="text-center mt-2">
-          {props.user2 && props.offers && (
-            <CreateDemand user={props.user2} offers={props.offers} />
+          {user && offers && (
+            <CreateDemand
+              offers={offers.offers}
+              cancellations={cancellations}
+            />
           )}
         </div>
       </div>
     </div>
   );
-}
+};
 
-export function NoCards() {
+const NoCards = () => {
   return (
     <div className="text-center mt-3">
       <span>No cards avaliable!</span>
     </div>
   );
-}
+};
 
-export function MyCards(props) {
+const MyCards = ({ cards, offer }) => {
   return (
     <>
-      {props.cards.map((card, index) => (
+      {cards.map((card, index) => (
         <div className="row offer-card p-2" key={index}>
           <div className="col-6 text-center d-block d-md-none d-xl-block">
             <img
@@ -42,9 +45,7 @@ export function MyCards(props) {
           </div>
           <div className="col-6 col-md-12 col-xl-6 text-md-center text-xl-left">
             <div className="row">
-              <div className="col-12 title">
-                {card.offer.translations[0].title}
-              </div>
+              <div className="col-12 title">{offer.translations[0].title}</div>
               <div className="col-12">{card.work_date}</div>
               <div className="col-12">
                 <strong>Status:</strong> {card.status}
@@ -55,9 +56,9 @@ export function MyCards(props) {
       ))}
     </>
   );
-}
+};
 
-export function CreateDemand(props) {
+const CreateDemand = ({ offers, cancellations }) => {
   return (
     <>
       <NavLink to={`/#`} data-toggle="modal" data-target="#createDemand">
@@ -73,42 +74,49 @@ export function CreateDemand(props) {
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content p-4">
-            <h4 className="modal-title mb-4">Card</h4>
+            <h4 className="modal-title mb-3">Create Offer</h4>
             <form
               id="create_card"
               method="post"
               target="_self"
               className="form-signin text-center pt-3"
-              // onSubmit={this.updateAvatar}
             >
-              <label htmlFor="create_card">Offer:</label>
-              <select
-                id="selected_offer"
-                name="selected_offer"
-                className="form-control"
-                // onChange={this.getCities}
-                defaultValue="0"
-                required
-              >
-                <option defaultValue={0} value={0} disabled>
-                  Select offer
-                </option>
-                {console.log(props.offers.offers)}
-                {props.offers.offers.map((offer, index) => (
-                  <option key={index} value={offer.specialization_id}>
-                    {offer.translations[0].title}
-                  </option>
-                ))}
-              </select>
-              <Time></Time>
+              <SelectOffer offers={offers} />
+              <SelectDate />
+              <SelectCancellation cancellations={cancellations} />
             </form>
           </div>
         </div>
       </div>
     </>
   );
-}
-export function Time() {
+};
+
+const SelectOffer = ({ offers }) => {
+  return (
+    <div className="mb-2">
+      <label htmlFor="create_card">Select offer:</label>
+      <select
+        id="selected_offer"
+        name="selected_offer"
+        className="form-control"
+        defaultValue="0"
+        required
+      >
+        <option defaultValue={0} value={0} disabled>
+          Select offer
+        </option>
+        {offers.map((offer, index) => (
+          <option key={index} value={offer.specialization_id}>
+            {offer.translations[0].title}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
+const SelectDate = () => {
   const date = new Date();
   const today =
     date.getFullYear() +
@@ -116,19 +124,59 @@ export function Time() {
     ("0" + (date.getMonth() + 1)).slice(-2) +
     "-" +
     ("0" + date.getDate()).slice(-2);
+  const time =
+    ("0" + date.getHours()).slice(-2) +
+    ":" +
+    ("0" + date.getMinutes()).slice(-2);
   return (
-    <div class="form-group row">
-      <label for="example-date-input" class="col-2 col-form-label">
-        Date
-      </label>
-      <div class="col-10">
-        <input
-          // class="form-control"
-          type="date"
-          value="2011-08-19"
-          id="example-date-input"
-        />
+    <div className="mb-2">
+      <label htmlFor="create_card">Date of the meeting:</label>
+      <div className="row">
+        <div className="col-6 pr-1">
+          <input
+            className="form-control"
+            type="date"
+            id="date"
+            defaultValue={today}
+            min={today}
+          />
+        </div>
+        <div className="col-6 pl-1">
+          <input
+            className="form-control p-1"
+            type="time"
+            id="time"
+            defaultValue={time}
+            min={time}
+          />
+        </div>
       </div>
     </div>
   );
-}
+};
+
+const SelectCancellation = ({ cancellations }) => {
+  return (
+    <div className="mb-2">
+      <label htmlFor="selected_cancellation">Select cancellation:</label>
+      <select
+        id="selected_cancellation"
+        name="selected_cancellation"
+        className="form-control"
+        defaultValue="0"
+        required
+      >
+        <option defaultValue={0} value={0} disabled>
+          Select cancellation:
+        </option>
+        {cancellations.map((cancellation, index) => (
+          <option key={index} value={cancellation.cancellation_policy_id}>
+            {cancellation.name}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
+export default Cards;
