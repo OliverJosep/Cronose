@@ -11,7 +11,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { LocaleContext } from "../../contexts/LocaleContext";
 import Translate from "../../translations/Translate";
 
-function NavBar(props) {
+const NavBar = ({ routes }) => {
   return (
     <Router>
       <nav className="navbar navbar-expand-xl w-100 container">
@@ -39,7 +39,7 @@ function NavBar(props) {
           id="navbarToggler"
         >
           <ul id="ul-nav-hor" className="navbar-nav">
-            {props.routes.map(function (route, index) {
+            {routes.map(function (route, index) {
               if (route.show === false) return false;
               return (
                 <li key={index} className="item">
@@ -57,13 +57,15 @@ function NavBar(props) {
           </ul>
         </div>
       </nav>
-      <main className="w-100">{SwitchRoutes(props.routes, props)}</main>
-      <Footer lang={props.lang} changeLanguage={props.changeLanguage} />
+      <main className="w-100">
+        <SwitchRoutes routes={routes} />
+      </main>
+      <Footer />
     </Router>
   );
-}
+};
 
-function SideBar(props) {
+const SideBar = ({ routes }) => {
   return (
     <Router>
       <input type="checkbox" name="toggle" id="sidebar-toggle"></input>
@@ -78,7 +80,7 @@ function SideBar(props) {
             alt="logo"
           />
           <ul className="nav flex-column mb-0 mt-4">
-            {props.routes.map(function (route, index) {
+            {routes.map(function (route, index) {
               if (route.show === false) return false;
               return (
                 <li key={index} className="nav-item">
@@ -110,13 +112,15 @@ function SideBar(props) {
           </ul>
         </section>
       </nav>
-      <main className="">{SwitchRoutes(props.routes, props)}</main>
-      <Footer lang={props.lang} changeLanguage={props.changeLanguage} />
+      <main className="">
+        <SwitchRoutes routes={routes} />
+      </main>
+      <Footer />
     </Router>
   );
-}
+};
 
-function SwitchRoutes(routes, props) {
+const SwitchRoutes = ({ routes }) => {
   return (
     <Switch>
       {routes.map((route, index) => (
@@ -129,6 +133,6 @@ function SwitchRoutes(routes, props) {
       ))}
     </Switch>
   );
-}
+};
 
 export { NavBar, SideBar };

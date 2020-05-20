@@ -1,14 +1,12 @@
 import React from "react";
 import { SideBar } from "../layouts/Nav";
 
-export default function App(props) {
+const App = ({ navigator }) => {
   return (
     <div id="app" className="w-100">
-      <SideBar
-        basename={props.navigator.basename}
-        routes={props.navigator.routes}
-        changeLanguage={props.changeLanguage}
-      />
+      <SideBar routes={navigator.routes} />
     </div>
   );
-}
+};
+
+export default App;

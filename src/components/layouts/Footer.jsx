@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { IoLogoTwitter, IoLogoFacebook, IoLogoInstagram } from "react-icons/io";
 import LanguagePicker from "./LanguagePicker";
+import { LocaleContext } from "../../contexts/LocaleContext";
 
-export default function Footer(props) {
+const Footer = () => {
+  const context = useContext(LocaleContext);
   return (
     <footer className="page-footer p-4">
-      <LanguagePicker changeLanguage={props.changeLanguage} />
+      <LanguagePicker changeLanguage={context.changeLanguage} />
       <div className="links row text-center">
         <div className="col-md-6 text-md-left">
           <p>
@@ -72,4 +74,6 @@ export default function Footer(props) {
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

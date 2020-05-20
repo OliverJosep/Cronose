@@ -6,7 +6,7 @@ import Loader from "./components/layouts/Loader";
 import navigators from "./configs/navigators.jsx";
 import LocaleContextProvider, { LocaleContext } from "./contexts/LocaleContext";
 
-export default function Platform() {
+const Platform = () => {
   return (
     <LocaleContextProvider>
       <LocaleContext.Consumer>
@@ -20,18 +20,18 @@ export default function Platform() {
               return (
                 <App
                   navigator={navigators.filter((nav) => nav.name === "app")[0]}
-                  changeLanguage={context.changeLanguage}
                 />
               );
           }
           return (
             <HomePage
               navigator={navigators.filter((nav) => nav.name === "root")[0]}
-              changeLanguage={context.changeLanguage}
             />
           );
         }}
       </LocaleContext.Consumer>
     </LocaleContextProvider>
   );
-}
+};
+
+export default Platform;

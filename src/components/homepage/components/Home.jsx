@@ -5,7 +5,7 @@ import HowItWorks from "./HowItWorks";
 import Contact from "./Contact";
 import { NavLink } from "react-router-dom";
 
-export default function Home(props) {
+const Home = () => {
   return (
     <div>
       <div className="container mt-5 pt-4 text-center">
@@ -31,4 +31,6 @@ export default function Home(props) {
       <Contact />
     </div>
   );
-}
+};
+
+export default Home;

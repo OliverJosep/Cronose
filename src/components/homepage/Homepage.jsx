@@ -1,14 +1,12 @@
 import React from "react";
 import { NavBar } from "../layouts/Nav";
 
-export default function HomePage(props) {
+const HomePage = ({ navigator }) => {
   return (
     <div id="homepage" className="w-100">
-      <NavBar
-        basename={props.navigator.basename}
-        routes={props.navigator.routes}
-        changeLanguage={props.changeLanguage}
-      />
+      <NavBar routes={navigator.routes} />
     </div>
   );
-}
+};
+
+export default HomePage;

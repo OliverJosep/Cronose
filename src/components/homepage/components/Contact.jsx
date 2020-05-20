@@ -1,7 +1,7 @@
 import React from "react";
 import Translate from "../../../translations/Translate";
 
-export default function Contact() {
+const Contact = () => {
   return (
     <div className="container mb-5 mt-5" id="contact">
       <h1>
@@ -42,4 +42,6 @@ export default function Contact() {
       </div>
     </div>
   );
-}
+};
+
+export default Contact;

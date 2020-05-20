@@ -1,7 +1,7 @@
 import React from "react";
 import Translate from "../../../translations/Translate";
 
-export default function HowItWorks() {
+const HowItWorks = () => {
   return (
     <div className="container mt-5" id="HowItWorks">
       <div className="row mt-4">
@@ -78,4 +78,6 @@ export default function HowItWorks() {
       </div>
     </div>
   );
-}
+};
+
+export default HowItWorks;

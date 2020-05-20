@@ -2,6 +2,24 @@ import React from "react";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import Translate from "../../../translations/Translate";
 
+const AboutUs = () => {
+  return (
+    <div className="container" id="about">
+      <h1>
+        <Translate string={"about-us"} />
+      </h1>
+      <p>
+        <Translate string={"about-us-text-1"} />
+        <br />
+        <Translate string={"about-us-text-2"} />
+        <br />
+        <Translate string={"about-us-text-3"} />
+      </p>
+      <Moves />
+    </div>
+  );
+};
+
 const position = [39.5616104, 3.20025];
 
 const styles = {
@@ -37,20 +55,4 @@ Moves.defaultProps = {
   url: "https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png",
 };
 
-export default function AboutUs(props) {
-  return (
-    <div className="container" id="about">
-      <h1>
-        <Translate string={"about-us"} />
-      </h1>
-      <p>
-        <Translate string={"about-us-text-1"} />
-        <br />
-        <Translate string={"about-us-text-2"} />
-        <br />
-        <Translate string={"about-us-text-3"} />
-      </p>
-      <Moves />
-    </div>
-  );
-}
+export default AboutUs;

@@ -1,7 +1,7 @@
 import React from "react";
 import Loader from "react-loader-spinner";
 
-export default function loader() {
+const loader = () => {
   return (
     <div
       style={{
@@ -21,4 +21,6 @@ export default function loader() {
       />
     </div>
   );
-}
+};
+
+export default loader;
