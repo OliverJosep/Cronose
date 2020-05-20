@@ -173,27 +173,6 @@ export default class Chat extends Component {
     this.setState({ chatsLength: objDiv.scrollWidth / 15 });
   }
 
-  // // Cards
-  // getCards() {
-  //   Axios.get(
-  //     `${process.env.REACT_APP_API_URL}/${this.context.lang}/cards/${this.context.user.id}/${this.state.chat_selected}`
-  //   ).then((response) => {
-  //     this.setState({
-  //       cards: response.data.length !== 0 ? response.data : null,
-  //     });
-  //   });
-  // }
-
-  // getCancellations() {
-  //   Axios.get(
-  //     `${process.env.REACT_APP_API_URL}/${this.context.lang}/cancellations`
-  //   ).then((response) => {
-  //     this.setState({
-  //       cancellations: response.data,
-  //     });
-  //   });
-  // }
-
   render() {
     return (
       <>
@@ -252,7 +231,6 @@ export default class Chat extends Component {
               </form>
             </div>
             <Cards
-              // user1={this.context.user.id}
               user={this.state.chat_selected}
               offers={this.state.user_offers}
               cards={this.state.cards}

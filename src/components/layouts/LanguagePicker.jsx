@@ -1,13 +1,6 @@
 import React, { Component } from "react";
-import $ from "jquery";
 
 class LanguagePicker extends Component {
-  componentDidMount() {
-    $(".btnlan").click(function () {
-      $(".btnlan").removeClass("active");
-      $(this).addClass("active");
-    });
-  }
   render() {
     const { changeLanguage } = this.props;
     return (
