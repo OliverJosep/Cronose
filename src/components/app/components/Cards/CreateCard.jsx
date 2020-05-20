@@ -1,66 +1,60 @@
-import React from "react";
-import { MdAddCircleOutline } from "react-icons/md";
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
+import Axios from "axios";
+import { MdAddCircleOutline } from "react-icons/md";
+import { LocaleContext } from "../../../../contexts/LocaleContext";
 
-const Cards = ({ cards, user, offers, cancellations }) => {
-  return (
-    <div className="col-xl-3 col-12 p-1 cards">
-      <div className="bg">
-        <h3 className="w-100 p-2 pt-3 m-0">Cards</h3>
-        {cards === null ? <NoCards /> : <MyCards cards={cards} />}
-        <div className="text-center mt-2">
-          {user && offers && (
-            <CreateDemand
-              offers={offers.offers}
-              cancellations={cancellations}
-            />
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
+const CreateCard = ({ user, lang }) => {
+  const context = useContext(LocaleContext);
+  const [offers, setOffers] = useState([]);
+  const [cancellations, setCancellations] = useState([]);
 
-const NoCards = () => {
-  return (
-    <div className="text-center mt-3">
-      <span>No cards avaliable!</span>
-    </div>
-  );
-};
+  // Get Offers
+  useEffect(() => {
+    const getOffers = () => {
+      user &&
+        Axios.get(
+          `${process.env.REACT_APP_API_URL}/${lang}/offers/user/${user}`
+        ).then((response) => {
+          setOffers(response.data.offers);
+        });
+    };
+    getOffers();
+  }, [user, lang]);
 
-const MyCards = ({ cards, offer }) => {
-  return (
-    <>
-      {cards.map((card, index) => (
-        <div className="row offer-card p-2" key={index}>
-          <div className="col-6 text-center d-block d-md-none d-xl-block">
-            <img
-              className="m-auto"
-              src="/assets/img/img-work.jpg"
-              width="auto"
-              height="71px"
-              alt="img-work"
-            ></img>
-          </div>
-          <div className="col-6 col-md-12 col-xl-6 text-md-center text-xl-left">
-            <div className="row">
-              <div className="col-12 title">{offer.translations[0].title}</div>
-              <div className="col-12">{card.work_date}</div>
-              <div className="col-12">
-                <strong>Status:</strong> {card.status}
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
-    </>
-  );
-};
+  // Get Cancellations
+  useEffect(() => {
+    const getCancellations = () => {
+      Axios.get(`${process.env.REACT_APP_API_URL}/${lang}/cancellations`).then(
+        (response) => {
+          setCancellations(response.data);
+        }
+      );
+    };
 
-const CreateDemand = ({ offers, cancellations }) => {
+    getCancellations();
+  }, [lang]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let data = new FormData(e.currentTarget);
+    const timestamp =
+      data.get("date") + " " + document.getElementById("time").value + ":00";
+    data.delete("date");
+    data.set("worker_id", user);
+    data.set("client_id", context.user.id);
+    data.set("work_date", timestamp);
+    Axios.post(`${process.env.REACT_APP_API_URL}/demand`, data).then(
+      (response) => {
+        console.log("e");
+        // setCancellations(response.data);
+      }
+    );
+  };
+
+  if (offers.length <= 0) return <></>;
   return (
-    <>
+    <div>
       <NavLink to={`/#`} data-toggle="modal" data-target="#createDemand">
         <MdAddCircleOutline className="add" />
       </NavLink>
@@ -80,15 +74,21 @@ const CreateDemand = ({ offers, cancellations }) => {
               method="post"
               target="_self"
               className="form-signin text-center pt-3"
+              onSubmit={handleSubmit}
             >
               <SelectOffer offers={offers} />
               <SelectDate />
               <SelectCancellation cancellations={cancellations} />
+              <input
+                className="btn btn-lg btn-register w-100 mt-3 text-white"
+                type="submit"
+                value="Create"
+              />
             </form>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
@@ -97,8 +97,8 @@ const SelectOffer = ({ offers }) => {
     <div className="mb-2">
       <label htmlFor="create_card">Select offer:</label>
       <select
-        id="selected_offer"
-        name="selected_offer"
+        id="specialization_id"
+        name="specialization_id"
         className="form-control"
         defaultValue="0"
         required
@@ -106,11 +106,12 @@ const SelectOffer = ({ offers }) => {
         <option defaultValue={0} value={0} disabled>
           Select offer
         </option>
-        {offers.map((offer, index) => (
-          <option key={index} value={offer.specialization_id}>
-            {offer.translations[0].title}
-          </option>
-        ))}
+        {offers &&
+          offers.map((offer, index) => (
+            <option key={index} value={offer.specialization_id}>
+              {offer.translations[0].title}
+            </option>
+          ))}
       </select>
     </div>
   );
@@ -124,17 +125,14 @@ const SelectDate = () => {
     ("0" + (date.getMonth() + 1)).slice(-2) +
     "-" +
     ("0" + date.getDate()).slice(-2);
-  const time =
-    ("0" + date.getHours()).slice(-2) +
-    ":" +
-    ("0" + date.getMinutes()).slice(-2);
   return (
     <div className="mb-2">
-      <label htmlFor="create_card">Date of the meeting:</label>
+      <label htmlFor="date">Date of the meeting:</label>
       <div className="row">
         <div className="col-6 pr-1">
           <input
             className="form-control"
+            name="date"
             type="date"
             id="date"
             defaultValue={today}
@@ -144,10 +142,11 @@ const SelectDate = () => {
         <div className="col-6 pl-1">
           <input
             className="form-control p-1"
+            time="time"
             type="time"
             id="time"
-            defaultValue={time}
-            min={time}
+            defaultValue="00:00"
+            min="00:00"
           />
         </div>
       </div>
@@ -158,10 +157,10 @@ const SelectDate = () => {
 const SelectCancellation = ({ cancellations }) => {
   return (
     <div className="mb-2">
-      <label htmlFor="selected_cancellation">Select cancellation:</label>
+      <label htmlFor="cancellation_policy">Select cancellation:</label>
       <select
-        id="selected_cancellation"
-        name="selected_cancellation"
+        id="cancellation_policy"
+        name="cancellation_policy"
         className="form-control"
         defaultValue="0"
         required
@@ -179,4 +178,4 @@ const SelectCancellation = ({ cancellations }) => {
   );
 };
 
-export default Cards;
+export default CreateCard;

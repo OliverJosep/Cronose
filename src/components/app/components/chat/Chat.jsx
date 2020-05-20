@@ -4,7 +4,7 @@ import { LocaleContext } from "../../../../contexts/LocaleContext";
 import qs from "qs";
 import { RenderChat, RenderChats } from "./Messages";
 // import InfiniteScroll from 'react-infinite-scroll-component';
-import Cards from "./Cards";
+import Cards from "../Cards/Cards";
 
 export default class Chat extends Component {
   static contextType = LocaleContext;
@@ -19,8 +19,6 @@ export default class Chat extends Component {
       chat_loaded: false,
       new_data: false,
       chatsLength: "10",
-      cards: null,
-      user_offers: null,
     };
     this.getChat = this.getChat.bind(this);
     this.getChats = this.getChats.bind(this);
@@ -31,7 +29,6 @@ export default class Chat extends Component {
     this.getChatsInterval = this.getChatsInterval.bind(this);
     this.chatsMessage = this.chatsMessage.bind(this);
     this.newChat = this.newChat.bind(this);
-    this.getCancellations = this.getCancellations.bind(this);
   }
 
   componentDidMount() {
@@ -39,7 +36,6 @@ export default class Chat extends Component {
     this.getChats();
     this.chatsInterval = setInterval(this.getChatsInterval, 5000);
     this.chatsMessage();
-    this.getCancellations();
   }
 
   componentDidUpdate() {}
@@ -74,7 +70,6 @@ export default class Chat extends Component {
         chats: response.data.chats || this.state.chats,
         chats_loaded: true || false,
       });
-      this.getCards();
     });
   }
 
@@ -95,7 +90,6 @@ export default class Chat extends Component {
         },
         function () {
           this.scrollDown();
-          this.getCards();
         }
       );
     });
@@ -105,7 +99,6 @@ export default class Chat extends Component {
   selectChat = ({ currentTarget: { id } }) => {
     this.getChat(id);
     this.chatsMessage();
-    this.getOffers(id);
   };
 
   handleSubmit(e) {
@@ -146,14 +139,6 @@ export default class Chat extends Component {
     this.setState({ message: e.target.value });
   }
 
-  getOffers(user_id) {
-    Axios.get(
-      `${process.env.REACT_APP_API_URL}/${this.context.lang}/offers/user/${user_id}`
-    ).then((response) => {
-      this.setState({ user_offers: response.data });
-    });
-  }
-
   getLastMessage() {
     let chat = this.state.chat;
     if (this.state.chat_selected) {
@@ -188,26 +173,26 @@ export default class Chat extends Component {
     this.setState({ chatsLength: objDiv.scrollWidth / 15 });
   }
 
-  // Cards
-  getCards() {
-    Axios.get(
-      `${process.env.REACT_APP_API_URL}/${this.context.lang}/cards/${this.context.user.id}/${this.state.chat_selected}`
-    ).then((response) => {
-      this.setState({
-        cards: response.data.length !== 0 ? response.data : null,
-      });
-    });
-  }
+  // // Cards
+  // getCards() {
+  //   Axios.get(
+  //     `${process.env.REACT_APP_API_URL}/${this.context.lang}/cards/${this.context.user.id}/${this.state.chat_selected}`
+  //   ).then((response) => {
+  //     this.setState({
+  //       cards: response.data.length !== 0 ? response.data : null,
+  //     });
+  //   });
+  // }
 
-  getCancellations() {
-    Axios.get(
-      `${process.env.REACT_APP_API_URL}/${this.context.lang}/cancellations`
-    ).then((response) => {
-      this.setState({
-        cancellations: response.data,
-      });
-    });
-  }
+  // getCancellations() {
+  //   Axios.get(
+  //     `${process.env.REACT_APP_API_URL}/${this.context.lang}/cancellations`
+  //   ).then((response) => {
+  //     this.setState({
+  //       cancellations: response.data,
+  //     });
+  //   });
+  // }
 
   render() {
     return (
