@@ -2,7 +2,6 @@ import React from "react";
 import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
 import Axios from "axios";
-import qs from "qs";
 import { LocaleContext } from "../../../contexts/LocaleContext";
 
 export default class NewOffer extends React.Component {
@@ -48,15 +47,14 @@ export default class NewOffer extends React.Component {
 
   send(e) {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    formData.set("user_id", this.context.user.id);
-    const data = Object.fromEntries(formData);
+    const data = new FormData(e.currentTarget);
+    data.set("user_id", this.context.user.id);
+    data.set("jwt", this.context.jwt);
+    // const data = Object.fromEntries(formData);
     console.log(data);
     Axios.post(
       `${process.env.REACT_APP_API_URL}/${this.context.lang}/offer`,
-      qs.stringify({
-        data: data,
-      })
+      data
     ).then((response) => (window.location.href = "/Market"));
   }
 

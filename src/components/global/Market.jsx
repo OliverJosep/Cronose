@@ -123,7 +123,6 @@ export default class Market extends Component {
           ></input>
         </div>
         <section className="works">
-          {console.log(this.state.offers)}
           {this.state.offers.map((offer, index) => (
             <OfferCard
               key={index}

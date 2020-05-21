@@ -104,6 +104,7 @@ export default class EditProfile extends Component {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     formData.set("user_id", this.context.user.id);
+    formData.set("jwt", this.context.user.id);
     Axios.post(
       `${process.env.REACT_APP_API_URL}/user/description`,
       formData
@@ -121,7 +122,9 @@ export default class EditProfile extends Component {
     let repeat_password = md5(formData.get("repeat_password"));
     formData.delete(old_password, new_password, repeat_password);
     formData.set("password", new_password);
+    formData.set("jwt", this.context.jwt);
     if (new_password === repeat_password) this.setState({ equals: true });
+    const email = this.context.user.email;
     Axios.get(
       `${process.env.REACT_APP_API_URL}/password/${this.context.user.id}`
     ).then((response) => {
@@ -130,13 +133,15 @@ export default class EditProfile extends Component {
           Axios.post(
             `${process.env.REACT_APP_API_URL}/reset_password`,
             formData
-          )
-            .then((response) => {
-              this.setState({ password: "", equals: false });
-            })
-            .finally(function () {
-              this.context.updateUser(this.context.user.id);
+          ).then((response) => {
+            this.setState({ password: "", equals: false }, function () {
+              let data = new FormData();
+              data.set("email", email);
+              data.set("password", new_password);
+              data = Object.fromEntries(data);
+              this.context.login(data);
             });
+          });
         }
       });
     });

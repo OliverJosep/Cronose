@@ -73,6 +73,7 @@ export default class EditOffer extends Component {
     const formData = new FormData(e.currentTarget);
     formData.set("user_id", this.context.user.id);
     formData.set("specialization_id", specialization);
+    formData.set("jwt", this.context.user.id);
     Axios.post(`${process.env.REACT_APP_API_URL}/offer/translations`, formData);
   }
 
@@ -82,6 +83,7 @@ export default class EditOffer extends Component {
     const formData = new FormData(e.currentTarget);
     formData.set("user_id", this.context.user.id);
     formData.set("specialization_id", specialization);
+    formData.set("jwt", this.context.jwt);
     Axios.post(`${process.env.REACT_APP_API_URL}/offer/switch`, formData);
   }
 

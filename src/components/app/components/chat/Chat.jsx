@@ -53,7 +53,8 @@ export default class Chat extends Component {
 
   getChats() {
     Axios.get(
-      `${process.env.REACT_APP_API_URL}/chats/${this.context.user.id}`
+      `${process.env.REACT_APP_API_URL}/chats/${this.context.user.id}`,
+      { params: { jwt: this.context.jwt } }
     ).then((response) => {
       this.setState({
         chats: response.data.chats || this.state.chats,
@@ -64,7 +65,8 @@ export default class Chat extends Component {
 
   getChatsInterval() {
     Axios.get(
-      `${process.env.REACT_APP_API_URL}/chats/${this.context.user.id}`
+      `${process.env.REACT_APP_API_URL}/chats/${this.context.user.id}`,
+      { params: { jwt: this.context.jwt } }
     ).then((response) => {
       this.setState({
         chats: response.data.chats || this.state.chats,
@@ -75,7 +77,8 @@ export default class Chat extends Component {
 
   getChat(id) {
     Axios.get(
-      `${process.env.REACT_APP_API_URL}/chat/${this.context.user.id}/${id}`
+      `${process.env.REACT_APP_API_URL}/chat/${this.context.user.id}/${id}`,
+      { params: { jwt: this.context.jwt } }
     ).then((response) => {
       if (this.state.chat_selected) {
         this.chatInterval = setInterval(this.getLastMessage, 10000);
@@ -84,7 +87,7 @@ export default class Chat extends Component {
       this.setState({ chat_selected: id });
       this.setState(
         {
-          chat: response.data || "this.state.chat",
+          chat: response.data,
           chat_loaded: true || false,
           new_data: true,
         },
@@ -123,6 +126,7 @@ export default class Chat extends Component {
       sended: "1",
       sended_date: date,
       message: this.state.message,
+      jwt: this.context.jwt,
     };
     Axios.post(
       `${process.env.REACT_APP_API_URL}/chat/${this.context.user.id}/${this.state.chat_selected}`,
@@ -143,7 +147,8 @@ export default class Chat extends Component {
     let chat = this.state.chat;
     if (this.state.chat_selected) {
       Axios.get(
-        `${process.env.REACT_APP_API_URL}/chat/last/${this.context.user.id}/${this.state.chat_selected}`
+        `${process.env.REACT_APP_API_URL}/chat/last/${this.context.user.id}/${this.state.chat_selected}`,
+        { params: { jwt: this.context.jwt } }
       ).then((response) => {
         for (let i = 0; i < response.data.messages.length; i++) {
           if (

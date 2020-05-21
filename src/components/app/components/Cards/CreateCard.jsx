@@ -42,12 +42,12 @@ const CreateCard = ({ user, lang }) => {
       data.get("date") + " " + document.getElementById("time").value + ":00";
     data.delete("date");
     data.set("worker_id", user);
-    data.set("client_id", context.user.id);
+    data.set("user_id", context.user.id);
     data.set("work_date", timestamp);
+    data.set("jwt", context.jwt);
     Axios.post(`${process.env.REACT_APP_API_URL}/demand`, data).then(
       (response) => {
-        console.log("e");
-        // setCancellations(response.data);
+        console.log("Done!");
       }
     );
   };
