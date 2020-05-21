@@ -3,8 +3,7 @@ import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
 import { NavLink } from "react-router-dom";
 
-export default function ProfileCard(props) {
-  const offer = props.offer;
+const ProfileCard = ({ offer, user }) => {
   return (
     <div className="card card-profile mt-3">
       <img
@@ -29,7 +28,7 @@ export default function ProfileCard(props) {
           {offer.description || offer.translations[0].description}
         </p>
         <NavLink
-          to={`/offer/${props.user.initials}/${props.user.tag}/${offer.specialization_id}`}
+          to={`/offer/${user.initials}/${user.tag}/${offer.specialization_id}`}
           className="btn btn-block text-white"
         >
           See Offer
@@ -37,4 +36,6 @@ export default function ProfileCard(props) {
       </div>
     </div>
   );
-}
+};
+
+export default ProfileCard;

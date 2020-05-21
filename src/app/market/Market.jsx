@@ -124,13 +124,7 @@ export default class Market extends Component {
         </div>
         <section className="works">
           {this.state.offers.map((offer, index) => (
-            <OfferCard
-              key={index}
-              offer={offer}
-              translations={offer.translations}
-              offerUser={offer.user}
-              user={this.context.user}
-            />
+            <OfferCard key={index} offer={offer} />
           ))}
         </section>
         <input type="checkbox" name="toggle" id="filter-toggle"></input>

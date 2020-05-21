@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
 import { NavLink } from "react-router-dom";
 import UserAvatar from "../components/Avatar";
+import { LocaleContext } from "../../contexts/LocaleContext";
 
-export default function OfferCard(props) {
-  const offer = props.offer;
-  const user = props.offerUser;
-
+const OfferCard = ({ offer }) => {
+  const context = useContext(LocaleContext);
   return (
     <article className="card work-card">
       <section className="info row">
@@ -49,10 +48,14 @@ export default function OfferCard(props) {
             <h4>
               <b>{offer.title || offer.translations[0].title}</b>
             </h4>
-            <UserAvatar name={user.full_name} avatar={user.avatar} size={30} />
-            {user.full_name && user.full_name + " | "}
-            <small className="d-inline form-text">{user.initials}</small>
-            <small className="d-inline text-muted">#{user.tag}</small>
+            <UserAvatar
+              name={offer.user.full_name}
+              avatar={offer.user.avatar}
+              size={30}
+            />
+            {offer.user.full_name && offer.user.full_name + " | "}
+            <small className="d-inline form-text">{offer.user.initials}</small>
+            <small className="d-inline text-muted">#{offer.user.tag}</small>
             <hr></hr>
             <p className="card-text">
               {offer.description || offer.translations[0].description}
@@ -62,26 +65,25 @@ export default function OfferCard(props) {
                 <b>Precio: {offer.coin_price}</b>
               </p>
               <NavLink
-                to={`/offer/${user.initials}/${user.tag}/${offer.specialization_id}`}
+                to={`/offer/${offer.user.initials}/${offer.user.tag}/${offer.specialization_id}`}
                 className="btn text-white"
               >
                 See Offer
               </NavLink>
-              {console.log(props)}
-              {props.user &&
-                user.initials === props.user.initials &&
-                user.tag === props.user.tag && (
-                  <NavLink
-                    to={`/offer/edit/${offer.specialization_id}`}
-                    className="btn text-white"
-                  >
-                    Edit
-                  </NavLink>
-                )}
+              {offer.user.id === context.user.id && (
+                <NavLink
+                  to={`/offer/edit/${offer.specialization_id}`}
+                  className="btn text-white"
+                >
+                  Edit
+                </NavLink>
+              )}
             </section>
           </div>
         </div>
       </section>
     </article>
   );
-}
+};
+
+export default OfferCard;
