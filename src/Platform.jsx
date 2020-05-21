@@ -1,7 +1,7 @@
 import React from "react";
-import HomePage from "./components/homepage/Homepage";
-import App from "./components/app/App";
-import Loader from "./components/layouts/Loader";
+import HomePage from "./app/HomePage";
+import App from "./app/App";
+import Loader from "./app/components/Loader";
 
 import navigators from "./configs/navigators.jsx";
 import LocaleContextProvider, { LocaleContext } from "./contexts/LocaleContext";

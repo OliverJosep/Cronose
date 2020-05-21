@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import Platform from "./Platform";
 import * as serviceWorker from "./serviceWorker";
 import dotenv from "dotenv";
