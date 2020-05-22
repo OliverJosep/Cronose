@@ -121,7 +121,7 @@ const Profile = ({ match }) => {
                   <b>My Offers</b>
                 </h3>
                 <div className="card-deck text-center">
-                  {offers.offers.map((offer, index) => (
+                  {offers.map((offer, index) => (
                     <ProfileCard key={index} offer={offer} user={offers.user} />
                   ))}
                 </div>

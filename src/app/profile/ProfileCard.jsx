@@ -3,7 +3,7 @@ import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
 import { NavLink } from "react-router-dom";
 
-const ProfileCard = ({ offer, user }) => {
+const ProfileCard = ({ offer }) => {
   return (
     <div className="card card-profile mt-3">
       <img
@@ -28,7 +28,7 @@ const ProfileCard = ({ offer, user }) => {
           {offer.description || offer.translations[0].description}
         </p>
         <NavLink
-          to={`/offer/${user.initials}/${user.tag}/${offer.specialization_id}`}
+          to={`/offer/${offer.user.initials}/${offer.user.tag}/${offer.specialization_id}`}
           className="btn btn-block text-white"
         >
           See Offer
