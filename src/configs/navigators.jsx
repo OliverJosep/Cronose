@@ -2,7 +2,7 @@ import Profile from "../app/profile/Profile";
 import EditProfile from "../app/profile/EditProfile";
 import Wallet from "../app/wallet/Wallet";
 import Market from "../app/market/Market";
-import Chat from "../app/chat/Chat";
+import ChatPage from "../app/chat/ChatPage";
 import MyOffers from "../app/offers/MyOffers";
 import OfferDetails from "../app/offers/OfferDetails";
 import NewOffer from "../app/offers/NewOffer";
@@ -60,7 +60,7 @@ export default [
       {
         title: "chat",
         path: "/chat",
-        component: Chat,
+        component: ChatPage,
         icon: IoIosChatbubbles,
       },
       {

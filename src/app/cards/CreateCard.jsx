@@ -6,8 +6,8 @@ import { LocaleContext } from "../../contexts/LocaleContext";
 
 const CreateCard = ({ user, lang }) => {
   const context = useContext(LocaleContext);
-  const [offers, setOffers] = useState([]);
-  const [cancellations, setCancellations] = useState([]);
+  const [offers, setOffers] = useState();
+  const [cancellations, setCancellations] = useState();
 
   // Get Offers
   useEffect(() => {
@@ -16,7 +16,7 @@ const CreateCard = ({ user, lang }) => {
         Axios.get(
           `${process.env.REACT_APP_API_URL}/${lang}/offers/user/${user}`
         ).then((response) => {
-          setOffers(response.data.offers);
+          setOffers(response.data);
         });
     };
     getOffers();
@@ -45,14 +45,10 @@ const CreateCard = ({ user, lang }) => {
     data.set("user_id", context.user.id);
     data.set("work_date", timestamp);
     data.set("jwt", context.jwt);
-    Axios.post(`${process.env.REACT_APP_API_URL}/demand`, data).then(
-      (response) => {
-        console.log("Done!");
-      }
-    );
+    Axios.post(`${process.env.REACT_APP_API_URL}/demand`, data);
   };
 
-  if (offers.length <= 0) return <></>;
+  if (!offers) return <></>;
   return (
     <div>
       <NavLink to={`/#`} data-toggle="modal" data-target="#createDemand">

@@ -1,113 +1,72 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Axios from "axios";
 import { LocaleContext } from "../../contexts/LocaleContext";
+import { NavLink } from "react-router-dom";
+import UserAvatar from "../components/Avatar";
+import { InitialsTag } from "../components/InitialsTag";
 import qs from "qs";
-import { RenderChat, RenderChats } from "./Messages";
-import Cards from "../cards/Cards";
 
-export default class Chat extends Component {
-  static contextType = LocaleContext;
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: "",
-      chats: [],
-      chats_loaded: false,
-      chat_selected: "",
-      chat: [],
-      chat_loaded: false,
-      new_data: false,
-      chatsLength: "10",
-    };
-    this.getChat = this.getChat.bind(this);
-    this.getChats = this.getChats.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.getLastMessage = this.getLastMessage.bind(this);
-    this.selectChat = this.selectChat.bind(this);
-    this.scrollDown = this.scrollDown.bind(this);
-    this.getChatsInterval = this.getChatsInterval.bind(this);
-    this.chatsMessage = this.chatsMessage.bind(this);
-    this.newChat = this.newChat.bind(this);
-  }
+const Chat = ({ selectedChat, setNewData }) => {
+  const context = useContext(LocaleContext);
+  // const [chat, setChat] = useState();
+  const [receiver, setReceiver] = useState();
+  const [messages, setMessages] = useState();
+  const [message, setMessage] = useState();
+  const [scrollDown, setScrollDown] = useState();
 
-  componentDidMount() {
-    this.newChat();
-    this.getChats();
-    this.chatsInterval = setInterval(this.getChatsInterval, 5000);
-    this.chatsMessage();
-  }
-
-  componentDidUpdate() {}
-
-  componentWillUnmount() {
-    clearInterval(this.chatInterval);
-    clearInterval(this.chatsInterval);
-  }
-
-  newChat() {
-    let url = new URL(window.location.href);
-    let id = url.searchParams.get("id");
-    if (id) this.getChat(id);
-  }
-
-  getChats() {
-    Axios.get(
-      `${process.env.REACT_APP_API_URL}/chats/${this.context.user.id}`,
-      { params: { jwt: this.context.jwt } }
-    ).then((response) => {
-      this.setState({
-        chats: response.data.chats || this.state.chats,
-        chats_loaded: true || false,
-      });
-    });
-  }
-
-  getChatsInterval() {
-    Axios.get(
-      `${process.env.REACT_APP_API_URL}/chats/${this.context.user.id}`,
-      { params: { jwt: this.context.jwt } }
-    ).then((response) => {
-      this.setState({
-        chats: response.data.chats || this.state.chats,
-        chats_loaded: true || false,
-      });
-    });
-  }
-
-  getChat(id) {
-    Axios.get(
-      `${process.env.REACT_APP_API_URL}/chat/${this.context.user.id}/${id}`,
-      { params: { jwt: this.context.jwt } }
-    ).then((response) => {
-      if (this.state.chat_selected) {
-        this.chatInterval = setInterval(this.getLastMessage, 10000);
-      }
-
-      this.setState({ chat_selected: id });
-      this.setState(
-        {
-          chat: response.data,
-          chat_loaded: true || false,
-          new_data: true,
-        },
-        function () {
-          this.scrollDown();
-        }
+  useEffect(() => {
+    // Get chat
+    const getChat = async () => {
+      const response = await Axios.get(
+        `${process.env.REACT_APP_API_URL}/chat/${context.user.id}/${selectedChat}`,
+        { params: { jwt: context.jwt } }
       );
-    });
-    this.scrollDown();
-  }
+      setReceiver(response.data.receiver);
+      setMessages(response.data.messages);
+      setScrollDown(true);
+    };
 
-  selectChat = ({ currentTarget: { id } }) => {
-    this.getChat(id);
-    this.chatsMessage();
-  };
+    selectedChat && getChat();
+  }, [selectedChat, context.user, context.jwt]);
 
-  handleSubmit(e) {
+  useEffect(() => {
+    // Get las messages
+    const getLastMessage = async () => {
+      if (selectedChat) {
+        const response = await Axios.get(
+          `${process.env.REACT_APP_API_URL}/chat/last/${context.user.id}/${selectedChat}`,
+          { params: { jwt: context.jwt } }
+        );
+        if (messages) {
+          for (let i = 0; i < response.data.messages.length; i++) {
+            if (
+              response.data.messages[i].sended_date >
+              messages[messages.length - 1].sended_date
+            ) {
+              setMessages((messages) => [
+                ...messages,
+                response.data.messages[i],
+              ]);
+              setScrollDown(true);
+            }
+          }
+        }
+      }
+    };
+
+    // getLastMessage();
+    const interval = setInterval(() => {
+      selectedChat && getLastMessage();
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [context.user, context.jwt, selectedChat, messages]);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     document.getElementById("send").value = "";
-    if (this.state.message === "") return false;
-    const list = this.state.chat.messages;
+    if (!message || message.trim() === "") return;
+    const list = messages;
     let date = new Date();
     date =
       date.getFullYear() +
@@ -124,125 +83,112 @@ export default class Chat extends Component {
     const newMessage = {
       sended: "1",
       sended_date: date,
-      message: this.state.message,
-      jwt: this.context.jwt,
+      message: message,
+      jwt: context.jwt,
     };
     Axios.post(
-      `${process.env.REACT_APP_API_URL}/chat/${this.context.user.id}/${this.state.chat_selected}`,
+      `${process.env.REACT_APP_API_URL}/chat/${context.user.id}/${selectedChat}`,
       qs.stringify(newMessage)
     );
     list.push(newMessage);
-    this.setState({ messages: list, new_data: true, message: "" }, function () {
-      this.scrollDown();
-    });
-    this.getChats();
-  }
+    setMessages(list);
+    setMessage();
+    setScrollDown(true);
+    setNewData(true);
+  };
 
-  updateMessage(e) {
-    this.setState({ message: e.target.value });
-  }
-
-  getLastMessage() {
-    let chat = this.state.chat;
-    if (this.state.chat_selected) {
-      Axios.get(
-        `${process.env.REACT_APP_API_URL}/chat/last/${this.context.user.id}/${this.state.chat_selected}`,
-        { params: { jwt: this.context.jwt } }
-      ).then((response) => {
-        for (let i = 0; i < response.data.messages.length; i++) {
-          if (
-            response.data.messages[i].sended_date >
-            chat.messages[chat.messages.length - 1].sended_date
-          ) {
-            chat.messages.push(response.data.messages[i]);
-            this.setState({ chat: chat, new_data: true }, function () {
-              this.scrollDown();
-            });
-          }
-        }
-      });
-    }
-  }
-
-  scrollDown(now) {
-    if (this.state.new_data || now) {
+  useEffect(() => {
+    const scrollDown = () => {
       var objDiv = document.getElementById("chat_box");
       objDiv.scrollTop = objDiv.scrollHeight;
-    }
-    this.setState({ new_data: false });
-  }
+      setScrollDown(false);
+    };
+    scrollDown();
+  }, [scrollDown]);
 
-  chatsMessage() {
-    var objDiv = document.getElementById("user-chat");
-    this.setState({ chatsLength: objDiv.scrollWidth / 15 });
-  }
-
-  render() {
-    return (
-      <>
-        <h1 className="text-center mt-4">Chat</h1>
-        <div className="container-fluid ">
-          <div className="row card-chat mb-4">
-            <div className="chats col-4 col-xl-3 p-1" id="user-chat">
-              <div className="bg">
-                {this.state.chats_loaded
-                  ? this.state.chats.map((chat, index) => (
-                      <RenderChats
-                        user={chat.reciver}
-                        message={chat.last}
-                        selected={this.state.chat_selected}
-                        selectChat={this.selectChat}
-                        chatsLength={this.state.chatsLength}
-                        key={index}
-                      />
-                    ))
-                  : "Loading"}
-              </div>
-            </div>
-            <div className="chat col-xl-6 col-8 p-1">
-              {this.state.chat_loaded ? (
-                <RenderChat
-                  user={this.state.chat.receiver}
-                  messages={this.state.chat.messages}
-                  sendMessage={this.sendMessage}
-                />
+  return (
+    <div className="chat col-xl-6 col-8 p-1">
+      <div className="messages mb-2">
+        <div className="user p-2">
+          <UserAvatar
+            name={receiver ? receiver.full_name : null}
+            avatar={receiver ? receiver.avatar : null}
+            size={50}
+          />
+          <NavLink
+            to={
+              receiver
+                ? "/profile/" + receiver.initials + "/" + receiver.tag
+                : "#"
+            }
+          >
+            <span className="name">
+              {receiver ? (
+                receiver.full_name ? (
+                  receiver.full_name
+                ) : (
+                  <InitialsTag user={receiver.name} />
+                )
               ) : (
-                "Loading"
+                "Select User"
               )}
-              <form
-                id="send_message"
-                method="post"
-                target="_self"
-                className="w-100 row"
-                onSubmit={this.handleSubmit.bind(this)}
-              >
-                <div className="pr-1 col-xl-10 col-8">
-                  <input
-                    onChange={this.updateMessage.bind(this)}
-                    id="send"
-                    className="form-control"
-                    type="text"
-                    placeholder="Insert message here!"
-                  />
-                </div>
-                <div className="pl-1 col-xl-2 col-4">
-                  <input
-                    className="btn w-100 text-white"
-                    type="submit"
-                    value="Submit"
-                  />
-                </div>
-              </form>
-            </div>
-            <Cards
-              user={this.state.chat_selected}
-              offers={this.state.user_offers}
-              cards={this.state.cards}
-              cancellations={this.state.cancellations}
-            />
-          </div>
+            </span>
+          </NavLink>
         </div>
-      </>
-    );
-  }
-}
+        <div className="mt-1 scroll" id="chat_box">
+          {messages &&
+            messages.map((message, index) => (
+              <Message
+                sended={message.sended}
+                message={message.message}
+                date={message.sended_date}
+                key={index}
+              />
+            ))}
+        </div>
+      </div>
+      <form
+        id="send_message"
+        method="post"
+        target="_self"
+        className="w-100 row"
+        onSubmit={handleSubmit}
+      >
+        <div className="pr-1 col-xl-10 col-8">
+          <input
+            id="send"
+            onChange={({ target }) => setMessage(target.value)}
+            className="form-control"
+            type="text"
+            placeholder="Insert message here!"
+          />
+        </div>
+        <div className="pl-1 col-xl-2 col-4">
+          <input
+            className="btn w-100 text-white"
+            type="submit"
+            value="Submit"
+          />
+        </div>
+      </form>
+    </div>
+  );
+};
+
+const Message = ({ sended, message, date }) => {
+  return (
+    <div
+      className={
+        "ml-3 mb-2 card rounded w-75 " +
+        (sended === "1" ? "sender float-right" : "reciever float-left")
+      }
+    >
+      <div className="card-body p-2">
+        <p className="card-text black-text message"> {message} </p>
+        <div className="date">{date.substring(11, 16)}</div>
+      </div>
+    </div>
+  );
+};
+
+export default Chat;

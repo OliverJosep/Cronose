@@ -3,7 +3,7 @@ import Axios from "axios";
 import { LocaleContext } from "../../contexts/LocaleContext";
 import CreateCard from "./CreateCard";
 
-const Cards = ({ user }) => {
+const Cards = ({ selectedChat }) => {
   const context = useContext(LocaleContext);
 
   const [cards, setCards] = useState(null);
@@ -11,13 +11,13 @@ const Cards = ({ user }) => {
   useEffect(() => {
     const getCards = async () => {
       Axios.get(
-        `${process.env.REACT_APP_API_URL}/${context.lang}/cards/${context.user.id}/${user}`
+        `${process.env.REACT_APP_API_URL}/${context.lang}/cards/${context.user.id}/${selectedChat}`
       ).then((response) => {
         setCards(response.data);
       });
     };
-    if (user !== "") getCards();
-  }, [user, context.lang, context.user.id]);
+    if (selectedChat !== "") getCards();
+  }, [selectedChat, context.lang, context.user.id]);
 
   return (
     <div className="col-xl-3 col-12 p-1 cards">
@@ -25,7 +25,7 @@ const Cards = ({ user }) => {
         <h3 className="w-100 p-2 pt-3 m-0">Cards</h3>
         {cards ? <MyCards cards={cards} /> : <NoCards />}
         <div className="text-center mt-2">
-          <CreateCard user={user} lang={context.lang} />
+          <CreateCard user={selectedChat} lang={context.lang} />
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@ const NoCards = () => {
   );
 };
 
-const MyCards = ({ cards, offer }) => {
+const MyCards = ({ cards }) => {
   return (
     <>
       {cards.map((card, index) => (
