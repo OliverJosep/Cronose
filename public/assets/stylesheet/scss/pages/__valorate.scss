@@ -1,0 +1,14 @@
+.valorate_bg {
+  background-color: rgb(238, 238, 238);
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  .title {
+    // text-align: center;
+    margin-top: 75px;
+  }
+  .jumbotron {
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+  }
+}
