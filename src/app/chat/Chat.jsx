@@ -8,7 +8,6 @@ import qs from "qs";
 
 const Chat = ({ selectedChat, setNewData }) => {
   const context = useContext(LocaleContext);
-  // const [chat, setChat] = useState();
   const [receiver, setReceiver] = useState();
   const [messages, setMessages] = useState();
   const [message, setMessage] = useState();
@@ -55,11 +54,11 @@ const Chat = ({ selectedChat, setNewData }) => {
     };
 
     // getLastMessage();
-    const interval = setInterval(() => {
-      selectedChat && getLastMessage();
-    }, 2000);
+    // const interval = setInterval(() => {
+    //   selectedChat && getLastMessage();
+    // }, 2000);
 
-    return () => clearInterval(interval);
+    // return () => clearInterval(interval);
   }, [context.user, context.jwt, selectedChat, messages]);
 
   const handleSubmit = (e) => {
@@ -158,6 +157,7 @@ const Chat = ({ selectedChat, setNewData }) => {
           <input
             id="send"
             onChange={({ target }) => setMessage(target.value)}
+            autoComplete="off"
             className="form-control"
             type="text"
             placeholder="Insert message here!"

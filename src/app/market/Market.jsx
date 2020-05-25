@@ -15,13 +15,6 @@ const Market = () => {
   const [text, setText] = useState();
 
   useEffect(() => {
-    // Get all offers
-    const getOffers = async () => {
-      const response = await Axios.get(
-        `${process.env.REACT_APP_API_URL}/${context.lang}/offers/all/0/10`
-      );
-      setOffers(response.data);
-    };
     // Get all categories
     const getCategories = async () => {
       const response = await Axios.get(
@@ -30,7 +23,6 @@ const Market = () => {
       setCategories(response.data);
     };
 
-    // getOffers();
     getCategories();
   }, [context.lang]);
 
@@ -65,6 +57,13 @@ const Market = () => {
 
     getFilteredOffers();
   }, [context.lang, selectedCategory, selectedSpecialization, text]);
+
+  const resetFilter = () => {
+    setCategories();
+    setSelectedCategory();
+    setSelectedSpecialization();
+    setSpecializations();
+  };
 
   return (
     <>
@@ -130,7 +129,7 @@ const Market = () => {
           <div className="p-2 pt-4">
             <button
               id="btn-reset"
-              // onClick={resetFilter}
+              onClick={resetFilter}
               className="btn text-white"
             >
               Reset Filter

@@ -4,7 +4,7 @@ import Axios from "axios";
 import { MdAddCircleOutline } from "react-icons/md";
 import { LocaleContext } from "../../contexts/LocaleContext";
 
-const CreateCard = ({ user, lang }) => {
+const CreateCard = ({ user, lang, setNewCard }) => {
   const context = useContext(LocaleContext);
   const [offers, setOffers] = useState();
   const [cancellations, setCancellations] = useState();
@@ -35,7 +35,7 @@ const CreateCard = ({ user, lang }) => {
     getCancellations();
   }, [lang]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let data = new FormData(e.currentTarget);
     const timestamp =
@@ -45,7 +45,8 @@ const CreateCard = ({ user, lang }) => {
     data.set("user_id", context.user.id);
     data.set("work_date", timestamp);
     data.set("jwt", context.jwt);
-    Axios.post(`${process.env.REACT_APP_API_URL}/demand`, data);
+    await Axios.post(`${process.env.REACT_APP_API_URL}/demand`, data);
+    setNewCard(true);
   };
 
   if (!offers) return <></>;
@@ -65,6 +66,14 @@ const CreateCard = ({ user, lang }) => {
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content p-4">
             <h4 className="modal-title mb-3">Create Offer</h4>
+            <button
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
             <form
               id="create_card"
               method="post"

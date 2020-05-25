@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 import Chats from "./Chats";
 import Chat from "./Chat";
 import Cards from "../cards/Cards";
