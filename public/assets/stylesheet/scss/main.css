@@ -973,14 +973,31 @@ footer .links {
   height: 591px;
 }
 
-.cards .bg .offer-card {
+.cards .bg .scroll {
+  height: 488px;
+  overflow-y: scroll;
+}
+
+.cards .bg .scroll .offer-card {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
   cursor: pointer;
 }
 
-.cards .bg .offer-card .title {
+.cards .bg .scroll .offer-card .title {
   font-weight: bold;
   color: var(--secondary-color);
+}
+
+.cards .bg .scroll .accepted {
+  border-right: 2px solid lime;
+}
+
+.cards .bg .scroll .rejected {
+  border-right: 2px solid red;
+}
+
+.cards .bg .scroll .pending {
+  border-right: 2px solid yellow;
 }
 
 .cards .bg .add {

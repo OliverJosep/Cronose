@@ -48,7 +48,7 @@ const NoCards = () => {
 
 const MyCards = ({ cards }) => {
   return (
-    <div>
+    <div className="scroll">
       {cards.map((card, index) => (
         <Card card={card} key={index} />
       ))}

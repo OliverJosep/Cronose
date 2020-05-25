@@ -4,7 +4,7 @@ import CardModal from "./CardModal";
 const Card = ({ card }) => {
   return (
     <div
-      className="row offer-card p-2"
+      className={"row offer-card p-2 " + card.status}
       data-toggle="modal"
       data-target={"#cardModal" + card.id}
     >

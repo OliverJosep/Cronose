@@ -5,14 +5,28 @@
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 10px 10px;
     height: 591px;
-    .offer-card {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-      cursor: pointer;
-      .title {
-        font-weight: bold;
-        color: var(--secondary-color);
+    .scroll {
+      height: 488px;
+      overflow-y: scroll;
+      .offer-card {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+        cursor: pointer;
+        .title {
+          font-weight: bold;
+          color: var(--secondary-color);
+        }
+      }
+      .accepted {
+        border-right: 2px solid rgb(0, 255, 0);
+      }
+      .rejected {
+        border-right: 2px solid rgb(255, 0, 0);
+      }
+      .pending {
+        border-right: 2px solid rgb(255, 255, 0);
       }
     }
+
     .add {
       cursor: pointer;
       color: var(--secondary-color);
