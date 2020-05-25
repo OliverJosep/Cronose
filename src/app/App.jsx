@@ -13,7 +13,7 @@ const App = ({ navigator }) => {
   useEffect(() => {
     const getDoneCards = async () => {
       const response = await Axios.get(
-        `${process.env.REACT_APP_API_URL}/cards/done`,
+        `${process.env.REACT_APP_API_URL}/${context.lang}/cards/done`,
         {
           params: {
             user_id: context.user.id,
@@ -26,7 +26,7 @@ const App = ({ navigator }) => {
 
     getDoneCards();
   }, [context]);
-
+  console.log(cards);
   if (!cards) return <Loader />;
   if (cards.length > 0) return <Valorate cards={cards} />;
   return (

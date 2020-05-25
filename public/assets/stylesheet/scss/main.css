@@ -1026,4 +1026,22 @@ footer .links {
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
+
+.valorate_bg .jumbotron .title {
+  font-weight: bold;
+  margin-right: 3px;
+}
+
+.valorate_bg .jumbotron .submit {
+  background-color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.valorate_bg .jumbotron .submit:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
 /*# sourceMappingURL=main.css.map */
