@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chats from "./Chats";
 import Chat from "./Chat";
 import Cards from "../cards/Cards";
@@ -7,6 +7,11 @@ const ChatPage = () => {
   // const [chats, setChats] = useState();
   const [selectedChat, setSelectedChat] = useState();
   const [newData, setNewData] = useState();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("id")) setSelectedChat(params.get("id"));
+  }, []);
 
   return (
     <>

@@ -1018,8 +1018,20 @@ footer .links {
   height: 100vh;
 }
 
+.valorate_bg .logo {
+  margin-left: 20px;
+  margin-top: 20px;
+  position: absolute;
+}
+
+.valorate_bg .logo .title {
+  font-weight: bold;
+  font-size: 24px;
+  color: var(--primary-color);
+}
+
 .valorate_bg .title {
-  margin-top: 75px;
+  margin-top: 150px;
 }
 
 .valorate_bg .jumbotron {
@@ -1027,7 +1039,7 @@ footer .links {
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.valorate_bg .jumbotron .title {
+.valorate_bg .jumbotron .label_title {
   font-weight: bold;
   margin-right: 3px;
 }
@@ -1043,5 +1055,14 @@ footer .links {
 .valorate_bg .jumbotron .submit:hover {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
+}
+
+.valorate_bg .jumbotron .valoration {
+  display: inline;
+}
+
+.valorate_bg .jumbotron .valoration .title {
+  font-weight: bold;
+  margin-right: 4px;
 }
 /*# sourceMappingURL=main.css.map */
