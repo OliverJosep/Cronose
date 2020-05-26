@@ -12,44 +12,17 @@ const Valorate = ({ cards }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    // const offer_valoration_text = document.getElementById("offer-valoration")
-    //   .value;
-    // const user_valoration_text = document.getElementById("user-valoration")
-    //   .value;
-    const user_id =
-      context.user.id === cards[0].worker.id
-        ? cards[0].client.id
-        : cards[0].worker.id;
-    const roll = context.user.id === cards[0].worker.id ? "client" : "worker";
-    // const offer_valoration = {
-    //   card_id: cards[0].id,
-    //   valorated_by: context.user.id,
-    //   text: offer_valoration_text,
-    //   puntuation: offerRating,
-    // };
-    // const user_valoration = {
-    //   user_id: user_id,
-    //   valorated_by: context.user.id,
-    //   roll: context.user.id === cards[0].worker.id ? "client" : "worker",
-    //   text: user_valoration_text,
-    //   puntuation: userRating,
-    // };
-    // formData.append("offer_valoration", offer_valoration);
-    // formData.set("user_valoration", user_valoration);
     formData.set("card_id", cards[0].id);
     formData.set("offer_puntuation", offerRating);
 
     formData.set("valorated_by", context.user.id);
 
-    formData.set("user_id", user_id);
-    formData.set("roll", roll);
-    formData.set("user_puntuation", userRating);
-    Axios.post(`${process.env.REACT_APP_API_URL}/valorations`, formData);
+    Axios.post(`${process.env.REACT_APP_API_URL}/valoration`, formData);
   };
 
   return (
     <div className="valorate_bg">
-      {/* <div className="logo">
+      <div className="logo">
         <img src="/assets/img/svg/logo.svg" width="50" alt="Cronose" />
         <span className="title">Cronose</span>
       </div>
@@ -97,7 +70,7 @@ const Valorate = ({ cards }) => {
                 </div>
               </>
             )}
-            <div className="row ml-4 mr-4 mt-4 mb-2 valoration">
+            {/* <div className="row ml-4 mr-4 mt-4 mb-2 valoration">
               <label htmlFor="user-valoration-text" className="label_title">
                 {context.user.id === cards[0].worker.id ? "Client" : "Worker"}{" "}
                 valoration
@@ -114,13 +87,13 @@ const Valorate = ({ cards }) => {
                 rows="3"
                 className="w-100"
               ></textarea>
-            </div>
+            </div> */}
             <div className="row d-flex justify-content-center m-4">
               <button className="submit w-25 p-2">SUBMIT</button>
             </div>
           </form>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 

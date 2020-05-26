@@ -26,9 +26,8 @@ const App = ({ navigator }) => {
 
     getDoneCards();
   }, [context]);
-  console.log(cards);
   if (!cards) return <Loader />;
-  if (cards.length > 0) return <Valorate cards={cards} />;
+  if (cards.length > 0 && cards[0] !== null) return <Valorate cards={cards} />;
   return (
     <div id="app" className="w-100">
       <SideBar routes={navigator.routes} />
