@@ -3,7 +3,7 @@ import Axios from "axios";
 import { LocaleContext } from "../../contexts/LocaleContext";
 import { NavLink } from "react-router-dom";
 import UserAvatar from "../components/Avatar";
-import { InitialsTag } from "../components/InitialsTag";
+import Name from "../components/Name";
 import qs from "qs";
 
 const Chat = ({ selectedChat, setNewData }) => {
@@ -122,15 +122,7 @@ const Chat = ({ selectedChat, setNewData }) => {
             }
           >
             <span className="name">
-              {receiver ? (
-                receiver.full_name ? (
-                  receiver.full_name
-                ) : (
-                  <InitialsTag user={receiver.name} />
-                )
-              ) : (
-                "Select User"
-              )}
+              {receiver ? <Name user={receiver} /> : "Select User"}
             </span>
           </NavLink>
         </div>

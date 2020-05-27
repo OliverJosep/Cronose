@@ -8,6 +8,7 @@ import { LocaleContext } from "../../contexts/LocaleContext";
 import Translate from "../../translations/Translate";
 import Loader from "../components/Loader";
 import UserAvatar from "../components/Avatar";
+import OfferValorations from "./OfferValorations";
 
 const OfferDetails = ({ match }) => {
   const context = useContext(LocaleContext);
@@ -167,129 +168,7 @@ const OfferDetails = ({ match }) => {
                     </p>
                   </div>
                 </div>
-                <div className="row">
-                  <div className="container-fluid mt-4">
-                    <div className="col-4">
-                      <h4>Rating</h4>
-                      <hr />
-                    </div>
-                    <div className="col-6 text-left">
-                      <div className="row">
-                        <div className="col">
-                          <small className="muted mr-2 my-auto">
-                            Puntuality
-                          </small>
-                        </div>
-                        <div className="col">
-                          <Rater total={5} rating={4.5} interactive={false} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-6 text-left">
-                      <div className="row">
-                        <div className="col">
-                          <small className="muted mr-2 my-auto">
-                            Profesionality
-                          </small>
-                        </div>
-                        <div className="col">
-                          <Rater total={5} rating={4.5} interactive={false} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-6 text-left">
-                      <div className="row">
-                        <div className="col">
-                          <small className="muted mr-2 my-auto">Simpathy</small>
-                        </div>
-                        <div className="col">
-                          <Rater total={5} rating={4.5} interactive={false} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="container-fluid mt-4">
-                    <div className="mb-4">
-                      <h4>Comments</h4>
-                      <div className="border-bottom col-4"></div>
-                      <div className="container-fluid mt-3">
-                        <div className="row mt-2">
-                          <img
-                            src="/assets/img/avatar-placeholder.png"
-                            height="30px"
-                            alt="avatar-placeholder"
-                          />
-                          <h4 className="ml-2 my-auto">Pepito grillo</h4>
-                        </div>
-                        <div className="row mt-2">
-                          <div className="col-8">
-                            <p>"Me gusta este hombre"</p>
-                          </div>
-                          <div className="pl-3 col-4">
-                            <div className="text-left">
-                              <small className="muted mr-2 my-auto">
-                                Valoration Average
-                              </small>
-                              <Rater total={5} rating={4} interactive={false} />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row mt-2">
-                          <img
-                            src="/assets/img/avatar-placeholder.png"
-                            height="30px"
-                            alt="avatar-placeholder"
-                          />
-                          <h4 className="ml-2 my-auto">Amancio Ortega</h4>
-                        </div>
-                        <div className="row mt-2">
-                          <div className="col-8">
-                            <p>
-                              "Salvó mi negocio, un crack, máquina, mastodonte,
-                              tifón..."
-                            </p>
-                          </div>
-                          <div className="pl-3 col-4">
-                            <div className="text-left">
-                              <small className="muted mr-2 my-auto">
-                                Valoration Average
-                              </small>
-                              <Rater total={5} rating={5} interactive={false} />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row mt-2">
-                          <img
-                            src="/assets/img/avatar-placeholder.png"
-                            height="30px"
-                            alt="avatar-placeholder"
-                          />
-                          <h4 className="ml-2 my-auto">Willy Toledo</h4>
-                        </div>
-                        <div className="row mt-2">
-                          <div className="col-8">
-                            <p>
-                              "No me denunció a pesar de blasfemar un par de
-                              veces. Se agradece bastante"
-                            </p>
-                          </div>
-                          <div className="pl-3 col-4">
-                            <div className="text-left">
-                              <small className="muted mr-2 my-auto">
-                                Valoration Average
-                              </small>
-                              <Rater
-                                total={5}
-                                rating={3.5}
-                                interactive={false}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <OfferValorations valorations={offer.valorations} />
               </div>
             </div>
           </div>

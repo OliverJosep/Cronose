@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Axios from "axios";
 import UserAvatar from "../components/Avatar";
-import { InitialsTag } from "../components/InitialsTag";
+import Name from "../components/Name";
 import { LocaleContext } from "../../contexts/LocaleContext";
 
 const Chats = ({ selectedChat, setSelectedChat, newData, setNewData }) => {
@@ -48,11 +48,7 @@ const Chats = ({ selectedChat, setSelectedChat, newData, setNewData }) => {
                 />
                 <div className="row">
                   <div className="col-12 d-none d-md-block user">
-                    {chat.receiver.full_name ? (
-                      chat.receiver.name
-                    ) : (
-                      <InitialsTag user={chat.reciever} />
-                    )}
+                    <Name user={chat.receiver} />
                   </div>
                   <small className="d-none d-md-block message">
                     {chat.last.message}

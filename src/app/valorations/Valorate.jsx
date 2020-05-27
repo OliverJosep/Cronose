@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import Axios from "axios";
 import { LocaleContext } from "../../contexts/LocaleContext";
 import Rater from "react-rater";
@@ -7,7 +7,6 @@ const Valorate = ({ cards }) => {
   const context = useContext(LocaleContext);
 
   const [offerRating, setOfferRating] = useState();
-  const [userRating, setUserRating] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -70,24 +69,6 @@ const Valorate = ({ cards }) => {
                 </div>
               </>
             )}
-            {/* <div className="row ml-4 mr-4 mt-4 mb-2 valoration">
-              <label htmlFor="user-valoration-text" className="label_title">
-                {context.user.id === cards[0].worker.id ? "Client" : "Worker"}{" "}
-                valoration
-              </label>
-              <Rater
-                total={5}
-                onRate={({ rating }) => setUserRating(rating * 20)}
-              />
-            </div>
-            <div className="row ml-4 mr-4 mb-4">
-              <textarea
-                name="user-valoration-text"
-                id="user-valoration-text"
-                rows="3"
-                className="w-100"
-              ></textarea>
-            </div> */}
             <div className="row d-flex justify-content-center m-4">
               <button className="submit w-25 p-2">SUBMIT</button>
             </div>
@@ -96,24 +77,6 @@ const Valorate = ({ cards }) => {
       </div>
     </div>
   );
-
-  // return (
-  //   <div className="valorate_bg">
-  //     {/* <div className="valorate"> */}
-  //     <div className="title">
-  //       <h1 className="mb-4">You have to valorate!</h1>
-  //     </div>
-  //     {cards &&
-  //       cards.map((card, index) => (
-  //         <div className="jumbotron jumbotorn bg-white mb-2">
-  //           <span>{card.id}</span>
-  //           <p>{card.client.full_name}</p>
-  //           <p>{card.worker.full_name}</p>
-  //         </div>
-  //       ))}
-  //     {/* </div> */}
-  //   </div>
-  // );
 };
 
 export default Valorate;
