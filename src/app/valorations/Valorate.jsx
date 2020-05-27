@@ -13,9 +13,7 @@ const Valorate = ({ cards }) => {
     const formData = new FormData(e.currentTarget);
     formData.set("card_id", cards[0].id);
     formData.set("offer_puntuation", offerRating);
-
     formData.set("valorated_by", context.user.id);
-
     Axios.post(`${process.env.REACT_APP_API_URL}/valoration`, formData);
   };
 

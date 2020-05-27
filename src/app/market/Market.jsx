@@ -3,16 +3,23 @@ import Axios from "axios";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import OfferCard from "../offers/OfferCard";
 import { LocaleContext } from "../../contexts/LocaleContext";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { SmallLoader } from "../components/Loader";
 
 const Market = () => {
   const context = useContext(LocaleContext);
 
-  const [offers, setOffers] = useState();
+  const counter = 5;
+
+  const [offers, setOffers] = useState([]);
   const [categories, setCategories] = useState();
   const [selectedCategory, setSelectedCategory] = useState();
   const [specializations, setSpecializations] = useState();
   const [selectedSpecialization, setSelectedSpecialization] = useState();
   const [text, setText] = useState();
+  const [limit, setLimit] = useState(counter);
+  const [resFilter, setResFilter] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     // Get all categories
@@ -22,7 +29,6 @@ const Market = () => {
       );
       setCategories(response.data);
     };
-
     getCategories();
   }, [context.lang]);
 
@@ -49,20 +55,40 @@ const Market = () => {
             text: text,
             langs: context.lang,
             defaultLang: context.lang,
+            offset: limit - counter,
+            limit: limit,
           },
         }
       );
-      setOffers(response.data);
+      setOffers((offers) => offers.concat(response.data));
+      response.data.length < counter && setHasMore(false);
     };
 
     getFilteredOffers();
+  }, [
+    context.lang,
+    selectedCategory,
+    selectedSpecialization,
+    text,
+    limit,
+    resFilter,
+  ]);
+
+  useEffect(() => {
+    setOffers([]);
+    setLimit(counter);
+    setHasMore(true);
   }, [context.lang, selectedCategory, selectedSpecialization, text]);
 
   const resetFilter = () => {
-    setCategories();
+    resFilter ? setResFilter(false) : setResFilter(true);
+    setLimit(counter);
+    setHasMore(true);
+    setOffers([]);
     setSelectedCategory();
     setSelectedSpecialization();
     setSpecializations();
+    document.getElementById("category_id").value = 0;
   };
 
   return (
@@ -77,9 +103,30 @@ const Market = () => {
           aria-label="Search"
         />
       </div>
-      <section className="works">
-        {offers &&
-          offers.map((offer, index) => <OfferCard key={index} offer={offer} />)}
+      <section id="offers" className="works">
+        {console.log(offers)}
+        {offers && (
+          <InfiniteScroll
+            dataLength={offers.length}
+            next={() => setLimit(limit + counter)}
+            hasMore={hasMore}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                {offers.length > 0 ? (
+                  <b>There are no more available offers yet </b>
+                ) : (
+                  <b>There are no available offers yet</b>
+                )}
+              </p>
+            }
+            loader={<SmallLoader />}
+          >
+            {offers.length > 0 &&
+              offers.map((offer, index) => (
+                <OfferCard key={index} offer={offer} />
+              ))}
+          </InfiniteScroll>
+        )}
       </section>
       <input type="checkbox" name="toggle" id="filter-toggle"></input>
       <label htmlFor="filter-toggle" id="btn-filter">

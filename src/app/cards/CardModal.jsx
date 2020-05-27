@@ -24,7 +24,6 @@ const CardModal = ({ card }) => {
       aria-labelledby="cardModalLabel"
       aria-hidden="true"
     >
-      {console.log(card)}
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
@@ -74,7 +73,9 @@ const CardModal = ({ card }) => {
               {card.cancellation_policy.name}
             </div>
 
-            {card.worker.id === context.user.id && <Accept action={action} />}
+            {card.worker.id === context.user.id && card.status !== "done" && (
+              <Accept action={action} />
+            )}
           </div>
           <div className="modal-footer">
             <button
