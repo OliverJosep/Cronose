@@ -263,11 +263,12 @@ const Register = () => {
               <div className="form-label-group col p-1">
                 <label htmlFor="r_password">Repeat password</label>
                 {r_password && <span className="ml-1 error">{r_password}</span>}
+                {console.log(r_password)}
                 <input
                   id="r_password"
                   type="password"
                   name="r_password"
-                  className="form-control"
+                  className={"form-control"}
                   placeholder="password"
                   onChange={validR_password}
                   required

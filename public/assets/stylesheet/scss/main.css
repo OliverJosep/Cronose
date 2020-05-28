@@ -928,6 +928,10 @@ footer .links {
   margin-top: 40px !important;
 }
 
+.img {
+  max-height: 300px;
+}
+
 .work #carousel img {
   max-height: 250px;
 }
@@ -1064,5 +1068,82 @@ footer .links {
 .valorate_bg .jumbotron .valoration .title {
   font-weight: bold;
   margin-right: 4px;
+}
+
+.offer_details .carousel {
+  width: 700px;
+  height: 394px;
+}
+
+.offer_details .carousel img {
+  height: 394px;
+  image-rendering: optimizeSpeed;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media (max-width: 1200px) {
+  .offer_details .carousel {
+    width: 580px;
+    height: 326px;
+  }
+  .offer_details .carousel img {
+    height: 326px;
+    image-rendering: optimizeSpeed;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}
+
+@media (max-width: 991px) {
+  .offer_details .carousel {
+    width: 580px;
+    height: 326px;
+  }
+  .offer_details .carousel img {
+    height: 326px;
+    image-rendering: optimizeSpeed;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}
+
+@media (max-width: 761px) {
+  .offer_details .carousel {
+    width: 450px;
+    height: 253px;
+  }
+  .offer_details .carousel img {
+    height: 253px;
+    image-rendering: optimizeSpeed;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}
+
+@media (max-width: 484px) {
+  .offer_details .carousel {
+    width: 350px;
+    height: 200px;
+  }
+  .offer_details .carousel img {
+    height: 200px;
+    image-rendering: optimizeSpeed;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}
+
+@media (max-width: 381px) {
+  .offer_details .carousel {
+    width: 300px;
+    height: 200px;
+  }
+  .offer_details .carousel img {
+    height: 200px;
+    image-rendering: optimizeSpeed;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
 }
 /*# sourceMappingURL=main.css.map */

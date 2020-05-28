@@ -11,6 +11,7 @@ const NewOffer = () => {
   const [categorySelectet, setCategorySelected] = useState();
   const [specialization, setSpecialization] = useState();
   const [rating, setRating] = useState();
+  const [url, setUrl] = useState();
 
   useEffect(() => {
     const getCategories = () => {
@@ -42,30 +43,29 @@ const NewOffer = () => {
     ).then(() => (window.location.href = "/market"));
   };
 
+  const showFileSize = (event) => {
+    const maxSize = 1048576; // 1 MB
+    const file = event.target.files[0];
+    if (isValid(file, maxSize) === true)
+      return setUrl(URL.createObjectURL(file));
+    setUrl(null);
+  };
+
+  const isValid = (img, size) => {
+    if (!img) return;
+    if (!img.type.match("image/jpeg") && !img.type.match("image/png"))
+      return "Invalid image";
+    if (size < img.size) return "Max 1 MB";
+    return true;
+  };
+
   return (
     <div
       className="langSelector container shadow m-2 p-3 text-center"
       id="offerForm"
     >
-      <h5>¿En qué idioma ofrecerás tu trabajo?</h5>
-      <p>Después podrás añadir más idiomas complementarios</p>
-      <button
-        className="btn btn-lg dropdown-toggle text-white"
-        type="button"
-        id="dropdownMenuButton"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        Idiomas
-      </button>
-      <div
-        id="langsAvaliable"
-        className="dropdown-menu"
-        aria-labelledby="dropdownMenuButton"
-      ></div>
-
-      <div id="offerForm2" className="container text-left">
+      <h5 className="mt-2">Create offer</h5>
+      <div id="offerForm2" className="mt-2 container text-left">
         <hr />
 
         <form method="post" target="_self" onSubmit={handleSubmit}>
@@ -163,116 +163,22 @@ const NewOffer = () => {
             </small>
           </div>
           <hr />
-          <h3>Horario</h3>
-          <div className="row mb-4 mt-1">
-            <div className="col-lg-8 my-auto">
-              <div className="form-check form-check-inline">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="materialInline1"
-                />
-                <label className="form-check-label" htmlFor="materialInline1">
-                  Lunes
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="materialInline2"
-                />
-                <label className="form-check-label" htmlFor="materialInline2">
-                  Martes
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="materialInline3"
-                />
-                <label className="form-check-label" htmlFor="materialInline3">
-                  Miércoles
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="materialInline3"
-                />
-                <label className="form-check-label" htmlFor="materialInline3">
-                  Jueves
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="materialInline3"
-                />
-                <label className="form-check-label" htmlFor="materialInline3">
-                  Viernes
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="materialInline3"
-                />
-                <label className="form-check-label" htmlFor="materialInline3">
-                  Sábado
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="materialInline3"
-                />
-                <label className="form-check-label" htmlFor="materialInline3">
-                  Domingo
-                </label>
-              </div>
-              <small id="offerSubtitle" className="form-text text-muted">
-                Indica los días que puedes reaizar el trabajo.
-              </small>
-            </div>
-            <div className="col-lg-4">
-              <div className="form-row">
-                <div className="col">
-                  <div className="md-form">
-                    <label className="form-label" htmlFor="date1">
-                      De las{" "}
-                    </label>
-                    <input
-                      type="text"
-                      id="date1"
-                      className="form-control"
-                      placeholder="00:00"
-                    />
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="md-form">
-                    <label className="form-label" htmlFor="date2">
-                      Hasta las{" "}
-                    </label>
-                    <input
-                      type="email"
-                      id="date2"
-                      className="form-control"
-                      placeholder="00:00"
-                    />
-                  </div>
-                </div>
-                <small id="offerSubtitle" className="form-text text-muted">
-                  Escribe de que hora a que hora puedes realizar el trabajo
-                </small>
-              </div>
-            </div>
+          <h3>Images</h3>
+          <div className="custom-file mb-3">
+            <input
+              type="file"
+              className="custom-file-input"
+              id="customFile"
+              name="filename"
+              onChange={(event) => showFileSize(event)}
+            />
+            {console.log(url)}
+            <label className="custom-file-label" htmlFor="customFile">
+              Choose file
+            </label>
+          </div>
+          <div className="row d-flex justify-content-center">
+            {url && <img className="mb-2 img" src={url} alt="" />}
           </div>
           <input
             type="submit"

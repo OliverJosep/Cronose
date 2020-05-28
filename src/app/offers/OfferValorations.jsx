@@ -7,7 +7,7 @@ import UserAvatar from "../components/Avatar";
 const OfferValorations = ({ valorations }) => {
   return (
     <div className="row">
-      <div className="container-fluid mt-4">
+      {/* <div className="container-fluid mt-4">
         <div className="col-4">
           <h4>Rating</h4>
           <hr />
@@ -42,7 +42,7 @@ const OfferValorations = ({ valorations }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="container-fluid mt-4">
         <div className="mb-4">
           <h4>Comments</h4>

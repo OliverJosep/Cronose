@@ -27,14 +27,14 @@ const OfferDetails = ({ match }) => {
   }, [context.lang, initials, tag, specialization]);
   if (!offer) return <Loader></Loader>;
   return (
-    <section className="work">
+    <section className="offer_details">
       <div className="container mt-2">
         <div className="row">
           <h1>{offer.title}</h1>
           <h3 className="my-auto ml-4"> Precio: {offer.coin_price}</h3>
         </div>
         <div className="row">
-          <div className="col-12 col-md-8">
+          <div className="col-12 col-lg-8">
             <div
               id="carousel"
               className="carousel slide m-auto"
@@ -67,7 +67,7 @@ const OfferDetails = ({ match }) => {
                 <div className="carousel-item">
                   <img
                     className="d-block w-100"
-                    src="/assets/img/img-work.jpg"
+                    src="/assets/img/htmlcssbootstrap.jpg"
                     alt="Third slide"
                   />
                 </div>
@@ -97,8 +97,8 @@ const OfferDetails = ({ match }) => {
                 <span className="sr-only">Next</span>
               </a>
             </div>
-            <div className="row">
-              <div className="col-6">
+            <div className="row mt-2">
+              <div className="pl-4 col-6">
                 <Rater
                   total={5}
                   rating={offer.personal_valoration / 20}
@@ -108,7 +108,7 @@ const OfferDetails = ({ match }) => {
                   Personal Valoration
                 </small>
               </div>
-              <div className="col-6 text-right">
+              <div className="pr-4 col-6 text-right">
                 <small className="muted mr-2 my-auto">Users Valoration</small>
                 <Rater
                   total={5}
@@ -172,7 +172,7 @@ const OfferDetails = ({ match }) => {
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-4">
+          <div className="col-12 col-lg-4">
             <div className="m-3">
               <h4>Schedule</h4>
               <hr />
