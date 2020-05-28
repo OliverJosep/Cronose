@@ -10,6 +10,7 @@ const NewOffer = () => {
   const [categories, setCategories] = useState();
   const [categorySelectet, setCategorySelected] = useState();
   const [specialization, setSpecialization] = useState();
+  const [rating, setRating] = useState();
 
   useEffect(() => {
     const getCategories = () => {
@@ -32,13 +33,13 @@ const NewOffer = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    data.set("p_val", rating);
     data.set("user_id", context.user.id);
     data.set("jwt", context.jwt);
-    console.log(data);
     Axios.post(
       `${process.env.REACT_APP_API_URL}/${context.lang}/offer`,
       data
-    ).then(() => (window.location.href = "/Market"));
+    ).then(() => (window.location.href = "/market"));
   };
 
   return (
@@ -123,7 +124,11 @@ const NewOffer = () => {
               ¿Cuál es tu nivel de profesionalidad en este sector?
             </label>
             <div className="col">
-              <Rater total={5} rating={0} />
+              <Rater
+                total={5}
+                rating={0}
+                onRate={({ rating }) => setRating(rating * 20)}
+              />
             </div>
           </div>
           <div className="form-group">

@@ -42,6 +42,7 @@ const OfferCard = ({ offer }) => {
                 rating={offer.valoration_avg / 20}
                 interactive={false}
               />
+              {console.log(offer)}
             </div>
           </section>
           <div className="card-body">

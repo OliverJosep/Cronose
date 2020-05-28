@@ -49,9 +49,6 @@ export default class LocaleContextProvider extends Component {
         console.log(error.message);
         self.logout(error);
       });
-    // .finally(function () {
-    //   self.saveLocalStorage();
-    // });
   }
 
   updateUser(id) {
