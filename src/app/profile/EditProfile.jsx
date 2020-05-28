@@ -88,7 +88,7 @@ export default class EditProfile extends Component {
       `${process.env.REACT_APP_API_URL}/user/avatar/update`,
       formData
     ).then(() => {
-      // window.location.reload(false);
+      window.location.reload(false);
     });
   }
 

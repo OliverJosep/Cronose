@@ -37,7 +37,6 @@ const Register = () => {
     ) {
       Axios.post(`${process.env.REACT_APP_API_URL}/register`, formData)
         .then((response) => {
-          console.log(response);
           response.data !== null && setRegistered(true);
         })
         .catch((err) => console.error(err));
@@ -54,9 +53,9 @@ const Register = () => {
   };
 
   const updateAvatar = () => {
-    const name = document.getElementById("name").value.substr(0, 1);
-    const surname = document.getElementById("surname").value.substr(0, 1);
-    const surname_2 = document.getElementById("surname_2").value.substr(0, 1);
+    const name = document.getElementById("name").value;
+    const surname = document.getElementById("surname").value;
+    const surname_2 = document.getElementById("surname_2").value;
     setAvatar(`${name} ${surname} ${surname_2}`);
   };
 
@@ -69,7 +68,7 @@ const Register = () => {
     setUrl(null);
   };
 
-  const isValid = ({ img, size }) => {
+  const isValid = (img, size) => {
     if (!img) return;
     if (!img.type.match("image/jpeg") && !img.type.match("image/png"))
       return "Invalid image";

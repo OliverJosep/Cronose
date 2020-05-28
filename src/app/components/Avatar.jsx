@@ -15,7 +15,7 @@ const UserAvatar = ({ avatar, name, size }) => {
   if (avatar.visible === "1")
     return (
       <Avatar
-        src={`${process.env.REACT_APP_API_URL}/images/${avatar.url}`}
+        src={`${process.env.REACT_APP_API_URL}/images/${avatar.url}${avatar.extension}`}
         size={size}
         round={true}
         className="mr-2"

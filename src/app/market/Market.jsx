@@ -104,7 +104,6 @@ const Market = () => {
         />
       </div>
       <section id="offers" className="works">
-        {console.log(offers)}
         {offers && (
           <InfiniteScroll
             dataLength={offers.length}

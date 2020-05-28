@@ -70,7 +70,7 @@ const OfferCard = ({ offer }) => {
               >
                 See Offer
               </NavLink>
-              {offer.user.id === context.user.id && (
+              {context.user && offer.user.id === context.user.id && (
                 <NavLink
                   to={`/offer/edit/${offer.specialization_id}`}
                   className="btn text-white"
