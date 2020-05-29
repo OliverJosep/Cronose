@@ -1,101 +1,125 @@
 //HEAD PROFILE
 
 .img-back-profile {
-	z-index: -100;
-	img {
-		height: 300px;
-		min-width: 100%;
-	}
+  z-index: -100;
+  img {
+    height: 300px;
+    min-width: 100%;
+  }
 }
 
 #head-profile {
-	padding-left: 5%;
-	padding-right: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
 
-	.btn {
-		background-color: var(--secondary-color);
-	}
+  .btn {
+    background-color: var(--secondary-color);
+  }
 }
 
 .card-profile {
-	a:hover {
-		background-color: var(--secondary-color);
-	}
+  a:hover {
+    background-color: var(--secondary-color);
+  }
 }
 
 #profile-average {
-	p {
-		margin-top: 4px;
-		margin-right: 5px;
-	}
+  p {
+    margin-top: 4px;
+    margin-right: 5px;
+  }
 }
 
 .img-profile {
-	margin-top: -80px;
-	padding-left: 50px;
-	img {
-		width: 120px;
-		background-color: var(--white);
-	}
+  margin-top: -80px;
+  padding-left: 50px;
+  img {
+    width: 120px;
+    background-color: var(--white);
+  }
 }
 
 @media (max-width: 575px) {
-	.img-profile {
-		padding-left: 0px !important;
-	}
+  .img-profile {
+    padding-left: 0px !important;
+  }
 }
 
 .row-profile-name {
-	margin-right: 0px;
-	margin-left: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
 }
 
 // BODY PROFILE
 
 #body-profile {
-	padding-left: 8%;
-	padding-right: 8%;
-	padding-top: 30px;
+  padding-left: 8%;
+  padding-right: 8%;
+  padding-top: 30px;
 }
 
 .profile-offers {
-	padding-top: 25px;
+  padding-top: 25px;
 
-	h3 {
-		padding-left: 20px;
-	}
+  .offers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    column-gap: 5px;
+    row-gap: 5px;
+    .profile_card {
+      display: grid;
+      grid-template-columns: 1fr;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      background-color: #fff;
+    }
+    .card_img {
+      // background-image: url("http://api.local.cronose/images/offer/1_7.jpeg");
+      background-position: center;
+      background-size: cover;
+      height: 300px;
+      overflow: hidden;
+    }
+  }
 
-	.card-deck {
-		padding-top: 20px;
-	}
+  // h3 {
+  //   padding-left: 20px;
+  // }
 
-	.card {
-		max-width: 300px;
-		min-width: 300px;
-		margin: auto;
-		text-align: start;
-	}
+  // .card-deck {
+  //   padding-top: 20px;
+  // }
 
-	.btn {
-		background-color: var(--primary-color);
-	}
+  // .card {
+  //   max-width: 300px;
+  //   min-width: 300px;
+  //   height: 100%;
+  //   margin: auto;
+  //   text-align: start;
+  // }
 
-	.icon-more a {
-		font-size: 60px;
-		color: var(--secondary-color);
-		border: 0;
+  .btn {
+    background-color: var(--primary-color);
+  }
 
-		&:hover {
-			text-decoration: none;
-		}
-	}
+  .icon-more a {
+    font-size: 60px;
+    color: var(--secondary-color);
+    border: 0;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 .progress {
-	height: 20px;
-	.progress-bar {
-		width: 25%;
-		height: 20px;
-		background-color: var(--secondary-color);
-	}
+  height: 20px;
+  .progress-bar {
+    width: 25%;
+    height: 20px;
+    background-color: var(--secondary-color);
+  }
 }

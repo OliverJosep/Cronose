@@ -94,6 +94,7 @@ const Market = () => {
   return (
     <>
       <div className="btn-search md-form mt-0">
+        {/* Arreglar el sercador */}
         <input
           className="form-control"
           type="text"

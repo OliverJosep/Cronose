@@ -538,19 +538,33 @@ footer .links {
   padding-top: 25px;
 }
 
-.profile-offers h3 {
-  padding-left: 20px;
+.profile-offers .offers {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(350px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  -webkit-column-gap: 5px;
+          column-gap: 5px;
+  row-gap: 5px;
 }
 
-.profile-offers .card-deck {
-  padding-top: 20px;
+.profile-offers .offers .profile_card {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: #fff;
 }
 
-.profile-offers .card {
-  max-width: 300px;
-  min-width: 300px;
-  margin: auto;
-  text-align: start;
+.profile-offers .offers .card_img {
+  background-position: center;
+  background-size: cover;
+  height: 300px;
+  overflow: hidden;
 }
 
 .profile-offers .btn {

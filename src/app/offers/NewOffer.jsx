@@ -44,7 +44,7 @@ const NewOffer = () => {
   };
 
   const showFileSize = (event) => {
-    const maxSize = 1048576; // 1 MB
+    const maxSize = 2097152; // 1 MB
     const file = event.target.files[0];
     if (isValid(file, maxSize) === true)
       return setUrl(URL.createObjectURL(file));

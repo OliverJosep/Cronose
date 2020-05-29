@@ -5,16 +5,30 @@ import { NavLink } from "react-router-dom";
 
 const ProfileCard = ({ offer }) => {
   return (
-    <div className="card card-profile mt-3">
-      <img
-        className="card-img-top"
-        src={
-          offer.images.length < 1
-            ? "/assets/img/img-work.jpg"
-            : `${process.env.REACT_APP_API_URL}/images/${offer.images[0].url}${offer.images[0].extension}`
-        }
+    <div className="profile_card">
+      <div
+        className="card_img"
+        // src={
+        // offer.images.length < 1
+        //   ? "/assets/img/img-work.jpg"
+        //   : `${process.env.REACT_APP_API_URL}/images/${offer.images[0].url}${offer.images[0].extension}`
+        // }
         alt="img-work"
-      ></img>
+        style={
+          offer.images.length < 1
+            ? { backgroundImage: "url(/assets/img/img-work.jpg)" }
+            : {
+                backgroundImage:
+                  "url(" +
+                  `${process.env.REACT_APP_API_URL}/images/${offer.images[0].url}${offer.images[0].extension}` +
+                  ")",
+              }
+          // backgroundImage:
+          //   offer.images.length < 1
+          //     ? "/assets/img/img-work.jpg"
+          //     : `${process.env.REACT_APP_API_URL}/images/${offer.images[0].url}${offer.images[0].extension}`,
+        }
+      ></div>
       <div className="card-body">
         <div className="card-title">
           <div className="d-flex justify-content-end">
