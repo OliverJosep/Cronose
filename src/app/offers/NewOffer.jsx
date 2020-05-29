@@ -168,12 +168,11 @@ const NewOffer = () => {
             <input
               type="file"
               className="custom-file-input"
-              id="customFile"
-              name="filename"
+              id="offer"
+              name="offer"
               onChange={(event) => showFileSize(event)}
             />
-            {console.log(url)}
-            <label className="custom-file-label" htmlFor="customFile">
+            <label className="custom-file-label" htmlFor="offer">
               Choose file
             </label>
           </div>

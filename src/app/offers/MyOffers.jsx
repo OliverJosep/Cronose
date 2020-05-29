@@ -31,7 +31,6 @@ const MyOffers = () => {
         <h1>My Offers</h1>
       </div>
       <section className="works">
-        {console.log(offers)}
         {offers.map((offer, index) => (
           <OfferCard key={index} offer={offer} />
         ))}

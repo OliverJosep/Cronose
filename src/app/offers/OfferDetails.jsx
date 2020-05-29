@@ -35,67 +35,16 @@ const OfferDetails = ({ match }) => {
         </div>
         <div className="row">
           <div className="col-12 col-lg-8">
-            <div
-              id="carousel"
-              className="carousel slide m-auto"
-              data-ride="carousel"
-            >
-              <ol className="carousel-indicators">
-                <li
-                  data-target="#carousel"
-                  data-slide-to="0"
-                  className="active"
-                ></li>
-                <li data-target="#carousel" data-slide-to="1"></li>
-                <li data-target="#carousel" data-slide-to="2"></li>
-              </ol>
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                  <img
-                    className="d-block w-100"
-                    src="/assets/img/img-work.jpg"
-                    alt="First slide"
-                  />
-                </div>
-                <div className="carousel-item">
-                  <img
-                    className="d-block w-100"
-                    src="/assets/img/img-work.jpg"
-                    alt="Second slide"
-                  />
-                </div>
-                <div className="carousel-item">
-                  <img
-                    className="d-block w-100"
-                    src="/assets/img/htmlcssbootstrap.jpg"
-                    alt="Third slide"
-                  />
-                </div>
-              </div>
-              <a
-                className="carousel-control-prev"
-                href="#carousel"
-                role="button"
-                data-slide="prev"
-              >
-                <span
-                  className="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="sr-only">Previous</span>
-              </a>
-              <a
-                className="carousel-control-next"
-                href="#carousel"
-                role="button"
-                data-slide="next"
-              >
-                <span
-                  className="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="sr-only">Next</span>
-              </a>
+            <div className="image m-auto">
+              <img
+                className="d-block w-100"
+                src={
+                  offer.images.length < 1
+                    ? "/assets/img/img-work.jpg"
+                    : `${process.env.REACT_APP_API_URL}/images/${offer.images[0].url}${offer.images[0].extension}`
+                }
+                alt="Second slide"
+              />
             </div>
             <div className="row mt-2">
               <div className="pl-4 col-6">

@@ -8,7 +8,11 @@ const ProfileCard = ({ offer }) => {
     <div className="card card-profile mt-3">
       <img
         className="card-img-top"
-        src="/assets/img/img-work.jpg"
+        src={
+          offer.images.length < 1
+            ? "/assets/img/img-work.jpg"
+            : `${process.env.REACT_APP_API_URL}/images/${offer.images[0].url}${offer.images[0].extension}`
+        }
         alt="img-work"
       ></img>
       <div className="card-body">

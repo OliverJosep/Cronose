@@ -1070,12 +1070,12 @@ footer .links {
   margin-right: 4px;
 }
 
-.offer_details .carousel {
+.offer_details .image {
   width: 700px;
   height: 394px;
 }
 
-.offer_details .carousel img {
+.offer_details .image img {
   height: 394px;
   image-rendering: optimizeSpeed;
   -o-object-fit: cover;
@@ -1083,11 +1083,11 @@ footer .links {
 }
 
 @media (max-width: 1200px) {
-  .offer_details .carousel {
+  .offer_details .image {
     width: 580px;
     height: 326px;
   }
-  .offer_details .carousel img {
+  .offer_details .image img {
     height: 326px;
     image-rendering: optimizeSpeed;
     -o-object-fit: cover;
@@ -1096,11 +1096,11 @@ footer .links {
 }
 
 @media (max-width: 991px) {
-  .offer_details .carousel {
+  .offer_details .image {
     width: 580px;
     height: 326px;
   }
-  .offer_details .carousel img {
+  .offer_details .image img {
     height: 326px;
     image-rendering: optimizeSpeed;
     -o-object-fit: cover;
@@ -1109,11 +1109,11 @@ footer .links {
 }
 
 @media (max-width: 761px) {
-  .offer_details .carousel {
+  .offer_details .image {
     width: 450px;
     height: 253px;
   }
-  .offer_details .carousel img {
+  .offer_details .image img {
     height: 253px;
     image-rendering: optimizeSpeed;
     -o-object-fit: cover;
@@ -1122,11 +1122,11 @@ footer .links {
 }
 
 @media (max-width: 484px) {
-  .offer_details .carousel {
+  .offer_details .image {
     width: 350px;
     height: 200px;
   }
-  .offer_details .carousel img {
+  .offer_details .image img {
     height: 200px;
     image-rendering: optimizeSpeed;
     -o-object-fit: cover;
@@ -1135,11 +1135,11 @@ footer .links {
 }
 
 @media (max-width: 381px) {
-  .offer_details .carousel {
+  .offer_details .image {
     width: 300px;
     height: 200px;
   }
-  .offer_details .carousel img {
+  .offer_details .image img {
     height: 200px;
     image-rendering: optimizeSpeed;
     -o-object-fit: cover;
