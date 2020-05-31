@@ -210,6 +210,10 @@ main#homepage {
   z-index: 1000;
 }
 
+.icon-logout {
+  cursor: pointer;
+}
+
 .sidebar-nav #nav-text {
   display: none;
   margin-left: 10px;
@@ -319,7 +323,7 @@ main#homepage {
 
 .hamburger::before,
 .hamburger::after {
-  content: '';
+  content: "";
   position: absolute;
 }
 
@@ -543,9 +547,9 @@ footer .links {
   display: grid;
   -ms-grid-columns: (minmax(350px, 1fr))[auto-fill];
       grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  -webkit-column-gap: 5px;
-          column-gap: 5px;
-  row-gap: 5px;
+  -webkit-column-gap: 10px;
+          column-gap: 10px;
+  row-gap: 10px;
 }
 
 .profile-offers .offers .profile_card {
@@ -553,18 +557,52 @@ footer .links {
   display: grid;
   -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
+  -ms-grid-rows: 300px auto;
+      grid-template-rows: 300px auto;
   overflow: hidden;
   width: 100%;
   height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 7px;
   background-color: #fff;
 }
 
-.profile-offers .offers .card_img {
+.profile-offers .offers .profile_card:hover {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+}
+
+.profile-offers .offers .profile_card .card_img {
+  background-image: url("http://api.local.cronose/images/offer/1_7.jpeg");
   background-position: center;
   background-size: cover;
-  height: 300px;
   overflow: hidden;
+}
+
+.profile-offers .offers .profile_card .card-body {
+  position: relative;
+  padding: 7px;
+  padding-bottom: 40px;
+}
+
+.profile-offers .offers .profile_card .card-body .card-title {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.profile-offers .offers .profile_card .card-body .card-text {
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.profile-offers .offers .profile_card .card-body .btn {
+  width: calc(100% - 14px);
+  position: absolute;
+  bottom: 7px;
+}
+
+.profile-offers .offers .profile_card .card-body .btn:hover {
+  background-color: var(--secondary-color);
+  font-weight: bold;
 }
 
 .profile-offers .btn {
@@ -578,6 +616,8 @@ footer .links {
 }
 
 .profile-offers .icon-more a:hover {
+  cursor: pointer;
+  color: var(--primary-color);
   text-decoration: none;
 }
 
@@ -1046,6 +1086,28 @@ footer .links {
   font-weight: bold;
   font-size: 24px;
   color: var(--primary-color);
+}
+
+.valorate_bg .logout {
+  position: absolute;
+  right: 0;
+  margin-top: 47px;
+  padding-right: 20px;
+  text-align: end;
+}
+
+.valorate_bg .logout span {
+  font-size: 16px;
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.valorate_bg .logout span:hover {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--secondary-color);
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 .valorate_bg .title {

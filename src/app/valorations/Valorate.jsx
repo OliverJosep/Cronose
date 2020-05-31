@@ -23,6 +23,9 @@ const Valorate = ({ cards }) => {
         <img src="/assets/img/svg/logo.svg" width="50" alt="Cronose" />
         <span className="title">Cronose</span>
       </div>
+      <div className="logout">
+        <span onClick={() => context.logout()}>Log out</span>
+      </div>
       <div className="container title">
         <h1 className="">You have to value!</h1>
       </div>

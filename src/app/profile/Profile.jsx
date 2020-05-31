@@ -126,9 +126,11 @@ const Profile = ({ match }) => {
                   ))}
                 </div>
                 <div className="icon-more text-center ">
-                  <NavLink to="/newoffer">
-                    <MdAddBox />
-                  </NavLink>
+                  {context.user.id === user.id && (
+                    <NavLink to="/newoffer">
+                      <MdAddBox />
+                    </NavLink>
+                  )}
                 </div>
               </div>
             </div>

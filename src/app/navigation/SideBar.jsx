@@ -46,7 +46,7 @@ const SideBar = ({ routes }) => {
                   className="mt-5"
                   onClick={() => context.logout()}
                 >
-                  <FaPowerOff />
+                  <FaPowerOff className="icon-logout" />
                 </i>
               )}
             </LocaleContext.Consumer>

@@ -8,11 +8,6 @@ const ProfileCard = ({ offer }) => {
     <div className="profile_card">
       <div
         className="card_img"
-        // src={
-        // offer.images.length < 1
-        //   ? "/assets/img/img-work.jpg"
-        //   : `${process.env.REACT_APP_API_URL}/images/${offer.images[0].url}${offer.images[0].extension}`
-        // }
         alt="img-work"
         style={
           offer.images.length < 1
@@ -23,14 +18,10 @@ const ProfileCard = ({ offer }) => {
                   `${process.env.REACT_APP_API_URL}/images/${offer.images[0].url}${offer.images[0].extension}` +
                   ")",
               }
-          // backgroundImage:
-          //   offer.images.length < 1
-          //     ? "/assets/img/img-work.jpg"
-          //     : `${process.env.REACT_APP_API_URL}/images/${offer.images[0].url}${offer.images[0].extension}`,
         }
       ></div>
       <div className="card-body">
-        <div className="card-title">
+        <div className="card-title m-1">
           <div className="d-flex justify-content-end">
             <Rater
               total={5}
@@ -38,11 +29,11 @@ const ProfileCard = ({ offer }) => {
               interactive={false}
             />
           </div>
-          <h4>
+          <h4 className="m-0">
             <b>{offer.title || offer.translations[0].title}</b>
           </h4>
         </div>
-        <p className="card-text">
+        <p className="card-text pt-2">
           {offer.description || offer.translations[0].description}
         </p>
         <NavLink

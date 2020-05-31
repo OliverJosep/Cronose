@@ -14,9 +14,9 @@ const OfferCard = ({ offer }) => {
           <img
             className="card-img"
             src={
-              offer.images.length < 1
-                ? "/assets/img/img-work.jpg"
-                : `${process.env.REACT_APP_API_URL}/images/${offer.images[0].url}${offer.images[0].extension}`
+              offer.images && offer.images.length > 0
+                ? `${process.env.REACT_APP_API_URL}/images/${offer.images[0].url}${offer.images[0].extension}`
+                : "/assets/img/img-work.jpg"
             }
             alt="img-work"
           />
@@ -46,12 +46,11 @@ const OfferCard = ({ offer }) => {
                 rating={offer.valoration_avg / 20}
                 interactive={false}
               />
-              {console.log(offer)}
             </div>
           </section>
           <div className="card-body">
             <h4>
-              <b>{offer.title || offer.translations[0].title}</b>
+              <b>{offer.translations && offer.translations[0].title}</b>
             </h4>
             <UserAvatar
               name={offer.user.full_name}

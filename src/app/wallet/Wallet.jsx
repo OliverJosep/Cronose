@@ -57,7 +57,6 @@ export default class Wallet extends Component {
   }
 
   render() {
-    console.log(data);
     return (
       <>
         <div className="text-center pt-4">

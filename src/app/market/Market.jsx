@@ -105,7 +105,8 @@ const Market = () => {
         />
       </div>
       <section id="offers" className="works">
-        {offers && (
+        {/* {offers.length > 0 && offers.map((offer, index) => console.log(offer))} */}
+        {
           <InfiniteScroll
             dataLength={offers.length}
             next={() => setLimit(limit + counter)}
@@ -126,7 +127,7 @@ const Market = () => {
                 <OfferCard key={index} offer={offer} />
               ))}
           </InfiniteScroll>
-        )}
+        }
       </section>
       <input type="checkbox" name="toggle" id="filter-toggle"></input>
       <label htmlFor="filter-toggle" id="btn-filter">
