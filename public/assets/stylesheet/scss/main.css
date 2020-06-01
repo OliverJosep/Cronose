@@ -1041,35 +1041,72 @@ footer .links {
   height: 591px;
 }
 
-.cards .bg .scroll {
-  height: 488px;
-  overflow-y: scroll;
+.cards .bg h3 {
+  position: relative;
+  height: 67px;
 }
 
-.cards .bg .scroll .chat-card {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+.cards .bg .center-card {
+  height: 480px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 300px auto;
+      grid-template-rows: 300px auto;
+}
+
+.cards .bg .center-card .card-img {
+  margin: 10px;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+}
+
+.cards .bg .center-card .directions {
+  width: 100%;
+  position: relative;
+  color: var(--secondary-color);
+  font-size: 27px;
+  top: -13px;
   cursor: pointer;
 }
 
-.cards .bg .scroll .chat-card .title {
-  font-weight: bold;
+.cards .bg .center-card .directions .left {
+  position: absolute;
+  margin-left: 10px;
+}
+
+.cards .bg .center-card .directions .right {
+  position: absolute;
+  right: 10px;
+}
+
+.cards .bg .center-card .title {
   color: var(--secondary-color);
+  font-weight: bold;
+  margin: 0px 10px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.cards .bg .scroll .accepted {
-  border-right: 2px solid lime;
+.cards .bg .center-card .description {
+  margin-top: 7px;
+  color: rgba(0, 0, 0, 0.7);
 }
 
-.cards .bg .scroll .rejected {
-  border-right: 2px solid red;
+.cards .bg .center-card .offer_date {
+  margin-top: 12px;
+  color: rgba(0, 0, 0, 0.7);
 }
 
-.cards .bg .scroll .pending {
-  border-right: 2px solid yellow;
+.cards .bg .center-card .offer_status {
+  margin-top: 12px;
+  color: rgba(0, 0, 0, 0.7);
 }
 
-.cards .bg .scroll .done {
-  border-right: 2px solid #1b64aa;
+.cards .bg .center-card .offer_status strong {
+  color: var(--primary-color);
 }
 
 .cards .bg .add {

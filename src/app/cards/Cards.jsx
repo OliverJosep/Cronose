@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Axios from "axios";
 import { LocaleContext } from "../../contexts/LocaleContext";
 import Card from "./Card";
+import ReactPaginate from "react-paginate";
 import CreateCard from "./CreateCard";
 
 const Cards = ({ selectedChat }) => {
@@ -9,6 +10,7 @@ const Cards = ({ selectedChat }) => {
 
   const [cards, setCards] = useState(null);
   const [changes, setChanges] = useState(true);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     const getCards = async () => {
@@ -25,8 +27,13 @@ const Cards = ({ selectedChat }) => {
     <div className="col-xl-3 col-12 p-1 cards">
       <div className="bg">
         <h3 className="w-100 p-2 pt-3 m-0">Cards</h3>
-        {cards ? (
-          <MyCards cards={cards} setChanges={setChanges} />
+        {cards && cards.length > 0 ? (
+          <MyCards
+            cards={cards}
+            setChanges={setChanges}
+            page={page}
+            setPage={setPage}
+          />
         ) : (
           <NoCards />
         )}
@@ -50,12 +57,16 @@ const NoCards = () => {
   );
 };
 
-const MyCards = ({ cards, setChanges }) => {
+const MyCards = ({ cards, setChanges, page, setPage }) => {
   return (
-    <div className="scroll">
-      {cards.map((card, index) => (
-        <Card card={card} setChanges={setChanges} key={index} />
-      ))}
+    <div className="center-card">
+      <Card
+        card={cards[page]}
+        setChanges={setChanges}
+        page={page}
+        setPage={setPage}
+        maxPages={cards.length}
+      />
     </div>
   );
 };
