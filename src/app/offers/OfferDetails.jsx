@@ -66,44 +66,32 @@ const OfferDetails = ({ match }) => {
                 />
               </div>
             </div>
-            <div className="row mt-2">
-              <UserAvatar
-                name={offer.user.full_name}
-                avatar={offer.user.avatar}
-                size={50}
-              />
-              <div className="ml-2 my-auto">
-                {offer.user.full_name || offer.user.initials}
-                <h6 className="d-inline text-muted">#{offer.user.tag}</h6>
-              </div>
-            </div>
-            <div className="row mt-4">
-              <div className="container-fluid">
-                <h4>{offer.translations[0].title}</h4>
-                <hr />
-                <p>
-                  {offer.translations[0].description ? (
-                    offer.translations[0].description
-                  ) : (
-                    <Translate string={"no-description"} />
-                  )}
-                </p>
-              </div>
-            </div>
             <div className="row mt-4">
               <div className="container-fluid">
                 <h4>User info</h4>
                 <hr />
                 <div className="row mt-2">
-                  <img
-                    src="/assets/img/avatar-placeholder.png"
-                    height="40px"
-                    alt="avatar-placeholder"
+                  <UserAvatar
+                    name={offer.user.full_name}
+                    avatar={offer.user.avatar}
+                    size={50}
                   />
-                  <h4 className="ml-2 my-auto">{offer.user.full_name}</h4>
+                  <div className="ml-2 my-auto">
+                    <NavLink
+                      className="link"
+                      to={
+                        "/profile/" + offer.user.initials + "/" + offer.user.tag
+                      }
+                    >
+                      {offer.user.name
+                        ? offer.user.full_name
+                        : offer.user.initials}
+                      <h6 className="d-inline text-muted">#{offer.user.tag}</h6>
+                    </NavLink>
+                  </div>
                 </div>
                 <div className="row">
-                  <div className="container-fluid mt-4">
+                  <div className="container-fluid t-4">
                     <div className="col-4">
                       <h4>Description</h4>
                       <hr />
@@ -117,8 +105,21 @@ const OfferDetails = ({ match }) => {
                     </p>
                   </div>
                 </div>
-                <OfferValorations valorations={offer.valorations} />
               </div>
+            </div>
+            <div className="row mt-4 comments">
+              <div className="container-fluid">
+                <h4>{offer.translations[0].title}</h4>
+                <hr />
+                <p>
+                  {offer.translations[0].description ? (
+                    offer.translations[0].description
+                  ) : (
+                    <Translate string={"no-description"} />
+                  )}
+                </p>
+              </div>
+              <OfferValorations valorations={offer.valorations} />
             </div>
           </div>
           <div className="col-12 col-lg-4">

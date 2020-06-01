@@ -1,107 +1,116 @@
 .btn-search {
-	padding-right: 20%;
-	padding-left: 20%;
-	padding-top: 40px;
+  padding-right: 20%;
+  padding-left: 20%;
+  padding-top: 40px;
 }
 
 .btn-search input {
-	border-top: none;
-	border-right: none;
-	border-left: none;
-	border-radius: 0;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-radius: 0;
 
-	&:focus {
-		color: var(--text-color);
-		background-color: var(--white);
-		border-color: var(--primary-color);
-		outline: 0;
-		box-shadow: unset;
-	}
+  &:focus {
+    color: var(--text-color);
+    background-color: var(--white);
+    border-color: var(--primary-color);
+    outline: 0;
+    box-shadow: unset;
+  }
 }
 
-.work-card {
-	margin-top: 40px;
-	margin-bottom: 40px;
-	margin-left: 10%;
-	margin-right: 10%;
+.offer-card {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
 
-	.card-header {
-		padding-bottom: 0px;
-	}
+  .card-header {
+    padding-bottom: 0px;
+  }
 
-	.card-body {
-		padding: 20px;
-		padding-bottom: 0px;
-	}
+  .card-body {
+    padding: 20px;
+    padding-bottom: 0px;
 
-	.card-img {
-		margin: 0px;
-		padding: 0px;
-		height: 100%;
-		width: 100%;
-		object-fit: cover;
-		max-height: 300px;
-	}
+    .link {
+      text-decoration: none;
+      color: #000;
+      &:hover {
+        color: var(--primary-color);
+        font-weight: bold;
+      }
+    }
+  }
 
-	@media (max-width: 992px) {
-		.card-img {
-			height: 250px;
-		}
-	}
+  .card-img {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    max-height: 300px;
+  }
 
-	.btn {
-		background-color: #1b64aa;
-		margin: 15px;
-		padding-left: 20px;
-		padding-right: 20px;
+  @media (max-width: 992px) {
+    .card-img {
+      height: 250px;
+    }
+  }
 
-		&:hover {
-			background-color: var(--secondary-color);
-		}
-	}
+  .btn {
+    background-color: #1b64aa;
+    margin: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
 
-	.price {
-		color: #498f30;
-	}
+    &:hover {
+      background-color: var(--secondary-color);
+    }
+  }
+
+  .price {
+    color: #498f30;
+  }
 }
 
 .works {
-	padding-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 // Filter
 
 .filter {
-	background-color: var(--white);
-	position: fixed;
-	width: calc(250px);
-	height: 100%;
-	transition: all 250ms ease-in-out;
-	z-index: 1000;
-	right: -250px;
-	top: 0;
+  background-color: var(--white);
+  position: fixed;
+  width: calc(250px);
+  height: 100%;
+  transition: all 250ms ease-in-out;
+  z-index: 1000;
+  right: -250px;
+  top: 0;
 }
 
 #filter-toggle {
-	display: none;
-	z-index: 1000;
-	&:checked {
-		~ .filter {
-			right: 0;
-		}
-		~ #btn-filter {
-			transform: rotate(180deg);
-			right: 225px;
-		}
-	}
+  display: none;
+  z-index: 1000;
+  &:checked {
+    ~ .filter {
+      right: 0;
+    }
+    ~ #btn-filter {
+      transform: rotate(180deg);
+      right: 225px;
+    }
+  }
 }
 
 #btn-filter {
-	position: fixed;
-	font-size: 50px !important;
-	color: var(--primary-color);
-	top: 0;
-	right: 10px;
-	transition: all 250ms ease-in-out;
-	z-index: 10001;
+  position: fixed;
+  font-size: 50px !important;
+  color: var(--primary-color);
+  top: 0;
+  right: 10px;
+  transition: all 250ms ease-in-out;
+  z-index: 10001;
 }

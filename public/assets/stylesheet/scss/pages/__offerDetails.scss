@@ -8,6 +8,17 @@
       object-fit: cover;
     }
   }
+  .link {
+    text-decoration: none;
+    color: #000;
+    &:hover {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+  }
+  .comments {
+    margin-bottom: 30px;
+  }
 }
 
 @media (max-width: 1200px) {

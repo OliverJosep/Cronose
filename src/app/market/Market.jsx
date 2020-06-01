@@ -99,7 +99,7 @@ const Market = () => {
           className="form-control"
           type="text"
           id="search"
-          onChange={({ target }) => setText(target.value)}
+          onBlur={({ target }) => setText(target.value)}
           placeholder="Search"
           aria-label="Search"
         />
@@ -129,7 +129,7 @@ const Market = () => {
           </InfiniteScroll>
         }
       </section>
-      <input type="checkbox" name="toggle" id="filter-toggle"></input>
+      <input type="checkbox" name="toggle" id="filter-toggle" />
       <label htmlFor="filter-toggle" id="btn-filter">
         <IoIosArrowDropleftCircle />
       </label>

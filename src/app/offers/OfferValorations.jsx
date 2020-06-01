@@ -7,42 +7,6 @@ import UserAvatar from "../components/Avatar";
 const OfferValorations = ({ valorations }) => {
   return (
     <div className="row">
-      {/* <div className="container-fluid mt-4">
-        <div className="col-4">
-          <h4>Rating</h4>
-          <hr />
-        </div>
-        <div className="col-6 text-left">
-          <div className="row">
-            <div className="col">
-              <small className="muted mr-2 my-auto">Puntuality</small>
-            </div>
-            <div className="col">
-              <Rater total={5} rating={4.5} interactive={false} />
-            </div>
-          </div>
-        </div>
-        <div className="col-6 text-left">
-          <div className="row">
-            <div className="col">
-              <small className="muted mr-2 my-auto">Profesionality</small>
-            </div>
-            <div className="col">
-              <Rater total={5} rating={4.5} interactive={false} />
-            </div>
-          </div>
-        </div>
-        <div className="col-6 text-left">
-          <div className="row">
-            <div className="col">
-              <small className="muted mr-2 my-auto">Simpathy</small>
-            </div>
-            <div className="col">
-              <Rater total={5} rating={4.5} interactive={false} />
-            </div>
-          </div>
-        </div>
-      </div> */}
       <div className="container-fluid mt-4">
         <div className="mb-4">
           <h4>Comments</h4>
@@ -57,6 +21,7 @@ const OfferValorations = ({ valorations }) => {
                     size={50}
                   />
                   <NavLink
+                    className="link"
                     to={`/profile/${valoration.valorated_by.initials}/${valoration.valorated_by.tag}`}
                   >
                     <h4 className="ml-2 my-auto">

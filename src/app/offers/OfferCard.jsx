@@ -8,7 +8,7 @@ import { LocaleContext } from "../../contexts/LocaleContext";
 const OfferCard = ({ offer }) => {
   const context = useContext(LocaleContext);
   return (
-    <article className="card work-card">
+    <article className="card offer-card">
       <section className="info row">
         <figure className="col-lg-3">
           <img
@@ -57,9 +57,16 @@ const OfferCard = ({ offer }) => {
               avatar={offer.user.avatar}
               size={30}
             />
-            {offer.user.full_name && offer.user.full_name + " | "}
-            <small className="d-inline form-text">{offer.user.initials}</small>
-            <small className="d-inline text-muted">#{offer.user.tag}</small>
+            <NavLink
+              className="link"
+              to={"/profile/" + offer.user.initials + "/" + offer.user.tag}
+            >
+              {offer.user.name && offer.user.full_name + " | "}
+              <small className="d-inline form-text">
+                {offer.user.initials}
+              </small>
+              <small className="d-inline text-muted">#{offer.user.tag}</small>
+            </NavLink>
             <hr></hr>
             <p className="card-text">
               {offer.description || offer.translations[0].description}
