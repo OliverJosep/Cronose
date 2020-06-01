@@ -91,7 +91,7 @@ const OfferDetails = ({ match }) => {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="container-fluid t-4">
+                  <div className="container-fluid mt-3 t-4">
                     <div className="col-4">
                       <h4>Description</h4>
                       <hr />

@@ -4,7 +4,7 @@ import Axios from "axios";
 import { MdAddCircleOutline } from "react-icons/md";
 import { LocaleContext } from "../../contexts/LocaleContext";
 
-const CreateCard = ({ user, lang, setNewCard }) => {
+const CreateCard = ({ user, lang, setChanges }) => {
   const context = useContext(LocaleContext);
   const [offers, setOffers] = useState();
   const [cancellations, setCancellations] = useState();
@@ -46,7 +46,7 @@ const CreateCard = ({ user, lang, setNewCard }) => {
     data.set("work_date", timestamp);
     data.set("jwt", context.jwt);
     await Axios.post(`${process.env.REACT_APP_API_URL}/demand`, data);
-    setNewCard(true);
+    setChanges(true);
   };
 
   if (!offers) return <></>;

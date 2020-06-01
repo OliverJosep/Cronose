@@ -8,7 +8,7 @@ const Cards = ({ selectedChat }) => {
   const context = useContext(LocaleContext);
 
   const [cards, setCards] = useState(null);
-  const [newCard, setNewCard] = useState(true);
+  const [changes, setChanges] = useState(true);
 
   useEffect(() => {
     const getCards = async () => {
@@ -18,19 +18,23 @@ const Cards = ({ selectedChat }) => {
       setCards(response.data);
     };
     if (selectedChat !== "") getCards();
-    setNewCard(false);
-  }, [selectedChat, context.lang, context.user.id, newCard]);
+    setChanges(false);
+  }, [selectedChat, context.lang, context.user.id, changes]);
 
   return (
     <div className="col-xl-3 col-12 p-1 cards">
       <div className="bg">
         <h3 className="w-100 p-2 pt-3 m-0">Cards</h3>
-        {cards ? <MyCards cards={cards} /> : <NoCards />}
+        {cards ? (
+          <MyCards cards={cards} setChanges={setChanges} />
+        ) : (
+          <NoCards />
+        )}
         <div className="text-center mt-2">
           <CreateCard
             user={selectedChat}
             lang={context.lang}
-            setNewCard={setNewCard}
+            setChanges={setChanges}
           />
         </div>
       </div>
@@ -46,11 +50,11 @@ const NoCards = () => {
   );
 };
 
-const MyCards = ({ cards }) => {
+const MyCards = ({ cards, setChanges }) => {
   return (
     <div className="scroll">
       {cards.map((card, index) => (
-        <Card card={card} key={index} />
+        <Card card={card} setChanges={setChanges} key={index} />
       ))}
     </div>
   );

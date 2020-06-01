@@ -1,32 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { LocaleContext } from "../../contexts/LocaleContext";
 
 const LanguagePicker = ({ changeLanguage }) => {
+  const context = useContext(LocaleContext);
   return (
-    <div className="btn-group languagesButtons" role="group">
-      <button
-        id="en"
-        type="button"
-        // className='btn btnlan'
-        onClick={changeLanguage}
+    <div className="form-group w-25">
+      <select
+        className="form-control"
+        id="language"
+        defaultValue={context.lang}
+        onChange={changeLanguage}
       >
-        EN
-      </button>
-      <button
-        id="es"
-        type="button"
-        //className='btn btnlan'
-        onClick={changeLanguage}
-      >
-        ES
-      </button>
-      <button
-        id="ca"
-        type="button"
-        //className='btn btnlan active'
-        onClick={changeLanguage}
-      >
-        CA
-      </button>
+        <option value="ca">CA</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+      </select>
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import React from "react";
 import CardModal from "./CardModal";
 
-const Card = ({ card }) => {
+const Card = ({ card, setChanges }) => {
   return (
     <div
-      className={"row offer-card p-2 " + card.status}
+      className={"row chat-card p-2 " + card.status}
       data-toggle="modal"
       data-target={"#cardModal" + card.id}
     >
@@ -26,7 +26,7 @@ const Card = ({ card }) => {
           </div>
         </div>
       </div>
-      <CardModal card={card} />
+      <CardModal card={card} setChanges={setChanges} />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import Axios from "axios";
 import { LocaleContext } from "../../contexts/LocaleContext";
 import Translate from "../../translations/Translate";
 
-const CardModal = ({ card }) => {
+const CardModal = ({ card, setChanges }) => {
   const context = useContext(LocaleContext);
 
   const action = ({ target }) => {
@@ -13,6 +13,7 @@ const CardModal = ({ card }) => {
     formData.set("status", target.value);
     formData.set("jwt", context.jwt);
     Axios.post(`${process.env.REACT_APP_API_URL}/card`, formData);
+    setChanges(true);
   };
 
   return (

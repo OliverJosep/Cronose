@@ -18,6 +18,7 @@ const Market = () => {
   const [selectedSpecialization, setSelectedSpecialization] = useState();
   const [text, setText] = useState();
   const [limit, setLimit] = useState(counter);
+  const [offset, setOffset] = useState(0);
   const [resFilter, setResFilter] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
@@ -55,7 +56,7 @@ const Market = () => {
             text: text,
             langs: context.lang,
             defaultLang: context.lang,
-            offset: limit - counter,
+            offset: offset,
             limit: limit,
           },
         }
@@ -72,18 +73,19 @@ const Market = () => {
     text,
     limit,
     resFilter,
+    offset,
   ]);
 
   useEffect(() => {
     setOffers([]);
-    setLimit(counter);
     setHasMore(true);
   }, [context.lang, selectedCategory, selectedSpecialization, text]);
 
   const resetFilter = () => {
     resFilter ? setResFilter(false) : setResFilter(true);
-    setLimit(counter);
     setHasMore(true);
+    setOffset(0);
+    setLimit(counter);
     setOffers([]);
     setSelectedCategory();
     setSelectedSpecialization();
@@ -94,7 +96,6 @@ const Market = () => {
   return (
     <>
       <div className="btn-search md-form mt-0">
-        {/* Arreglar el sercador */}
         <input
           className="form-control"
           type="text"
@@ -105,14 +106,13 @@ const Market = () => {
         />
       </div>
       <section id="offers" className="works">
-        {/* {offers.length > 0 && offers.map((offer, index) => console.log(offer))} */}
         {
           <InfiniteScroll
             dataLength={offers.length}
-            next={() => setLimit(limit + counter)}
+            next={() => setOffset(offset + counter)}
             hasMore={hasMore}
             endMessage={
-              <p style={{ textAlign: "center" }}>
+              <p className="mt-4" style={{ textAlign: "center" }}>
                 {offers.length > 0 ? (
                   <b>There are no more available offers yet </b>
                 ) : (

@@ -116,7 +116,7 @@ const Profile = ({ match }) => {
                   </p>
                 </div>
               </div>
-              <div className="profile-offers">
+              <div className="profile-offers mb-3">
                 <h3>
                   <b>My Offers</b>
                 </h3>

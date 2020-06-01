@@ -32,10 +32,10 @@ const MyOffers = () => {
         <h1>My Offers</h1>
       </div>
       <section className="works">
-        {/* {offers.map((offer, index) => (
+        {offers.map((offer, index) => (
           <OfferCard key={index} offer={offer} />
-        ))} */}
-        <ReactPaginate
+        ))}
+        {/* <ReactPaginate
           previousLabel={"previous"}
           nextLabel={"next"}
           breakLabel={"..."}
@@ -47,7 +47,7 @@ const MyOffers = () => {
           containerClassName={"pagination"}
           subContainerClassName={"pages pagination"}
           activeClassName={"active"}
-        />
+        /> */}
       </section>
       <div className="text-center">
         <NavLink to="/newoffer" className="btn btn-lg mb-4">

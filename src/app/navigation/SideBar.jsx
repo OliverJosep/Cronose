@@ -4,11 +4,13 @@ import { LocaleContext } from "../../contexts/LocaleContext";
 import Translate from "../../translations/Translate";
 import SwitchRoutes from "./Switch";
 import Footer from "../components/Footer";
+import ScrollToTop from "./ScrollToTop";
 import { FaPowerOff } from "react-icons/fa";
 
 const SideBar = ({ routes }) => {
   return (
     <Router>
+      <ScrollToTop />
       <input type="checkbox" name="toggle" id="sidebar-toggle"></input>
       <nav className="sidebar-nav">
         <section className="navbar">

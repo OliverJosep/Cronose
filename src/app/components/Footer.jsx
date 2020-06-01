@@ -8,7 +8,6 @@ const Footer = () => {
   const context = useContext(LocaleContext);
   return (
     <footer className="page-footer p-4">
-      <LanguagePicker changeLanguage={context.changeLanguage} />
       <div className="links row text-center">
         <div className="col-md-6 text-md-left">
           <p>
@@ -25,9 +24,8 @@ const Footer = () => {
           </p>
         </div>
         <div className="col-md-6 text-md-left">
-          <p>
-            <NavLink to="/#">FAQ</NavLink>
-          </p>
+          <LanguagePicker changeLanguage={context.changeLanguage} />
+
           <p>
             <NavLink to="/#">Terms & Conditions</NavLink>
           </p>
@@ -35,7 +33,7 @@ const Footer = () => {
             <NavLink to="/#">Help & Support</NavLink>
           </p>
           <p>
-            <NavLink to="/#">Team</NavLink>
+            <NavLink to="/#">FAQ</NavLink>
           </p>
         </div>
         <div className="newsletter col-md-6">
@@ -48,7 +46,10 @@ const Footer = () => {
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
               />
-              <button type="submit" className="btn-submit btn my-2 my-sm-0">
+              <button
+                type="submit"
+                className="btn-submit btn my-2 my-sm-0 text-white"
+              >
                 Submit
               </button>
             </div>

@@ -70,12 +70,19 @@ export default class LocaleContextProvider extends Component {
     });
   }
 
-  changeLanguage = ({ currentTarget: { id } }) => {
+  changeLanguage = ({ currentTarget: { value } }) => {
     this.setState({
-      lang: id,
+      lang: value,
     });
     this.saveLocalStorage();
   };
+
+  // changeLanguage = ({ currentTarget: { id } }) => {¡
+  // this.setState({
+  //   lang: id,
+  // });
+  // this.saveLocalStorage();
+  // };
 
   saveLocalStorage() {
     setTimeout(() => {

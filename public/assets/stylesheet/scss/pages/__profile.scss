@@ -80,7 +80,6 @@
         transform: scale(1.02);
       }
       .card_img {
-        background-image: url("http://api.local.cronose/images/offer/1_7.jpeg");
         background-position: center;
         background-size: cover;
         overflow: hidden;
@@ -95,6 +94,7 @@
         }
         .card-text {
           border-top: 1px solid rgba(0, 0, 0, 0.125);
+          color: rgba(0, 0, 0, 0.7);
         }
         .btn {
           width: calc(100% - 14px);

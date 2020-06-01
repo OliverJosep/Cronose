@@ -573,7 +573,6 @@ footer .links {
 }
 
 .profile-offers .offers .profile_card .card_img {
-  background-image: url("http://api.local.cronose/images/offer/1_7.jpeg");
   background-position: center;
   background-size: cover;
   overflow: hidden;
@@ -592,6 +591,7 @@ footer .links {
 
 .profile-offers .offers .profile_card .card-body .card-text {
   border-top: 1px solid rgba(0, 0, 0, 0.125);
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .profile-offers .offers .profile_card .card-body .btn {
@@ -1046,12 +1046,12 @@ footer .links {
   overflow-y: scroll;
 }
 
-.cards .bg .scroll .offer-card {
+.cards .bg .scroll .chat-card {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
   cursor: pointer;
 }
 
-.cards .bg .scroll .offer-card .title {
+.cards .bg .scroll .chat-card .title {
   font-weight: bold;
   color: var(--secondary-color);
 }
@@ -1162,6 +1162,7 @@ footer .links {
 }
 
 .offer_details .image img {
+  border-radius: 25px;
   height: 394px;
   image-rendering: optimizeSpeed;
   -o-object-fit: cover;
