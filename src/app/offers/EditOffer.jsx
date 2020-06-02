@@ -68,7 +68,7 @@ const EditOffer = ({ match }) => {
   return (
     <div className="container edit_profile">
       <h1 className="text-center mt-4">Edit Offer</h1>
-      <div className="mt-4 box">
+      <div className="mt-4 mb-4 box">
         <div className="title p-2">
           {specialization && specialization.name} |{" "}
           <span className="user">
@@ -144,13 +144,13 @@ const EditOffer = ({ match }) => {
             <div className="row text-center pt-4">
               <div className="col-12">
                 <h4>Visible</h4>
-                {/* //! Revisar visible */}
+                {console.log(visible)}
                 {visible ? (
                   <input
                     type="checkbox"
                     id="visible"
                     name="visible"
-                    defaultChecked={visible === "1"}
+                    defaultChecked={visible.visibility === "1"}
                   />
                 ) : (
                   <>Loading</>

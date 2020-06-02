@@ -23,31 +23,13 @@ const MyOffers = () => {
   if (!offers) return <>loading</>;
   return (
     <>
-      <div className="text-right pt-4 mr-4">
-        <a href="/wallet" className="btn">
-          WORK HISTORY
-        </a>
-      </div>
-      <div className="text-center pt-2">
+      <div className="text-center mt-4 pt-2">
         <h1>My Offers</h1>
       </div>
       <section className="works">
         {offers.map((offer, index) => (
           <OfferCard key={index} offer={offer} />
         ))}
-        {/* <ReactPaginate
-          previousLabel={"previous"}
-          nextLabel={"next"}
-          breakLabel={"..."}
-          breakClassName={"break-me"}
-          pageCount={5}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          // onPageChange={this.handlePageClick}
-          containerClassName={"pagination"}
-          subContainerClassName={"pages pagination"}
-          activeClassName={"active"}
-        /> */}
       </section>
       <div className="text-center">
         <NavLink to="/newoffer" className="btn btn-lg mb-4">

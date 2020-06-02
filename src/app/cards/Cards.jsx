@@ -20,6 +20,7 @@ const Cards = ({ selectedChat }) => {
     };
     if (selectedChat !== "") getCards();
     setChanges(false);
+    setPage(0);
   }, [selectedChat, context.lang, context.user.id, changes]);
 
   return (
