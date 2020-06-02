@@ -16,7 +16,7 @@
 }
 
 * {
-  font-family: 'Montserrat', 'Lato', 'Work Sans', sans-serif;
+  font-family: "Montserrat", "Lato", "Work Sans", sans-serif;
 }
 
 html {
@@ -33,10 +33,6 @@ html {
 
 .react-rater-star.is-active-half::before {
   color: var(--secondary-color) !important;
-}
-
-.navbar {
-  background-color: var(--white);
 }
 
 footer {
@@ -71,7 +67,7 @@ figure {
   padding: 0;
 }
 
-[class*='col-'] {
+[class*="col-"] {
   padding: 0px;
 }
 
@@ -211,7 +207,23 @@ main#homepage {
 }
 
 .icon-logout {
+  position: absolute;
+  width: var(--sidebar-width);
+  text-align: center;
+  bottom: 25px;
   cursor: pointer;
+  color: #df2323;
+  font-size: 40px;
+}
+
+.coins-sidebar {
+  width: var(--sidebar-width);
+  color: #4f515b;
+  position: absolute;
+  bottom: 80px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .sidebar-nav #nav-text {

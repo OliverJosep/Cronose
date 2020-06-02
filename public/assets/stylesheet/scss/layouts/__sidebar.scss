@@ -50,7 +50,23 @@
   z-index: 1000;
 }
 .icon-logout {
+  position: absolute;
+  width: var(--sidebar-width);
+  text-align: center;
+  bottom: 25px;
   cursor: pointer;
+  color: #df2323;
+  font-size: 40px;
+}
+
+.coins-sidebar {
+  width: var(--sidebar-width);
+  color: #4f515b;
+  position: absolute;
+  bottom: 80px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .sidebar-nav #nav-text {

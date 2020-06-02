@@ -18,7 +18,7 @@ const SideBar = ({ routes }) => {
             <i className="hamburger"></i>
           </label>
           <img
-            className="img-logo m-auto mt-4"
+            className="img-logo mx-auto"
             src="/assets/img/svg/logo.svg"
             alt="logo"
           />
@@ -41,19 +41,19 @@ const SideBar = ({ routes }) => {
                 </li>
               );
             })}
-            <LocaleContext.Consumer>
-              {(context) => (
-                <i
-                  id="iconDown"
-                  className="mt-5"
-                  onClick={() => context.logout()}
-                >
-                  <FaPowerOff className="icon-logout" />
-                </i>
-              )}
-            </LocaleContext.Consumer>
           </ul>
         </section>
+        <LocaleContext.Consumer>
+          {(context) => (
+            <>
+              <span className="coins-sidebar">{context.user.coins}</span>
+              <FaPowerOff
+                onClick={() => context.logout()}
+                className="icon-logout"
+              />
+            </>
+          )}
+        </LocaleContext.Consumer>
       </nav>
       <main className="">
         <SwitchRoutes routes={routes} />
