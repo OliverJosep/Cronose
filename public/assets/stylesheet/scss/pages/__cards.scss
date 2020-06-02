@@ -39,10 +39,14 @@
       }
       .title {
         color: var(--secondary-color);
+        font-size: 20px;
         font-weight: bold;
         margin: 0px 10px;
         padding-bottom: 2px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+        span {
+          cursor: pointer;
+        }
       }
       .description {
         margin-top: 7px;

@@ -163,7 +163,7 @@ const SelectCancellation = ({ cancellations }) => {
   return (
     <div className="mb-2">
       <label htmlFor="cancellation_policy">Select cancellation:</label>
-      {/* <select
+      <select
         id="cancellation_policy"
         name="cancellation_policy"
         className="form-control"
@@ -178,7 +178,7 @@ const SelectCancellation = ({ cancellations }) => {
             {cancellation.name}
           </option>
         ))}
-      </select> */}
+      </select>
     </div>
   );
 };

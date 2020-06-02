@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import Axios from "axios";
 import { LocaleContext } from "../../contexts/LocaleContext";
 import Card from "./Card";
-import ReactPaginate from "react-paginate";
 import CreateCard from "./CreateCard";
 
 const Cards = ({ selectedChat }) => {

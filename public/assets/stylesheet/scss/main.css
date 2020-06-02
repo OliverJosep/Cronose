@@ -898,6 +898,7 @@ footer .links {
 
 .card-chat .chats .active {
   background-color: var(--primary-color);
+  border-radius: 10px;
 }
 
 .card-chat .chats .active .user-chat {
@@ -1084,10 +1085,15 @@ footer .links {
 
 .cards .bg .center-card .title {
   color: var(--secondary-color);
+  font-size: 20px;
   font-weight: bold;
   margin: 0px 10px;
   padding-bottom: 2px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.cards .bg .center-card .title span {
+  cursor: pointer;
 }
 
 .cards .bg .center-card .description {

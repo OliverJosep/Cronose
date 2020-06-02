@@ -41,7 +41,11 @@ const Card = ({ card, setChanges, page, setPage, maxPages }) => {
             </div>
           )}
         </div>
-        <div className="title">{card.offer.translations[0].title}</div>
+        <div className="title">
+          <span data-toggle="modal" data-target={"#cardModal" + card.id}>
+            {card.offer.translations[0].title}
+          </span>
+        </div>
         <div className="description">
           "{card.offer.translations[0].description}"
         </div>
@@ -50,6 +54,7 @@ const Card = ({ card, setChanges, page, setPage, maxPages }) => {
           <strong>Status:</strong> {card.status}
         </div>
       </div>
+
       <CardModal card={card} setChanges={setChanges} />
     </>
   );
