@@ -1092,10 +1092,6 @@ footer .links {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.cards .bg .center-card .title span {
-  cursor: pointer;
-}
-
 .cards .bg .center-card .description {
   margin-top: 7px;
   color: rgba(0, 0, 0, 0.7);
@@ -1107,12 +1103,23 @@ footer .links {
 }
 
 .cards .bg .center-card .offer_status {
-  margin-top: 12px;
+  margin-top: 7px;
   color: rgba(0, 0, 0, 0.7);
 }
 
 .cards .bg .center-card .offer_status strong {
   color: var(--primary-color);
+}
+
+.cards .bg .center-card .details {
+  margin-top: 7px;
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.cards .bg .center-card .close {
+  position: absolute;
+  right: 19px;
 }
 
 .cards .bg .add {

@@ -44,9 +44,6 @@
         margin: 0px 10px;
         padding-bottom: 2px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-        span {
-          cursor: pointer;
-        }
       }
       .description {
         margin-top: 7px;
@@ -57,11 +54,20 @@
         color: rgba(0, 0, 0, 0.7);
       }
       .offer_status {
-        margin-top: 12px;
+        margin-top: 7px;
         color: rgba(0, 0, 0, 0.7);
         strong {
           color: var(--primary-color);
         }
+      }
+      .details {
+        margin-top: 7px;
+        background-color: var(--primary-color);
+        color: #fff;
+      }
+      .close {
+        position: absolute;
+        right: 19px;
       }
     }
 

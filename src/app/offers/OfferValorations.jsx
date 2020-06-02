@@ -15,21 +15,19 @@ const OfferValorations = ({ valorations }) => {
             {valorations.map((valoration, index) => (
               <React.Fragment key={index}>
                 <div className="row mt-2">
-                  <div className="col-8">
-                    <UserAvatar
-                      name={valoration.valorated_by.full_name}
-                      avatar={valoration.valorated_by.avatar}
-                      size={50}
-                    />
-                    <NavLink
-                      className="link"
-                      to={`/profile/${valoration.valorated_by.initials}/${valoration.valorated_by.tag}`}
-                    >
-                      <h4 className="ml-2 my-auto">
-                        <Name user={valoration.valorated_by} />
-                      </h4>
-                    </NavLink>
-                  </div>
+                  <UserAvatar
+                    name={valoration.valorated_by.full_name}
+                    avatar={valoration.valorated_by.avatar}
+                    size={60}
+                  />
+                  <NavLink
+                    className="link my-auto"
+                    to={`/profile/${valoration.valorated_by.initials}/${valoration.valorated_by.tag}`}
+                  >
+                    <h4 className="ml-2 my-auto">
+                      <Name user={valoration.valorated_by} />
+                    </h4>
+                  </NavLink>
                 </div>
                 <div className="row mt-2">
                   <div className="col-8">
