@@ -21,7 +21,6 @@ const Registers = ({ card, index, user_id }) => {
               {card.date} | COINS : <b>{card.coins}</b>
             </a>
           </h5>
-          {console.log(card.card.worker.full_name)}
           <div
             id={"collapse-content" + index}
             className="collapse"

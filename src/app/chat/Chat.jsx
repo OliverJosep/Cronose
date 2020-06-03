@@ -53,12 +53,12 @@ const Chat = ({ selectedChat, setNewData }) => {
       }
     };
 
-    // getLastMessage();
-    // const interval = setInterval(() => {
-    //   selectedChat && getLastMessage();
-    // }, 2000);
+    getLastMessage();
+    const interval = setInterval(() => {
+      selectedChat && getLastMessage();
+    }, 1000);
 
-    // return () => clearInterval(interval);
+    return () => clearInterval(interval);
   }, [context.user, context.jwt, selectedChat, messages]);
 
   const handleSubmit = (e) => {

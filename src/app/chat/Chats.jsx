@@ -17,14 +17,14 @@ const Chats = ({ selectedChat, setSelectedChat, newData, setNewData }) => {
       setChats(response.data);
     };
 
-    // const interval = setInterval(() => {
-    //   getChats();
-    // }, 2000);
+    const interval = setInterval(() => {
+      getChats();
+    }, 3000);
 
     getChats();
     setNewData(false);
 
-    // return () => clearInterval(interval);
+    return () => clearInterval(interval);
   }, [context.user, context.jwt, newData, setNewData]);
 
   return (
