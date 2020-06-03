@@ -3,7 +3,7 @@ import Axios from "axios";
 import Rater from "react-rater";
 import { LocaleContext } from "../../contexts/LocaleContext";
 import Translate from "../../translations/Translate";
-import ProfileCard from "./ProfileCard";
+import ProfileCard from "./components/ProfileCard";
 import Loader from "../components/Loader";
 import UserAvatar from "../components/Avatar";
 import { NavLink } from "react-router-dom";
@@ -73,15 +73,23 @@ const Profile = ({ match }) => {
                 </div>
               </div>
               <div className="d-flex justify-content-md-end justify-content-center">
-                {context.user.id === user.id ? (
-                  <NavLink to={`/me/edit`} className="btn pl-4 pr-4">
-                    Edit
-                  </NavLink>
-                ) : (
-                  <NavLink to={`/chat?id=${user.id}`} className="btn pl-4 pr-4">
-                    Contact
-                  </NavLink>
-                )}
+                {context.user &&
+                  context.user.id &&
+                  context.user.id === user.id && (
+                    <NavLink to={`/me/edit`} className="btn pl-4 pr-4">
+                      Edit
+                    </NavLink>
+                  )}
+                {context.user &&
+                  context.user.id &&
+                  context.user.id !== user.id && (
+                    <NavLink
+                      to={`/chat?id=${user.id}`}
+                      className="btn pl-4 pr-4"
+                    >
+                      Contact
+                    </NavLink>
+                  )}
               </div>
             </div>
             <div id="body-profile">
@@ -126,11 +134,13 @@ const Profile = ({ match }) => {
                   ))}
                 </div>
                 <div className="icon-more text-center ">
-                  {context.user.id === user.id && (
-                    <NavLink to="/newoffer">
-                      <MdAddBox />
-                    </NavLink>
-                  )}
+                  {context.user &&
+                    context.user.id &&
+                    context.user.id === user.id && (
+                      <NavLink to="/newoffer">
+                        <MdAddBox />
+                      </NavLink>
+                    )}
                 </div>
               </div>
             </div>

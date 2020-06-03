@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import OfferCard from "./OfferCard";
 import Axios from "axios";
-import ReactPaginate from "react-paginate";
 import { LocaleContext } from "../../contexts/LocaleContext";
 import { NavLink } from "react-router-dom";
 
