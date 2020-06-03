@@ -1,17 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from "recharts";
 import "react-rater/lib/react-rater.css";
 import { LocaleContext } from "../../contexts/LocaleContext";
 import Axios from "axios";
 import Registers from "./Registers";
+import HisrotyChat from "./HistoryChart";
 
 const Wallet = () => {
   const context = useContext(LocaleContext);
@@ -40,39 +32,16 @@ const Wallet = () => {
       <div className="text-center pt-4">
         <h1>Wallet</h1>
       </div>
-      {data && (
-        <div className="text-center">
-          <LineChart
-            width={1000}
-            height={500}
-            data={data.reverse()}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="coins"
-              stroke="#f09a24"
-              activeDot={{ r: 8 }}
-            />
-          </LineChart>
-        </div>
-      )}
+      <HisrotyChat data={data} />
       {data &&
-        data
-          .reverse()
-          .map((card, index) => (
-            <Registers card={card} index={index} key={index} />
-          ))}
+        data.map((card, index) => (
+          <Registers
+            card={card}
+            index={index}
+            user_id={context.user.id}
+            key={index}
+          />
+        ))}
     </>
   );
 };

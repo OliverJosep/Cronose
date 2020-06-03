@@ -201,7 +201,7 @@ export default class EditProfile extends Component {
                     name="full_name"
                     className="form-control"
                     type="text"
-                    value={user.full_name ? user.full_name : "Private account"}
+                    value={user.name ? user.full_name : "Private account"}
                     disabled
                   />
                 </div>

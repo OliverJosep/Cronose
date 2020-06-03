@@ -125,6 +125,12 @@ export default [
         show: false,
       },
       {
+        title: "login",
+        path: "/login",
+        component: Login,
+        show: false,
+      },
+      {
         title: "not found",
         path: "*",
         component: notFound,

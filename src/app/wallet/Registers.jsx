@@ -1,7 +1,9 @@
 import React from "react";
 import Rater from "react-rater";
+import Name from "../components/Name";
+import { NavLink } from "react-router-dom";
 
-const Registers = ({ card, index }) => {
+const Registers = ({ card, index, user_id }) => {
   return (
     <div id="records">
       <div id="record">
@@ -19,7 +21,7 @@ const Registers = ({ card, index }) => {
               {card.date} | COINS : <b>{card.coins}</b>
             </a>
           </h5>
-          {console.log(card)}
+          {console.log(card.card.worker.full_name)}
           <div
             id={"collapse-content" + index}
             className="collapse"
@@ -27,7 +29,39 @@ const Registers = ({ card, index }) => {
           >
             <div className="card-body">
               <section className="row">
-                <p className="schedule col-6 text-muted">HORARIO</p>
+                <p className="schedule col-6 text-muted">
+                  {card.worker_id === user_id ? (
+                    <>
+                      Client:
+                      <NavLink
+                        className="link"
+                        to={
+                          "/profile/" +
+                          card.card.client.initials +
+                          "/" +
+                          card.card.client.tag
+                        }
+                      >
+                        <Name user={card.card.client} />
+                      </NavLink>
+                    </>
+                  ) : (
+                    <>
+                      Worker:
+                      <NavLink
+                        className="link"
+                        to={
+                          "/profile/" +
+                          card.card.worker.initials +
+                          "/" +
+                          card.card.worker.tag
+                        }
+                      >
+                        <Name user={card.card.worker} />
+                      </NavLink>
+                    </>
+                  )}
+                </p>
                 <div className="valuation col-6 text-right">
                   <Rater total={5} rating={3} interactive={false} />
                 </div>
@@ -41,7 +75,10 @@ const Registers = ({ card, index }) => {
               </p>
               <section className="text-right">
                 <p className="price">
-                  <b>{card.coin_price}</b>
+                  <b>
+                    {card.worker_id === user_id ? "+" : "-"}
+                    {card.coin_price}
+                  </b>
                 </p>
               </section>
             </div>

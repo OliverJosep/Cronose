@@ -886,6 +886,12 @@ footer .links {
           transform: rotate(90deg);
 }
 
+#records .link {
+  text-decoration: none;
+  color: #4141417a;
+  margin-left: 5px;
+}
+
 .card-chat .chats .bg {
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125);
@@ -1019,11 +1025,13 @@ footer .links {
 
 .edit_profile .box {
   border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 10px;
 }
 
 .edit_profile .box .title {
   background-color: #f7f7f7;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 10px 10px 0 0;
   margin: 0;
   font-weight: bold;
   font-size: 24px;
@@ -1032,6 +1040,14 @@ footer .links {
 .edit_profile .box .title .user {
   font-size: 18px;
   font-weight: normal;
+}
+
+.edit_profile .box .body {
+  border-radius: 0 0 10px 10px;
+}
+
+.edit_profile .box .btn {
+  border-radius: 10px;
 }
 
 .edit_profile .box .body {

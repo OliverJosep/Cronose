@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import md5 from "md5";
 import { LocaleContext } from "../../contexts/LocaleContext";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import Reset from "./Reset";
 
 const Login = () => {
@@ -15,6 +15,7 @@ const Login = () => {
     context.login(data);
   };
 
+  if (context.user && context.user.id) return <Redirect to={"/me"} />;
   return (
     <div className="card-login card text-center">
       <h3 className="card-title text-center">LOGIN</h3>
