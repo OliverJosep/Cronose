@@ -1,17 +1,22 @@
 .recharts-wrapper {
-	margin: auto;
-	margin-top: 50px;
-	margin-bottom: 50px;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 #records {
-	.card-header .fa {
-		transition: 0.3s transform ease-in-out;
-	}
-	.card-header a {
-		color: var(--primary-color);
-	}
-	.card-header .collapsed .fa {
-		transform: rotate(90deg);
-	}
+  .card-header .fa {
+    transition: 0.3s transform ease-in-out;
+  }
+  .card-header a {
+    color: var(--primary-color);
+  }
+  .card-header .collapsed .fa {
+    transform: rotate(90deg);
+  }
+  .link {
+    text-decoration: none;
+    color: #4141417a;
+    margin-left: 5px;
+  }
 }

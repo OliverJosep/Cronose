@@ -1,83 +1,107 @@
 .card-chat {
-	// height: 600px;
+  // height: 600px;
 
-	.chats {
-		.bg {
-			background-color: #fff;
-			border: 1px solid var(--primary-color);
-			border-radius: 10px 10px;
-			height: 591px;
-		}
+  .chats {
+    .bg {
+      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      border-radius: 10px 10px;
+      height: 591px;
+    }
 
-		.user-chat {
-			border-bottom: 1px solid var(--primary-color);
-			color: var(--secondary-color);
-			&:hover {
-				cursor: pointer;
-			}
-			.active {
-				color: orange;
-				font-weight: bold;
-			}
-		}
+    .user-chat {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+      color: var(--secondary-color);
+      &:hover {
+        cursor: pointer;
+      }
+      .user-box {
+        display: flex;
+      }
+    }
+    .active {
+      background-color: var(--primary-color);
+      border-radius: 10px;
+      .user-chat {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+        color: var(--secondary-color);
+      }
+      .user {
+        font-weight: bold;
+        font-size: 20px;
+      }
+      .message {
+        color: #fff;
+      }
+      small {
+        color: var(--secondary-color);
+      }
+    }
 
-		small {
-			color: #808080;
-		}
-	}
+    small {
+      color: #808080;
+    }
+  }
 
-	.chat {
-		.messages {
-			border: 1px solid var(--primary-color);
-			background-color: #fff;
-			border-radius: 10px 10px;
-			height: 545px;
+  .chat {
+    .messages {
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      background-color: #fff;
+      border-radius: 10px 10px;
+      height: 545px;
 
-			.user {
-				border-bottom: 1px solid var(--primary-color);
-			}
-			.scroll {
-				height: 480px;
-				overflow-y: scroll;
-			}
-		}
+      .user {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+        .name {
+          color: var(--secondary-color);
+          text-decoration: none;
+          font-weight: bold;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      .scroll {
+        height: 470px;
+        overflow-y: scroll;
+      }
+    }
 
-		.btn {
-			background-color: var(--primary-color);
-		}
-	}
+    .sender {
+      background-color: var(--primary-color);
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      color: #fff;
+    }
 
-	.cards {
-		border-radius: 10px 10px;
-		.bg {
-			background-color: #fff;
-			border: 1px solid var(--primary-color);
-			border-radius: 10px 10px;
-			height: 591px;
-			.offer-card {
-				border-bottom: 1px solid var(--primary-color);
-				cursor: pointer;
-				.title {
-					font-weight: bold;
-					color: var(--secondary-color);
-				}
-			}
-			.add {
-				cursor: pointer;
-				color: var(--secondary-color);
-				font-size: 30px;
-				font-weight: bold;
-			}
-		}
+    .reciever {
+      background-color: #f8f9fa;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      color: #000;
+    }
 
-		@media (max-width: 767px) {
-			.bg {
-				height: auto;
-			}
-		}
+    .message {
+      margin: 0;
+      margin-right: 40px;
+    }
 
-		h3 {
-			border-bottom: 1px solid var(--primary-color);
-		}
-	}
+    .date {
+      position: absolute;
+      right: 4px;
+      bottom: 0;
+      font-size: 11px;
+    }
+
+    .btn {
+      background-color: var(--primary-color);
+    }
+  }
+  @media (max-width: 767px) {
+    .bg {
+      height: auto;
+    }
+  }
+
+  h3 {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  }
 }
